@@ -239,7 +239,7 @@ gpgcheck=0</value>
   </property>
   <property>
     <name>stack_root</name>
-    <value>{"BIGTOP":"/usr/bigtop"}</value>
+    <value>{"BIGTOP":"/usr/hdp"}</value>
     <description>Stack root folder</description>
     <value-attributes>
       <read-only>true</read-only>

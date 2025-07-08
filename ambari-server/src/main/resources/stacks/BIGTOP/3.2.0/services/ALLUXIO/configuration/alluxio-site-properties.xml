@@ -64,7 +64,7 @@
   <property>
     <name>alluxio.master.metastore.dir</name>
     <description>Alluxio UnderFS Address</description>
-    <value>/usr/bigtop/current/alluxio/metastore</value>
+    <value>/usr/hdp/current/alluxio/metastore</value>
     <on-ambari-upgrade add="true"/>
   </property>
 
@@ -111,7 +111,7 @@ alluxio.master.mount.table.root.option.alluxio.security.underfs.hdfs.kerberos.cl
 alluxio.master.mount.table.root.option.alluxio.security.underfs.hdfs.impersonation.enabled=true
 alluxio.master.security.impersonation.yarn.users=*
 
-# 
+#
 # alluxio.worker.tieredstore.levels=1
 # alluxio.worker.tieredstore.level0.alias=MEM
 # alluxio.worker.tieredstore.level0.dirs.path=/mnt/ramdisk
