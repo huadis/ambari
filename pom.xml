@@ -97,6 +97,7 @@
     <assemblyPhase>package</assemblyPhase> <!-- use -DassemblyPhase=none to skip building tarball, useful when you want purely compile jar -->
     <rpm-maven-plugin.version>2.1.4</rpm-maven-plugin.version>
     <eclipselink.version>2.7.14</eclipselink.version>
+    <arch>x86_64</arch>
   </properties>
   <pluginRepositories>
     <pluginRepository>
@@ -846,6 +847,12 @@ instead of a SNAPSHOT. -->
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>aarch64</id>
+      <properties>
+        <arch>aarch64</arch>
+      </properties>
     </profile>
   </profiles>
   <!-- End of profiles for running unit tests. -->

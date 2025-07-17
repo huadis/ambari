@@ -259,13 +259,6 @@
     </dependency>
   </dependencies>
   <build>
-    <extensions>
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>1.7.1</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
          <groupId>org.codehaus.mojo</groupId>
@@ -414,7 +407,7 @@
             <fileEncoding>utf-8</fileEncoding>
           </postremoveScriptlet>
 
-          <needarch>${os.detected.arch}</needarch>
+          <needarch>${arch}</needarch>
           <autoRequires>false</autoRequires>
           <mappings>
             <mapping>
