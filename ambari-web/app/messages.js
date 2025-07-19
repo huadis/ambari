@@ -622,8 +622,8 @@ Em.I18n.translations = {
   'installer.controls.serviceConfigMasterHosts.header': '{0} 个主机',
   'installer.controls.slaveComponentChangeGroupName.error': '分组名称已存在',
 
-  'installer.step0.header':'开始',
-  'installer.step0.body.header':'开始',
+  'installer.step0.header':'开始安装',
+  'installer.step0.body.header':'开始安装',
   'installer.step0.body':'该向导将带你完成集群的安装. 首先请输入集群名称.',
   'installer.step0.clusterName':'集群名称',
   'installer.step0.clusterName.tooltip.title':'集群名称',
