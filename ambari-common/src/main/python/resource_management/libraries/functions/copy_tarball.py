@@ -44,7 +44,7 @@ from resource_management.libraries.functions import tar_archive
 STACK_NAME_PATTERN = "{{ stack_name }}"
 STACK_ROOT_PATTERN = "{{ stack_root }}"
 STACK_VERSION_PATTERN = "{{ stack_version }}"
-LIB_DIR = "usr/lib"
+LIB_DIR = ""
 
 
 def _prepare_tez_tarball():
@@ -242,42 +242,42 @@ def _prepare_mapreduce_tarball():
 TARBALL_MAP = {
   "yarn": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/hadoop-yarn/lib/service-dep.tar.gz",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/hadoop-yarn/lib/service-dep.tar.gz",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/yarn/service-dep.tar.gz",
     ),
     "service": "YARN",
   },
   "tez": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/tez/lib/tez.tar.gz",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/tez/lib/tez.tar.gz",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/tez/tez.tar.gz",
     ),
     "service": "TEZ",
   },
   "tez_hive2": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/tez_hive2/lib/tez.tar.gz",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/tez_hive2/lib/tez.tar.gz",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/tez_hive2/tez.tar.gz",
     ),
     "service": "HIVE",
   },
   "hive": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/hive/hive.tar.gz",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/hive/hive.tar.gz",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/hive/hive.tar.gz",
     ),
     "service": "HIVE",
   },
   "hadoop_streaming": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/hadoop-mapreduce/hadoop-streaming.jar",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/hadoop-mapreduce/hadoop-streaming.jar",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/mpreduce/hadoop-streaming.jar",
     ),
     "service": "MAPREDUCE2",
   },
   "mapreduce": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/hadoop/mapreduce.tar.gz",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/hadoop/mapreduce.tar.gz",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/mapreduce/mapreduce.tar.gz",
     ),
     "service": "MAPREDUCE2",
@@ -285,7 +285,7 @@ TARBALL_MAP = {
   },
   "spark": {
     "dirs": (
-      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/{LIB_DIR}/spark/lib/spark-{STACK_NAME_PATTERN}-assembly.jar",
+      f"{STACK_ROOT_PATTERN}/{STACK_VERSION_PATTERN}/spark/lib/spark-{STACK_NAME_PATTERN}-assembly.jar",
       f"/{STACK_NAME_PATTERN}/apps/{STACK_VERSION_PATTERN}/spark/spark-{STACK_NAME_PATTERN}-assembly.jar",
     ),
     "service": "SPARK",
