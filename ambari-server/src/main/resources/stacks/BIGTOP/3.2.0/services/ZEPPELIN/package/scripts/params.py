@@ -99,7 +99,7 @@ zeppelin_war_tempdir = config["configurations"]["zeppelin-env"]["zeppelin_war_te
 zeppelin_notebook_dir = config["configurations"]["zeppelin-env"][
   "zeppelin_notebook_dir"
 ]
-local_notebook_dir = "/var/lib/zeppelin/notebook"
+local_notebook_dir = "/zeppelin/notebook"
 
 hbase_home = config["configurations"]["zeppelin-env"]["hbase_home"]
 hbase_conf_dir = config["configurations"]["zeppelin-env"]["hbase_conf_dir"]
