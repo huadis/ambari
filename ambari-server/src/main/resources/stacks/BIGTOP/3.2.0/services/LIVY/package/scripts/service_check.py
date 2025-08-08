@@ -44,7 +44,7 @@ class LivyServiceCheck(Script):
             format(
               "curl -s -o /dev/null -w'%{{http_code}}' --negotiate -u: -k {livy_http_scheme}://{livyserver_host}:{livy_livyserver_port}/sessions | grep 200"
             ),
-            tries=3,
+            tries=10,
             try_sleep=1,
             logoutput=True,
             user=params.smoke_user,
