@@ -79,7 +79,7 @@ class KnoxServiceCheckDefault(KnoxServiceCheck):
 
     File(validateKnoxFilePath,
          content=StaticFile(validateKnoxFileName),
-         mode=0755
+         mode=0o755
     )
 
     Execute(smoke_cmd,
