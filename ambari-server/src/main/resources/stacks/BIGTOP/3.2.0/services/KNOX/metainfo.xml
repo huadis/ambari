@@ -84,6 +84,13 @@
         <config-type>ranger-knox-security</config-type>
       </configuration-dependencies>
 
+      <quickLinksConfigurations>
+        <quickLinksConfiguration>
+          <fileName>quicklinks.json</fileName>
+          <default>true</default>
+        </quickLinksConfiguration>
+      </quickLinksConfigurations>
+
       <themes>
         <theme>
           <fileName>credentials.json</fileName>

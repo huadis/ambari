@@ -1,0 +1,28 @@
+{
+  "name": "default",
+  "description": "default quick links configuration",
+  "configuration": {
+    "protocol":
+    {
+      "type":"HTTPS_ONLY"
+    },
+
+    "links": [
+      {
+        "name": "knox_gateway_ui",
+        "label": "Knox Gateway UI",
+        "component_name": "KNOX_GATEWAY",
+        "requires_user_name": "false",
+        "url": "%@://%@:%@/gateway",
+        "port":{
+          "http_property": "gateway.port",
+          "http_default_port": "8443",
+          "https_property": "gateway.port",
+          "https_default_port": "8444",
+          "regex": "^(\\d+)$",
+          "site": "gateway-site"
+        }
+      }
+    ]
+  }
+}
