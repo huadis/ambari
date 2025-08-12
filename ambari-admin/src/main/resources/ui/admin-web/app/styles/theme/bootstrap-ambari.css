@@ -782,7 +782,7 @@ input.radio:checked + label:after {
   transition: width 0.5s ease-out;
 }
 .navigation-bar-container ul.nav.side-nav-header li.navigation-header {
-  background: #313d54;
+  background: #407aff;
   padding: 15px 5px 15px 25px;
   height: 55px;
 }
@@ -918,7 +918,7 @@ input.radio:checked + label:after {
 }
 .navigation-bar-container ul.nav.side-nav-menu li.navigation-footer,
 .navigation-bar-container ul.nav.side-nav-footer li.navigation-footer {
-  background: #313d54;
+  background: #407aff;
   height: 48px;
 }
 .navigation-bar-container ul.nav.side-nav-menu li.navigation-footer a .navigation-icon,
@@ -956,7 +956,7 @@ input.radio:checked + label:after {
 .navigation-bar-container ul.nav.side-nav-footer li > ul > li > a:hover,
 .navigation-bar-container ul.nav.side-nav-menu li > a:hover,
 .navigation-bar-container ul.nav.side-nav-footer li > a:hover {
-  background: #404351;
+  background: #407aff;
   cursor: pointer;
   color: #fff;
 }
@@ -982,7 +982,7 @@ input.radio:checked + label:after {
 .navigation-bar-container ul.nav.side-nav-footer li.active:not(.has-sub-menu),
 .navigation-bar-container ul.nav.side-nav-menu li.active.collapsed,
 .navigation-bar-container ul.nav.side-nav-footer li.active.collapsed {
-  background: #404351;
+  background: #407aff;
   cursor: pointer;
 }
 .navigation-bar-container ul.nav.side-nav-menu li.active:not(.has-sub-menu) > a,
@@ -1124,7 +1124,7 @@ input.radio:checked + label:after {
 }
 .navigation-bar-container.collapsed ul.nav.side-nav-menu li.active,
 .navigation-bar-container.collapsed ul.nav.side-nav-footer li.active {
-  background: #404351;
+  background: #407aff;
   cursor: pointer;
 }
 .navigation-bar-container.collapsed ul.nav.side-nav-menu li.active > a,
