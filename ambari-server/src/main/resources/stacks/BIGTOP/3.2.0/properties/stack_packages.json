@@ -241,6 +241,20 @@
           ]
         }
       },
+      "KNOX": {
+        "KNOX_GATEWAY": {
+          "STACK-SELECT-PACKAGE": "knox-server",
+          "INSTALL": [
+            "knox-server"
+          ],
+          "PATCH": [
+            "knox-server"
+          ],
+          "STANDARD": [
+            "knox-server"
+          ]
+        }
+      },
       "MAPREDUCE2": {
         "HISTORYSERVER": {
           "STACK-SELECT-PACKAGE": "hadoop-mapreduce-historyserver",
@@ -660,6 +674,9 @@
         "packages": [
           "kafka"
         ]
+      },
+      "KNOX": {
+        "packages": ["knox"]
       },
       "MAPREDUCE2": {
         "packages": []
