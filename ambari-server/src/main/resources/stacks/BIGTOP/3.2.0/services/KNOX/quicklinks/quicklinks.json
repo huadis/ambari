@@ -10,10 +10,10 @@
     "links": [
       {
         "name": "knox_gateway_ui",
-        "label": "Knox Gateway UI",
+        "label": "Knox Admin UI",
         "component_name": "KNOX_GATEWAY",
         "requires_user_name": "false",
-        "url": "%@://%@:%@/gateway",
+        "url": "%@://%@:%@/gateway/manager/admin-ui",
         "port":{
           "http_property": "gateway.port",
           "http_default_port": "8443",
