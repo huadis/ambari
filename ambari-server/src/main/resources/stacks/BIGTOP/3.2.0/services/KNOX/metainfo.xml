@@ -72,6 +72,18 @@
         <scriptType>PYTHON</scriptType>
         <timeout>300</timeout>
       </commandScript>
+
+      <osSpecifics>
+        <osSpecific>
+          <osFamily>redhat7,redhat8,redhat9,openeuler22</osFamily>
+          <packages>
+            <package>
+              <name>knox_${stack_version}</name>
+            </package>
+          </packages>
+        </osSpecific>
+      </osSpecifics>
+
       <configuration-dependencies>
         <config-type>gateway-site</config-type>
         <config-type>gateway-log4j</config-type>
