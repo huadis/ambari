@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -55,5 +55,5 @@ else:
   knox_user = default("/configurations/knox-env/knox_user", "knox")
   kinit_path_local = get_kinit_path(default('/configurations/kerberos-env/executable_search_paths', None))
   temp_dir = Script.get_tmp_dir()
-  
+
 stack_name = default("/clusterLevelParams/stack_name", None)

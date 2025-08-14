@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -163,7 +164,7 @@ class KnoxGatewayDefault(KnoxGateway):
     except:
       show_logs(params.knox_logs_dir, params.knox_user)
       raise
-    
+
     File(params.knox_pid_file,
          action="delete",
     )
@@ -197,11 +198,11 @@ class KnoxGatewayDefault(KnoxGateway):
     File(params.ldap_pid_file,
       action = "delete"
     )
-      
+
   def get_log_folder(self):
     import params
     return params.knox_logs_dir
-  
+
   def get_user(self):
     import params
     return params.knox_user
