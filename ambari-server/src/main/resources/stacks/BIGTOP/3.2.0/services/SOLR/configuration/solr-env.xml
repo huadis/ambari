@@ -305,14 +305,14 @@
 
   <property>
     <name>solr_gc_log_opts</name>
-    <value>-verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=15 -XX:GCLogFileSize=200M</value>
+    <value>-Xlog:gc*,heap*,age*,safepoint*:file=gc.log:time,uptime,pid,level,tags:filecount=15,filesize=200M</value>
     <display-name>Solr GC log options</display-name>
     <description>Solr GC log options</description>
     <on-ambari-upgrade add="true"/>
   </property>
   <property>
     <name>solr_gc_tune</name>
-    <value>-XX:NewRatio=3 -XX:SurvivorRatio=4 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=8 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ConcGCThreads=4 -XX:ParallelGCThreads=4 -XX:+CMSScavengeBeforeRemark -XX:PretenureSizeThreshold=64m -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=50 -XX:CMSMaxAbortablePrecleanTime=6000 -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled</value>
+    <value>-XX:+UseG1GC -XX:NewRatio=3  -XX:SurvivorRatio=4  -XX:TargetSurvivorRatio=90  -XX:MaxTenuringThreshold=8 -XX:ConcGCThreads=4  -XX:ParallelGCThreads=4  -XX:+ParallelRefProcEnabled -XX:InitiatingHeapOccupancyPercent=50 -XX:G1HeapWastePercent=5 -XX:MaxGCPauseMillis=200</value>
     <display-name>Solr GC Tune</display-name>
     <description>Solr GC Tune</description>
     <on-ambari-upgrade add="true"/>
