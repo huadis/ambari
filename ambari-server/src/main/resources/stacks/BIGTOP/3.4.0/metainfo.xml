@@ -19,5 +19,5 @@
     <versions>
 	  <active>true</active>
     </versions>
-    <extends>3.2.0</extends>
+    <extends>3.3.0</extends>
 </metainfo>

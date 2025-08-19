@@ -60,6 +60,6 @@
     "Blueprints" : {
         "blueprint_name" : "blueprint-singlenode-default",
         "stack_name" : "BIGTOP",
-        "stack_version" : "3.3.0"
+        "stack_version" : "3.4.0"
     }
 }
