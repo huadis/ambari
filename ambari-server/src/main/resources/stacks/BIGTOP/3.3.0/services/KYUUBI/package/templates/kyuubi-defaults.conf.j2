@@ -1,0 +1,52 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+## Kyuubi Configurations
+
+kyuubi.frontend.bind.host               {{kyuubi_frontend_bind_host}}
+kyuubi.frontend.protocols               {{kyuubi_frontend_protocols}}
+kyuubi.frontend.thrift.binary.bind.port {{kyuubi_frontend_thrift_binary_bind_port}}
+kyuubi.frontend.rest.bind.port          {{kyuubi_frontend_rest_bind_port}}
+kyuubi.frontend.jetty.sendVersion.enabled   {{kyuubi_frontend_jetty_sendVersion_enabled}}
+kyuubi.metrics.prometheus.port          {{kyuubi_metrics_prometheus_port}}
+
+kyuubi.ha.client.class                  {{kyuubi_ha_client_class}}
+kyuubi.ha.addresses                     {{kyuubi_ha_addresses}}
+kyuubi.ha.namespace                     {{kyuubi_ha_namespace}}
+
+kyuubi.ha.zookeeper.auth.type           {{kyuubi_ha_zookeeper_auth_type}}
+{% if kyuubi_ha_zookeeper_auth_type == 'KERBEROS' %}
+kyuubi.ha.zookeeper.auth.principal      {{kyuubi_ha_zookeeper_auth_principal}}
+kyuubi.ha.zookeeper.auth.keytab         {{kyuubi_ha_zookeeper_auth_keytab}}
+{% endif %}
+
+kyuubi.authentication                   {{kyuubi_authentication}}
+{% if kyuubi_authentication == 'KERBEROS' %}
+kyuubi.kinit.principal                  {{kyuubi_kinit_principal}}
+kyuubi.kinit.keytab                     {{kyuubi_kinit_keytab}}
+{% endif %}
+
+kyuubi.engine.share.level               {{kyuubi_engine_share_level}}
+
+kyuubi.engine.type                      {{kyuubi_engine_type}}
+
+spark.master                            {{spark_master}}
+spark.yarn.queue                        {{spark_yarn_queue}}
+
+# Custom properties
+
+{{custom_properties}}

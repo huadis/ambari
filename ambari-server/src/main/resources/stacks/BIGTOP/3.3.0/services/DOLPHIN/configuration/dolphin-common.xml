@@ -1,0 +1,133 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<configuration>
+    <property>
+        <name>data.basedir.path</name>
+        <value>/data/dolphinscheduler</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.storage.type</name>
+        <value>HDFS</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.upload.path</name>
+        <value>/dolphinscheduler</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>hadoop.security.authentication.startup.state</name>
+        <value>false</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>java.security.krb5.conf.path</name>
+        <value>/opt/krb5.conf</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>login.user.keytab.username</name>
+        <value>hdfs-mycluster@ESZ.COM</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>login.user.keytab.path</name>
+        <value>/opt/hdfs.headless.keytab</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>kerberos.expire.time</name>
+        <value>2</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>hdfs.root.user</name>
+        <value>hdfs</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://testhdfsha:8020</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>fs.s3a.endpoint</name>
+        <value>http://192.168.xx.xx:9010</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>fs.s3a.access.key</name>
+        <value>A3DXS30FO22544RE</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>fs.s3a.secret.key</name>
+        <value>OloCLq3n+8+sdPHUhJ21XrSxTC+JK</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.manager.httpaddress.port</name>
+        <value>8088</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.ha.rm.ids</name>
+        <value>10.216.138.23,10.216.138.24</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>yarn.application.status.address</name>
+        <value>http://ds1:8088/ws/v1/cluster/apps/%s</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>yarn.job.history.status.address</name>
+        <value>http://ds1:19888/ws/v1/history/mapreduce/jobs/%s</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>datasource.encryption.enable</name>
+        <value>false</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>datasource.encryption.salt</name>
+        <value>!@#$%^&amp;*</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>support.hive.oneSession</name>
+        <value>true</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>sudo.enable</name>
+        <value>false</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>development.state</name>
+        <value>false</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>datasource.plugin.dir</name>
+        <value>lib/plugin/datasource</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+</configuration>

@@ -1,0 +1,58 @@
+{
+  "services": [
+    {
+      "name": "KYUUBI",
+      "identities": [
+        {
+          "name": "kyuubi_smokeuser",
+          "reference": "/smokeuser"
+        },
+        {
+          "name": "kyuubi_user",
+          "principal": {
+            "value": "${kyuubi-defaults/kyuubi_user}/_HOST@${realm}",
+            "type" : "user",
+            "configuration": "kyuubi-defaults/kyuubi_kinit_principal",
+            "local_username" : "${kyuubi-defaults/kyuubi_user}"
+          },
+          "keytab": {
+            "file": "${keytab_dir}/kyuubi.service.keytab",
+            "owner": {
+              "name": "${kyuubi-defaults/kyuubi_user}",
+              "access": "r"
+            },
+            "group": {
+              "name": "${cluster-env/user_group}",
+              "access": ""
+            },
+            "configuration": "kyuubi-defaults/kyuubi_kinit_keytab"
+          }
+        }
+      ],
+      "components": [
+        {
+          "name": "KYUUBI_SERVER"
+        }
+      ],
+      "configurations": [
+        {
+          "kyuubi-defaults": {
+            "kyuubi_authentication": "KERBEROS",
+            "kyuubi_kinit_principal": "${kyuubi-defaults/kyuubi_user}/_HOST@${realm}",
+            "kyuubi_kinit_keytab": "${keytab_dir}/kyuubi.service.keytab",
+            "kyuubi_ha_zookeeper_auth_type": "KERBEROS",
+            "kyuubi_ha_zookeeper_auth_principal": "${kyuubi-defaults/kyuubi_user}/_HOST@${realm}",
+            "kyuubi_ha_zookeeper_auth_keytab": "${keytab_dir}/kyuubi.service.keytab"
+          }
+        },
+        {
+          "core-site": {
+            "hadoop.proxyuser.${kyuubi-defaults/kyuubi_user}.groups": "*",
+            "hadoop.proxyuser.${kyuubi-defaults/kyuubi_user}.hosts": "*",
+            "hadoop.proxyuser.${kyuubi-defaults/kyuubi_user}.users": "*"
+          }
+        }
+      ]
+    }
+  ]
+}
