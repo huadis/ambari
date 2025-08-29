@@ -15,13 +15,6 @@
    limitations under the License.
 -->
 <configuration supports_adding_forbidden="true">
-    <property>
-        <name>kyuubi_download_url</name>
-        <value>DOWNLOAD_PROM_REPO</value>
-        <display-name>Kyuubi Download URL</display-name>
-        <description>Kyuubi Download URL. Kyuubi will be downloaded from repository URL if this config is left unchanged.</description>
-    </property>
-
 <!--  Kyuubi user  -->
     <property>
         <name>kyuubi_group</name>
