@@ -20,6 +20,18 @@
                         </commandScript>
                 </component>
             </components>
+
+            <osSpecifics>
+                <osSpecific>
+                    <osFamily>redhat8</osFamily>
+                    <packages>
+                        <package>
+                            <name>kafka-manager_${stack_version}</name>
+                        </package>
+                    </packages>
+                </osSpecific>
+            </osSpecifics>
+
             <requiredServices>
                 <service>KAFKA</service>
             </requiredServices>

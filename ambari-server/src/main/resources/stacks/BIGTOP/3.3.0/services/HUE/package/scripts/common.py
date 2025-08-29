@@ -42,7 +42,7 @@ def __set_home_dir_ownership():
   """
   if not os.path.exists("/home/{0}".format(params.hue_user)):
     Directory(params.hue_local_home_dir,
-            mode=0700,
+            mode=0o700,
             cd_access='a',
             owner=params.hue_user,
             group=params.hue_group,
@@ -120,7 +120,7 @@ def add_hive_configuration(if_ranger=False, security_enabled=False):
   services_configurations['hive-site']['hive.security.authorization.sqlstd.confwhitelist.append'] = 'hive.server2.logging.operation.verbose'
   services_configurations['hive-site'] = {}
   services_configurations['hive-site']['webhcat.proxyuser.hue.groups'] = '*'
-  services_configurations['hive-site']['webhcat.proxyuser.hue.hosts'] = '*' 	
+  services_configurations['hive-site']['webhcat.proxyuser.hue.hosts'] = '*'
   if if_ranger:
     services_configurations['hive-site']['hive.server2.enable.impersonation'] = 'true'
   add_configurations(services_configurations)
@@ -160,4 +160,3 @@ def add_configurations(services_configurations):
           cmd = format(params.service_packagedir + "/files/configs.sh set " + params.ambari_server_hostname + " " + params.cluster_name + " " + key1 + " '" + key2 + "' '"+ value2 + "'")
           Execute(cmd)
 
-  

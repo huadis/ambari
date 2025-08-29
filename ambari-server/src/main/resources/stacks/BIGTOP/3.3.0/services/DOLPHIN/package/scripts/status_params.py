@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -20,4 +21,4 @@ from resource_management import *
 
 config = Script.get_config()
 
-dolphin_run_dir = "/opt/soft/dolphinscheduler/pid/"
+dolphin_run_dir = "/var/run/dolphinscheduler/"

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Licensed to the Apache Software Foundation (ASF) under one or more
@@ -49,7 +50,7 @@ class KyuubiServer(Script):
 
         Logger.info('Creating Kyuubi install directory')
         Directory([params.kyuubi_installation_path],
-                  mode=0755,
+                  mode=0o755,
                   cd_access='a',
                   owner=params.kyuubi_user,
                   group=params.kyuubi_group,

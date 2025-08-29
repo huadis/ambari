@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -29,12 +30,12 @@ sys.setdefaultencoding('utf-8')
 config = Script.get_config()
 
 # conf_dir = "/etc/"
-dolphin_home = "/opt/soft/dolphinscheduler"
+dolphin_home = "/usr/hdp/current/dolphinscheduler"
 dolphin_conf_dir = dolphin_home + "/conf"
 dolphin_log_dir = dolphin_home + "/logs"
 dolphin_bin_dir = dolphin_home + "/bin"
 dolphin_lib_jars = dolphin_home + "/lib/*"
-dolphin_pidfile_dir = "/opt/soft/run/dolphinscheduler"
+dolphin_pidfile_dir = "/var/run/dolphinscheduler"
 
 rmHosts = default("/clusterHostInfo/rm_host", [])
 

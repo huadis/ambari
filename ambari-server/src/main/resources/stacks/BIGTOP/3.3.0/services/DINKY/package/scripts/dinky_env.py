@@ -28,19 +28,19 @@ def dinky_env():
          )  # 创建用户
 
     Directory(params.dinky_pidfile_dir,  # Directory执行文件夹操作
-              mode=0777,
+              mode=0o777,
               owner=params.dinky_user,
               group=params.dinky_group,
               create_parents=True  # 父目录不存在时一起创建
               )
     Directory(params.dinky_log_dir,
-              mode=0777,
+              mode=0o777,
               owner=params.dinky_user,
               group=params.dinky_group,
               create_parents=True
               )
     Directory(params.dinky_conf_dir,
-              mode=0777,
+              mode=0o777,
               owner=params.dinky_user,
               group=params.dinky_group,
               create_parents=True
@@ -48,7 +48,7 @@ def dinky_env():
 
     ## 重写 启动脚本 auto.sh 文件
     File(format(params.dinky_bin_dir + params.start_script_name),
-         mode=0755,
+         mode=0o755,
          content=Template(params.start_script_template_file),
          owner=params.dinky_user,
          group=params.dinky_group
@@ -56,7 +56,7 @@ def dinky_env():
 
     # 重写 application.yml 文件
     File(format(params.dinky_conf_dir + "/" + params.dinky_application_main_config_file),
-         mode=0755,
+         mode=0o755,
          content=Template(params.dinky_application_main_config_template_file),
          owner=params.dinky_user,
          group=params.dinky_group
@@ -66,7 +66,7 @@ def dinky_env():
     if params.dinky_database_config['dinky_database_type'] == "mysql":
         ## 重写 application-mysql.yml 文件
         File(format(params.dinky_conf_dir + "/" + params.dinky_application_mysql_config_file),
-             mode=0755,
+             mode=0o755,
              content=Template(params.dinky_application_mysql_config_template_file),
              owner=params.dinky_user,
              group=params.dinky_group
@@ -74,7 +74,7 @@ def dinky_env():
     else:
         ## 重写 application-pgsql.yml 文件
         File(format(params.dinky_conf_dir + "/" + params.dinky_application_pgsql_config_file),
-             mode=755,
+             mode=0o755,
              content=Template(params.dinky_application_pgsql_config_template_file),
              owner=params.dinky_user,
              group=params.dinky_group

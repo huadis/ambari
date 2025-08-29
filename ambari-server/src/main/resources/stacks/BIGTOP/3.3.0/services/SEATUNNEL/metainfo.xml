@@ -81,10 +81,10 @@
           <osFamily>redhat8</osFamily>
           <packages>
             <package>
-              <name>seatunnel</name>
+              <name>seatunnel_${stack_version}</name>
             </package>
             <package>
-              <name>seatunnel-web</name>
+              <name>seatunnel-web_${stack_version}</name>
             </package>
           </packages>
         </osSpecific>

@@ -64,7 +64,7 @@ class DorisBE(Script):
         File(os.path.join(params.limits_conf_dir, 'system.conf'),
              owner='root',
              group='root',
-             mode=0644,
+             mode=0o644,
              content=Template("system.conf.j2")
              )
 

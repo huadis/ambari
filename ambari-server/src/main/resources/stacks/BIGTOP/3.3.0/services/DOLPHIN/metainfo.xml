@@ -98,10 +98,10 @@
 
             <osSpecifics>
                 <osSpecific>
-                    <osFamily>any</osFamily>
+                    <osFamily>redhat7,redhat8,redhat9,openeuler22</osFamily>
                     <packages>
                         <package>
-                            <name>apache-dolphinscheduler*</name>
+                            <name>dolphinscheduler_${stack_version}</name>
                         </package>
                     </packages>
                 </osSpecific>

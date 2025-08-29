@@ -46,7 +46,7 @@ def sqoop(type=None):
   )
 
   jdbc_connector()
-  
+
   Directory(params.sqoop_conf_dir,
             owner = params.sqoop_user,
             group = params.user_group,
@@ -113,12 +113,12 @@ def jdbc_connector():
 
       File(downloaded_custom_connector,
            content = DownloadSource(driver_curl_source),
-           mode = 0644,
+           mode = 0o644,
       )
     except HTTPError:
       error_string = format("Could not download {driver_curl_source}\n\
                  Please upload jdbc driver to server by run command:\n\
                  ambari-server setup --jdbc-db={jdbc_driver_label} --jdbc-driver=<PATH TO DRIVER>\n\
-                 at {ambari_server_hostname}") 
+                 at {ambari_server_hostname}")
       raise Fail(error_string)
-                 
+
