@@ -28,6 +28,8 @@ tmp_dir = Script.get_tmp_dir()
 stack_name = default("/clusterLevelParams/stack_name", None)
 stack_root = Script.get_stack_root()
 
+KYUUBI_HOME = format("{stack_root}/current/kyuubi")
+
 # This is expected to be of the form #.#.#.#
 stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
 stack_version_formatted = format_stack_version(stack_version_unformatted)
