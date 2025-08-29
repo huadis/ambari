@@ -19,7 +19,6 @@ from resource_management import *
 # from resource_management.core.logger import Logger
 from kyuubi_utils import get_zookeeper_ensemble_str
 import os
-import repoin
 import socket
 
 # server configurations
