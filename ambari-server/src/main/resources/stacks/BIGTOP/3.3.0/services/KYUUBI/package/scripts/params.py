@@ -18,35 +18,22 @@ limitations under the License.
 from resource_management import *
 # from resource_management.core.logger import Logger
 from kyuubi_utils import get_zookeeper_ensemble_str
-import commands
 import os
 import repoin
 import socket
 
-# Package & env configuration
-
-KYUUBI_TAR_NAME = 'apache-kyuubi-1.9.2-bin.tgz'
-KYUUBI_DIR_NAME = 'apache-kyuubi-1.9.2-bin'
-STACK_VERSION = '3.0.1.0-187'
-
-# Whether Kyuubi locates in aux or HDP basic package
-AUX_ENABLED = True
-
+# server configurations
 config = Script.get_config()
+tmp_dir = Script.get_tmp_dir()
 
+stack_name = default("/clusterLevelParams/stack_name", None)
 stack_root = Script.get_stack_root()
 
-kyuubi_installation_path = os.path.join(stack_root, STACK_VERSION, 'kyuubi')
-KYUUBI_HOME = os.path.join(kyuubi_installation_path, KYUUBI_DIR_NAME)
+# This is expected to be of the form #.#.#.#
+stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
+stack_version_formatted = format_stack_version(stack_version_unformatted)
 
 kyuubi_defaults = config['configurations']['kyuubi-defaults']
-
-if AUX_ENABLED:
-    download_url_from_aux = commands.getoutput('cat /etc/yum.repos.d/aux.repo | grep "baseurl" | head -1 | awk -F= \'{print $2"/kyuubi/' + KYUUBI_TAR_NAME + '"}\'')
-    kyuubi_download_url = download_url_from_aux if kyuubi_defaults['kyuubi_download_url'] == 'DOWNLOAD_PROM_REPO' else kyuubi_defaults['kyuubi_download_url']
-else:
-    kyuubi_download_url = os.path.join(repoin.get_base_url(), 'kyuubi', KYUUBI_TAR_NAME) if kyuubi_defaults['kyuubi_download_url'] == 'DOWNLOAD_PROM_REPO' else kyuubi_defaults['kyuubi_download_url']
-
 # Kyuubi user
 
 kyuubi_user = kyuubi_defaults['kyuubi_user']

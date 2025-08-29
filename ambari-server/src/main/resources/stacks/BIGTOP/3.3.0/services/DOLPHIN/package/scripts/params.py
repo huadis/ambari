@@ -18,16 +18,22 @@ limitations under the License.
 """
 
 import sys
+# Local Imports
 from resource_management import *
 from resource_management.core.logger import Logger
 from resource_management.libraries.functions import default
+from resource_management.libraries.script.script import Script
 
 Logger.initialize_logger()
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # server configurations
 config = Script.get_config()
+
+stack_root = Script.get_stack_root()
+stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
+stack_version_formatted_major = format_stack_version(stack_version_unformatted)
+#dolphin_pid_dir = config["configurations"]["hive-env"]["hive_pid_dir"]
+#dolphin_pid = format("{hive_pid_dir}/hive-server.pid")
 
 # conf_dir = "/etc/"
 dolphin_home = "/usr/hdp/current/dolphinscheduler"
