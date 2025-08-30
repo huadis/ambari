@@ -1,0 +1,28 @@
+{
+  "name": "default",
+  "description": "default quick links configuration",
+  "configuration": {
+    "protocol":
+    {
+      "type":"HTTP_ONLY"
+    },
+
+    "links": [
+      {
+        "name": "kyuubi_ui",
+        "label": "Kyuubi Web UI",
+        "component_name": "KYUUBI_SERVER",
+        "requires_user_name": "false",
+        "url": "%@://%@:%@/ui/overview",
+        "port":{
+          "http_property": "kyuubi.frontend.rest.bind.port",
+          "http_default_port": "10099",
+          "https_property": "kyuubi.frontend.rest.bind.port",
+          "https_default_port": "10099",
+          "regex": "^(\\d+)$",
+          "site": "kyuubi-defaults"
+        }
+      }
+    ]
+  }
+}

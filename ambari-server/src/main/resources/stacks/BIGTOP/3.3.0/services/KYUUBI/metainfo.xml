@@ -61,12 +61,12 @@
 
             <restartRequiredAfterChange>true</restartRequiredAfterChange>
 
-            <!--<quickLinksConfigurations>
+            <quickLinksConfigurations>
                 <quickLinksConfiguration>
                     <fileName>quicklinks.json</fileName>
                     <default>true</default>
                 </quickLinksConfiguration>
-            </quickLinksConfigurations>-->
+            </quickLinksConfigurations>
             <themes>
                 <theme>
                     <fileName>theme.json</fileName>
