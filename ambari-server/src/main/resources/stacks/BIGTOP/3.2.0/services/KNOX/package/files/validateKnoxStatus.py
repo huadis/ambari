@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -31,13 +31,13 @@ def main():
   (options, args) = parser.parse_args()
   timeout_seconds = 5
   try:
-    s = socket.create_connection((options.hostname, int(options.port)),timeout=timeout_seconds)
-    print "Successfully connected to %s on port %s" % (options.hostname, options.port)
-    s.close()
-  except socket.error, e:
-    print "Connection to %s on port %s failed: %s" % (options.hostname, options.port, e)
+    # Python3中socket.create_connection返回的是一个上下文管理器
+    with socket.create_connection((options.hostname, int(options.port)), timeout=timeout_seconds) as s:
+      print(f"Successfully connected to {options.hostname} on port {options.port}")
+    # 不需要显式调用close()，with语句会自动处理
+  except socket.error as e:
+    print(f"Connection to {options.hostname} on port {options.port} failed: {e}")
     exit(1)
 
 if __name__ == "__main__":
   main()
-
