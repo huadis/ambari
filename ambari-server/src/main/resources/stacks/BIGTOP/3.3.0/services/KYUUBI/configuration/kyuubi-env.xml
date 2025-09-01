@@ -88,21 +88,21 @@
 # export KYUUBI_JAVA_OPTS="-Xmx10g -XX:+UnlockDiagnosticVMOptions -XX:ParGCCardsPerStrideChunk=4096 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled -XX:+UseCondCardMark -XX:MaxDirectMemorySize=1024m  -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -Xloggc:./logs/kyuubi-server-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=5M -XX:NewRatio=3 -XX:MetaspaceSize=512m"
 # export KYUUBI_BEELINE_OPTS="-Xmx2g -XX:+UnlockDiagnosticVMOptions -XX:ParGCCardsPerStrideChunk=4096 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSParallelRemarkEnabled -XX:+UseCondCardMark"
 
-export HADOOP_CONF_DIR=/usr/hdp/3.0.1.0-187/hadoop/conf
-export YARN_CONF_DIR=/usr/hdp/3.0.1.0-187/hadoop/conf
+export HADOOP_CONF_DIR=/usr/hdp/current/hadoop-client/etc/hadoop
+export YARN_CONF_DIR=/usr/hdp/current/hadoop-yarn-client/etc/hadoop
 
 # Spark Configuration
-export SPARK_HOME=/usr/hdp/3.0.1.0-187/spark3/spark-3.3.2
+export SPARK_HOME=/usr/hdp/current/spark-client
 
 # Flink Configuration
-# export FLINK_HOME=/usr/hdp/3.0.1.0-187/flink/flink-1.17.2
-# export FLINK_HADOOP_CLASSPATH=`hadoop classpath`
-# export HADOOP_CLASSPATH=`hadoop classpath`
+export FLINK_HOME=/usr/hdp/current/flink-client
+export FLINK_HADOOP_CLASSPATH=`hadoop classpath`
+export HADOOP_CLASSPATH=`hadoop classpath`
 
 # Hive Configuration
-# export HIVE_HOME=/usr/hdp/3.0.1.0-187/hive
-# export HIVE_CONF_DIR=/usr/hdp/3.0.1.0-187/hive/conf
-# export HIVE_HADOOP_CLASSPATH=`hadoop classpath`
+export HIVE_HOME=/usr/hdp/current/hive-client
+export HIVE_CONF_DIR=/usr/hdp/current/hive-client/conf
+export HIVE_HADOOP_CLASSPATH=`hadoop classpath`
 
 ]]></value>
         <value-attributes>
