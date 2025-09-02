@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLINK_VERSION={{ dinky_flink_big_version }}
+FLINK_VERSION={{ dinky_flink_major_version }}
 
 JAR_NAME="dinky-admin"
 
@@ -14,7 +14,7 @@ APP_HOME="$(cd `dirname $0`; pwd)"
 JMX="-javaagent:$APP_HOME/lib/jmx_prometheus_javaagent-0.20.0.jar=10087:$APP_HOME/config/jmx/jmx_exporter_config.yaml"
 
 # Check whether the pid path exists
-PID_PATH={{ dinky_pidfile_dir }}
+PID_PATH={{ dinky_pid_dir }}
 
 if [ -d "${PID_PATH}" ];then
     echo "${PID_PATH} is already exist." >> /dev/null

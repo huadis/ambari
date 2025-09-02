@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -27,6 +27,7 @@ class ServiceCheck(Script):
         env.set_params(params)
 
         Execute(format("sh {dinky_bin_dir}/{start_script_name} status"))
+
 
 if __name__ == "__main__":
     ServiceCheck().execute()

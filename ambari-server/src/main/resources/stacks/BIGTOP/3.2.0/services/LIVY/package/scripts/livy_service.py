@@ -17,8 +17,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from resource_management.core.resources.system import Execute
 from resource_management.libraries.functions import format
-from resource_management.core.resources.system import File, Execute
 from resource_management.libraries.functions import get_user_call_output
 
 

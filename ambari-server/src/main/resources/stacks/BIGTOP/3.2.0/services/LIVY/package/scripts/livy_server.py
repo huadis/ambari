@@ -18,23 +18,23 @@ limitations under the License.
 
 """
 
-from resource_management.libraries.script.script import Script
+from resource_management import is_empty
+from resource_management import shell
+from resource_management.core.exceptions import Fail
+from resource_management.core.logger import Logger
+from resource_management.core.resources.system import Execute
+from resource_management.libraries.functions import namenode_ha_utils
+from resource_management.libraries.functions import stack_select
 from resource_management.libraries.functions.check_process_status import (
   check_process_status,
 )
-from resource_management.libraries.functions.stack_features import check_stack_feature
 from resource_management.libraries.functions.constants import StackFeature
-from resource_management.core.exceptions import Fail
-from resource_management.core.resources.system import Execute
-from resource_management.libraries.providers.hdfs_resource import WebHDFSUtil
-from resource_management.libraries.providers.hdfs_resource import HdfsResourceProvider
-from resource_management import is_empty
-from resource_management import shell
 from resource_management.libraries.functions.decorator import retry
-from resource_management.core.logger import Logger
 from resource_management.libraries.functions.format import format
-from resource_management.libraries.functions import stack_select
-from resource_management.libraries.functions import namenode_ha_utils
+from resource_management.libraries.functions.stack_features import check_stack_feature
+from resource_management.libraries.providers.hdfs_resource import HdfsResourceProvider
+from resource_management.libraries.providers.hdfs_resource import WebHDFSUtil
+from resource_management.libraries.script.script import Script
 
 from livy_service import livy_service
 from setup_livy import setup_livy

@@ -19,31 +19,29 @@ limitations under the License.
 """
 
 import socket
-import status_params
-import os
 from urllib.parse import urlparse
 
 from ambari_commons.constants import AMBARI_SUDO_BINARY
-
-from resource_management.libraries.functions.stack_features import check_stack_feature
-from resource_management.libraries.functions.constants import StackFeature
 from resource_management.libraries.functions import conf_select, stack_select
+from resource_management.libraries.functions import get_kinit_path
+from resource_management.libraries.functions.constants import StackFeature
+from resource_management.libraries.functions.copy_tarball import (
+  get_sysprep_skip_copy_tarballs_hdfs,
+)
+from resource_management.libraries.functions.default import default
+from resource_management.libraries.functions.format import format
+from resource_management.libraries.functions.get_not_managed_resources import (
+  get_not_managed_resources,
+)
+from resource_management.libraries.functions.stack_features import check_stack_feature
 from resource_management.libraries.functions.version import (
   format_stack_version,
   get_major_version,
 )
-from resource_management.libraries.functions.copy_tarball import (
-  get_sysprep_skip_copy_tarballs_hdfs,
-)
-from resource_management.libraries.functions.format import format
-from resource_management.libraries.functions.default import default
-from resource_management.libraries.functions import get_kinit_path
-from resource_management.libraries.functions.get_not_managed_resources import (
-  get_not_managed_resources,
-)
 from resource_management.libraries.resources.hdfs_resource import HdfsResource
 from resource_management.libraries.script.script import Script
-from ambari_commons.constants import AMBARI_SUDO_BINARY
+
+import status_params
 
 sudo = AMBARI_SUDO_BINARY
 

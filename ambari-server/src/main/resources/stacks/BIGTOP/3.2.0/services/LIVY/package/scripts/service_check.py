@@ -17,15 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import subprocess
-import time
-import os
-
 from resource_management.core.exceptions import Fail
-from resource_management.libraries.script.script import Script
-from resource_management.libraries.functions.format import format
 from resource_management.core.resources.system import Execute
-from resource_management.core.logger import Logger
+from resource_management.libraries.functions.format import format
+from resource_management.libraries.script.script import Script
 
 CHECK_COMMAND_TIMEOUT_DEFAULT = 60.0
 

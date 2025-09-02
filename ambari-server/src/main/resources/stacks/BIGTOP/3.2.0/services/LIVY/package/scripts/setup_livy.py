@@ -19,10 +19,7 @@ limitations under the License.
 """
 
 import os
-from resource_management.libraries.functions.default import default
-from resource_management.libraries.functions.generate_logfeeder_input_config import (
-  generate_logfeeder_input_config,
-)
+
 from resource_management import (
   Directory,
   File,
@@ -30,6 +27,10 @@ from resource_management import (
   Template,
   InlineTemplate,
   format,
+)
+from resource_management.libraries.functions.default import default
+from resource_management.libraries.functions.generate_logfeeder_input_config import (
+  generate_logfeeder_input_config,
 )
 
 
