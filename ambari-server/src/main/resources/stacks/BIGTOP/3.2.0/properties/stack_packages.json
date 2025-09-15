@@ -536,6 +536,20 @@
           ]
         }
       },
+      "STREAMPARK": {
+        "STREAMPARK_SERVER": {
+          "STACK-SELECT-PACKAGE": "streampark",
+          "INSTALL": [
+            "streampark"
+          ],
+          "PATCH": [
+            "streampark"
+          ],
+          "STANDARD": [
+            "streampark"
+          ]
+        }
+      },
       "HIVE": {
         "HIVE_METASTORE": {
           "STACK-SELECT-PACKAGE": "hive-metastore",
