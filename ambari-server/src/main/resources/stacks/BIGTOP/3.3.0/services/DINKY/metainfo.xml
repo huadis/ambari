@@ -19,7 +19,7 @@
     <schemaVersion>1.0</schemaVersion>
     <services>
         <service>
-            <name>Dinky</name>
+            <name>DINKY</name>
             <displayName>Dinky</displayName>
             <comment>
                 Dinky是一个基于Apache Flink的数据开发平台，实现了敏捷的数据开发和部署。
@@ -29,7 +29,7 @@
             <components>
                 <component>
                     <name>DINKY_SERVER</name>
-                    <displayName>Dinky</displayName>
+                    <displayName>Dinky Server</displayName>
                     <category>MASTER</category>
                     <cardinality>1+</cardinality>
                     <commandScript>

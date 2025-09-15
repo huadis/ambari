@@ -101,7 +101,7 @@
                     <osFamily>redhat7,redhat8,redhat9,openeuler22</osFamily>
                     <packages>
                         <package>
-                            <name>dolphinscheduler_${stack_version}</name>
+                            <name>dolphin_${stack_version}</name>
                         </package>
                     </packages>
                 </osSpecific>

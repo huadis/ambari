@@ -19,7 +19,7 @@
     <schemaVersion>1.0</schemaVersion>
     <services>
         <service>
-            <name>DataEase</name>
+            <name>DATAEASE</name>
             <displayName>DataEase</displayName>
             <comment>
                 开源 BI 工具，数据可视化神器。
@@ -27,7 +27,7 @@
             <version>2.10.12</version>
             <components>
                 <component>
-                    <name>DATAEASE</name>
+                    <name>DATAEASE_SERVER</name>
                     <displayName>DataEase</displayName>
                     <category>MASTER</category>
                     <cardinality>1+</cardinality>

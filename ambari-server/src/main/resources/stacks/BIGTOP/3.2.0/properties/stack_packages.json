@@ -40,6 +40,18 @@
             "seatunnel"
           ]
         },
+        "SEATUNNEL-WEB": {
+          "STACK-SELECT-PACKAGE": "seatunnel-web",
+          "INSTALL": [
+            "seatunnel-web"
+          ],
+          "PATCH": [
+            "seatunnel-web"
+          ],
+          "STANDARD": [
+            "seatunnel-web"
+          ]
+        },
         "SEATUNNEL_CLIENT": {
           "STACK-SELECT-PACKAGE": "seatunnel",
           "INSTALL": [
@@ -53,7 +65,7 @@
           ]
         }
       },
-      "DOLPHINSCHEDULER": {
+      "DOLPHIN": {
         "DOLPHIN_MASTER": {
           "STACK-SELECT-PACKAGE": "dolphinscheduler",
           "INSTALL": [
@@ -510,6 +522,20 @@
           ]
         }
       },
+      "DATAEASE": {
+        "DATAEASE_SERVER": {
+          "STACK-SELECT-PACKAGE": "dataease",
+          "INSTALL": [
+            "dataease"
+          ],
+          "PATCH": [
+            "dataease"
+          ],
+          "STANDARD": [
+            "dataease"
+          ]
+        }
+      },
       "HIVE": {
         "HIVE_METASTORE": {
           "STACK-SELECT-PACKAGE": "hive-metastore",
@@ -601,6 +627,20 @@
           ],
           "STANDARD": [
             "knox-server"
+          ]
+        }
+      },
+      "DINKY": {
+        "DINKY_SERVER": {
+          "STACK-SELECT-PACKAGE": "dinky-server",
+          "INSTALL": [
+            "dinky-server"
+          ],
+          "PATCH": [
+            "dinky-server"
+          ],
+          "STANDARD": [
+            "dinky-server"
           ]
         }
       },
@@ -1034,6 +1074,34 @@
           "component": "hbase-client"
         }
       ],
+      "dataease": [
+        {
+          "conf_dir": "/etc/dataease/conf",
+          "current_dir": "{0}/current/dataease/conf",
+          "component": "dataease"
+        }
+      ],
+      "dinky": [
+        {
+          "conf_dir": "/etc/dinky/conf",
+          "current_dir": "{0}/current/dinky-server/conf",
+          "component": "dinky"
+        }
+      ],
+      "seatunnel": [
+        {
+          "conf_dir": "/etc/seatunnel/conf",
+          "current_dir": "{0}/current/seatunnel-server/conf",
+          "component": "seatunnel"
+        }
+      ],
+      "seatunnel-web": [
+        {
+          "conf_dir": "/etc/seatunnel-web/conf",
+          "current_dir": "{0}/current/seatunnel-web/conf",
+          "component": "seatunnel-web"
+        }
+      ],
       "hive": [
         {
           "conf_dir": "/etc/hive/conf",
@@ -1203,6 +1271,15 @@
           "hive",
           "hive-hcatalog"
         ]
+      },
+      "DATAEASE": {
+        "packages": ["dataease"]
+      },
+      "DINKY": {
+        "packages": ["dinky"]
+      },
+      "SEATUNNEL": {
+        "packages": ["seatunnel", "seatunnel-web"]
       },
       "KAFKA": {
         "packages": [
