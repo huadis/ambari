@@ -7,13 +7,14 @@ JAR_NAME="dinky-admin"
 DINKY_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
 
 # Use FLINK_HOME:
-CLASS_PATH=".:${DINKY_HOME}/lib/*:config:${DINKY_HOME}/extends/*:${DINKY_HOME}/plugins/*:${DINKY_HOME}/customJar/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/*"
+CLASS_PATH=".:${DINKY_HOME}/lib/*:${DINKY_HOME}/config/*:${DINKY_HOME}/extends/*:${DINKY_HOME}/plugins/*:${DINKY_HOME}/customJar/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/*"
+
+. /usr/lib/bigtop-utils/bigtop-detect-javahome
 
 PID_FILE={{ dinky_pid_filename }}
 
 # JMX path
-APP_HOME="$(cd `dirname $0`; pwd)"
-JMX="-javaagent:$APP_HOME/lib/jmx_prometheus_javaagent-0.20.0.jar=10087:$APP_HOME/config/jmx/jmx_exporter_config.yaml"
+JMX="-javaagent:$DINKY_HOME/lib/jmx_prometheus_javaagent-0.20.0.jar=10087:$DINKY_HOME/config/jmx/jmx_exporter_config.yaml"
 
 # Check whether the pid path exists
 PID_PATH={{ dinky_pid_dir }}
