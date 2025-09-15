@@ -4,8 +4,10 @@ FLINK_VERSION={{ dinky_flink_major_version }}
 
 JAR_NAME="dinky-admin"
 
+DINKY_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
+
 # Use FLINK_HOME:
-CLASS_PATH=".:./lib/*:config:./extends/*:./plugins/*:./customJar/*:./plugins/flink${FLINK_VERSION}/dinky/*:./plugins/flink${FLINK_VERSION}/*:./extends/flink${FLINK_VERSION}/dinky/*:./extends/flink${FLINK_VERSION}/*"
+CLASS_PATH=".:${DINKY_HOME}/lib/*:config:${DINKY_HOME}/extends/*:${DINKY_HOME}/plugins/*:${DINKY_HOME}/customJar/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/*"
 
 PID_FILE={{ dinky_pid_filename }}
 

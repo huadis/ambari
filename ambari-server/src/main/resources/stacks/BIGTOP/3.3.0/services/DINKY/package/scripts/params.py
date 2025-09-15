@@ -33,11 +33,11 @@ major_stack_version = get_major_version(stack_version_formatted_major)
 dinky_home = os.path.join(stack_root, "current", "dinky-server")
 
 dinky_server_port = config['configurations']['dinky-application-server']['server.port']
-dinky_user = config['configurations']['dinky-application-server']["dinky.user"]
-dinky_group = config['configurations']['dinky-application-server']["dinky.group"]
-dinky_pid_dir = config['configurations']['dinky-application-server']["dinky.pid.dir"]
+dinky_user = config['configurations']['dinky-application-server']["dinky_user"]
+user_group = config["configurations"]["cluster-env"]["user_group"]
+dinky_pid_dir = config['configurations']['dinky-application-server']["dinky_pid_dir"]
 dinky_pid_filename = "dinky.pid"
-dinky_log_dir = config['configurations']['dinky-application-server']["dinky.log.dir"]
+dinky_log_dir = config['configurations']['dinky-application-server']["dinky_log_dir"]
 
 start_script_name = "auto.sh"
 start_script_template_file = start_script_name + ".j2"

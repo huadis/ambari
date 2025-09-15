@@ -28,7 +28,7 @@ def dinky_env():
         [params.dinky_pid_dir, params.dinky_log_dir],
               mode=0o777,
               owner=params.dinky_user,
-              group=params.dinky_group,
+              group=params.user_group,
               create_parents=True
               )
 
@@ -36,14 +36,14 @@ def dinky_env():
          mode=0o755,
          content=Template(params.start_script_template_file),
          owner=params.dinky_user,
-         group=params.dinky_group
+         group=params.user_group
          )
 
     File(format(params.dinky_conf_dir + "/" + params.dinky_application_config_file),
          mode=0o755,
          content=Template(params.dinky_application_config_template_file),
          owner=params.dinky_user,
-         group=params.dinky_group
+         group=params.user_group
          )
 
     if params.dinky_database_config['dinky_database_type'] == "mysql":
@@ -51,12 +51,12 @@ def dinky_env():
              mode=0o755,
              content=Template(params.dinky_application_mysql_config_template_file),
              owner=params.dinky_user,
-             group=params.dinky_group
+             group=params.user_group
              )
     else:
         File(format(params.dinky_conf_dir + "/" + params.dinky_application_pgsql_config_file),
              mode=0o755,
              content=Template(params.dinky_application_pgsql_config_template_file),
              owner=params.dinky_user,
-             group=params.dinky_group
+             group=params.user_group
              )
