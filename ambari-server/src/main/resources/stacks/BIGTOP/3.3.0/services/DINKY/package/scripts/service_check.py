@@ -21,16 +21,12 @@ limitations under the License.
 
 from resource_management import *
 
-
-def service_check(env):
-    import params
-    env.set_params(params)
-
-    Execute(format("sh {dinky_bin_dir}/{start_script_name} status"))
-
-
 class ServiceCheck(Script):
-    pass
+    def service_check(self, env):
+        import params
+        env.set_params(params)
+
+        Execute(format("sh {dinky_bin_dir}/{start_script_name} status"))
 
 
 if __name__ == "__main__":
