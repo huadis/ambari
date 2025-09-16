@@ -60,7 +60,7 @@ class DinkyService(Script):
     def status(self, env):
         import params
         env.set_params(params)
-        check_process_status(params.dinky_pid_dir + params.dinky_pid_filename)
+        check_process_status(params.dinky_pid_dir + "/" + params.dinky_pid_filename)
 
     def restart(self, env):
         self.stop(env)

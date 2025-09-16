@@ -26,7 +26,7 @@ def dinky_env():
 
     Directory(
         [params.dinky_pid_dir, params.dinky_log_dir],
-              mode=0o777,
+              mode=0o775,
               owner=params.dinky_user,
               group=params.user_group,
               create_parents=True
