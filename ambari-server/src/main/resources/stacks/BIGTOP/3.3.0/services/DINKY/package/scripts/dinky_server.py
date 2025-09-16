@@ -44,7 +44,8 @@ class DinkyService(Script):
 
         self.configure(env)
 
-        no_op_test = format("ls {dinky_pid_dir}/{dinky_pid_filename} >/dev/null 2>&1 && ps `cat {dinky_pid_dir}/{dinky_pid_filename}` >/dev/null 2>&1")
+        no_op_test = format(
+            "ls {dinky_pid_dir}/{dinky_pid_filename} >/dev/null 2>&1 && ps `cat {dinky_pid_dir}/{dinky_pid_filename}` >/dev/null 2>&1")
 
         start_cmd = format(
             "sh " + params.dinky_bin_dir + params.start_script_name + " start ")
