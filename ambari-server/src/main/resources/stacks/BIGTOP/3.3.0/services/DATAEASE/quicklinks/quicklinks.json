@@ -9,16 +9,16 @@
 
     "links": [
       {
-        "name": "dinky-ui",
-        "label": "Dinky Web UI",
+        "name": "dataease-ui",
+        "label": "DatEase Web UI",
         "requires_user_name": "false",
-        "component_name": "DINKY_SERVER",
+        "component_name": "DATAEASE_SERVER",
         "url": "%@://%@:%@",
         "port":{
           "http_property": "server.port",
-          "http_default_port": "8888",
+          "http_default_port": "8010",
           "regex": "^(\\d+)$",
-          "site": "dinky-application-server"
+          "site": "dataease-application"
         }
       }
     ]

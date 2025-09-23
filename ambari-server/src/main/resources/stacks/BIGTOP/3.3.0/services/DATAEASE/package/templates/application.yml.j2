@@ -1,0 +1,16 @@
+server:
+  tomcat:
+    connection-timeout: 70000
+  servlet:
+    context-path: {{ dataease_context }}
+  port: {{ dataease_server_port }}
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  datasource:
+    url: {{ dataease_database_config['dataease_database_url'] }}
+    username: {{ dataease_database_config['dataease_database_username'] }}
+    password: {{ dataease_database_config['dataease_database_password'] }}
+basePath: ${DATAEASE_HOME: {{ dataease_home }} }

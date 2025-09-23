@@ -1,0 +1,98 @@
+#!/bin/bash
+
+DATAEASE_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
+
+. /usr/lib/bigtop-utils/bigtop-detect-javahome
+
+PID_FILE={{ dataease_pid_filename }}
+
+# Check whether the pid path exists
+PID_PATH={{ dataease_pid_dir }}
+
+if [ -d "${PID_PATH}" ];then
+    echo "${PID_PATH} is already exist." >> /dev/null
+else
+    mkdir -p  "${PID_PATH}"
+fi
+
+# Check whether the pid file exists
+if [ -f "${PID_PATH}/${PID_FILE}" ];then
+    echo "${PID_PATH}/${PID_FILE} is already exist." >> /dev/null
+else
+    touch "${PID_PATH}"/${PID_FILE}
+fi
+
+tips() {
+  echo ""
+  echo "WARNING!!!......Tips, please use command: sh app.sh [start|stop|restart|status].   For example: sh app.sh start  "
+  echo ""
+  exit 1
+}
+
+updatePid() {
+  pid=$(ps -ef | grep [D]ataease  | awk '{print $2}' | head -1)
+  echo $pid >"${PID_PATH}"/${PID_FILE}
+}
+
+start() {
+  updatePid
+  if [ -z "$pid" ]; then
+    nohup java -Dfile.encoding=utf-8 -Dloader.path=${DATAEASE_HOME} -Dspring.config.additional-location=${DATAEASE_HOME}/config/ -XX:+ExitOnOutOfMemoryError -cp . -jar ${DATAEASE_HOME}/lib/CoreApplication.jar >${DATAEASE_HOME}/logs/dataease.out 2>&1 &
+    echo $! >"${PID_PATH}"/${PID_FILE}
+    echo "........................................Start DataEase Successfully........................................"
+  else
+    echo "DataEase pid $pid is in ${PID_PATH}/${PID_FILE}, Please stop first !!!"
+  fi
+}
+
+stop() {
+  updatePid
+  pid=$(cat "${PID_PATH}"/${PID_FILE})
+  if [ -z $pid ]; then
+    echo "DataEase pid is not exist in ${PID_PATH}/${PID_FILE}"
+  else
+    kill -9 $pid
+    sleep 1
+    echo "........................................Stop DataEase Successfully....................................."
+    rm -f "${PID_PATH}"/${PID_FILE}
+  fi
+}
+
+status() {
+  updatePid
+  if [ -z $pid ]; then
+    echo ""
+    echo "Service DataEase is not running!"
+    echo ""
+    exit 1
+  else
+    echo ""
+    echo "Service DataEase is running. It's pid=${pid}"
+    echo ""
+  fi
+}
+
+restart() {
+  echo ""
+  stop
+  start
+  echo "........................................Restart Successfully........................................"
+}
+
+case "$1" in
+"start")
+  start
+  ;;
+"stop")
+  stop
+  ;;
+"status")
+  status
+  ;;
+"restart")
+  restart
+  ;;
+*)
+  tips
+  ;;
+esac
