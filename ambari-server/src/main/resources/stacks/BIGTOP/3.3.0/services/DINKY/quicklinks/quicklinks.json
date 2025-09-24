@@ -18,7 +18,7 @@
           "http_property": "server.port",
           "http_default_port": "8888",
           "regex": "^(\\d+)$",
-          "site": "dinky-application-server"
+          "site": "application"
         }
       }
     ]

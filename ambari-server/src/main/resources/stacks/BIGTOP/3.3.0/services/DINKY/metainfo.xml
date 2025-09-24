@@ -62,7 +62,7 @@
             </commandScript>
 
             <configuration-dependencies>
-                <config-type>dinky-application-server</config-type>
+                <config-type>application</config-type>
             </configuration-dependencies>
 
             <quickLinksConfigurations>

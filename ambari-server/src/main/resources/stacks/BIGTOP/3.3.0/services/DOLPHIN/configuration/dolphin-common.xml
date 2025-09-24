@@ -23,32 +23,6 @@
     <property>
         <name>resource.storage.type</name>
         <value>HDFS</value>
-        <description>
-            资源存储类型: HDFS , S3 , OSS , NONE
-        </description>
-        <display-name>资源存储类型</display-name>
-        <value-attributes>
-            <type>value-list</type>
-            <entries>
-                <entry>
-                    <value>HDFS</value>
-                    <label>HDFS</label>
-                </entry>
-                <entry>
-                    <value>S3</value>
-                    <label>S3/MinIO/Ozone</label>
-                </entry>
-                <entry>
-                    <value>OSS</value>
-                    <label>OSS</label>
-                </entry>
-                <entry>
-                    <value>NONE</value>
-                    <label>NONE</label>
-                </entry>
-            </entries>
-            <selection-cardinality>1</selection-cardinality>
-        </value-attributes>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>

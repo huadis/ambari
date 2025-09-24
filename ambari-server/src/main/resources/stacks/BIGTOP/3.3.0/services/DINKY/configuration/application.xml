@@ -117,26 +117,32 @@
         <display-name>Server Port</display-name>
         <on-ambari-upgrade add="true"/>
     </property>
-    <property require-input="true">
+    <property>
         <name>flink.major.version</name>
         <value>1.16</value>
         <description>The version of flink major version such as: 1.18, 1.17, 1.16, 1.15, 1.14</description>
+        <display-name>Flink版本</display-name>
         <value-attributes>
             <type>value-list</type>
             <entries>
                 <entry>
                     <value>1.14</value>
+                    <label>1.14</label>
                 </entry>
                 <entry>
                     <value>1.15</value>
+                    <label>1.15</label>
                 </entry>
                 <entry>
                     <value>1.16</value>
+                    <label>1.16</label>
                 </entry>
                 <entry>
                     <value>1.17</value>
+                    <label>1.17</label>
                 </entry>
             </entries>
+            <selection-cardinality>1</selection-cardinality>
         </value-attributes>
         <on-ambari-upgrade add="true"/>
     </property>

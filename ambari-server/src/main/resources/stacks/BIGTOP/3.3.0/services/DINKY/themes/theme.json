@@ -1,0 +1,59 @@
+{
+  "name": "default",
+  "description": "Default theme for Dinky service",
+  "configuration": {
+    "layouts": [
+      {
+        "name": "default",
+        "tabs": [
+          {
+            "name": "settings",
+            "display-name": "Settings",
+            "layout": {
+              "tab-columns": "2",
+              "tab-rows": "1",
+              "sections": [
+                {
+                  "name": "dinky-flink-version",
+                  "display-name": "Dinky Flink",
+                  "row-index": "0",
+                  "column-index": "0",
+                  "row-span": "1",
+                  "column-span": "2",
+                  "section-columns": "2",
+                  "section-rows": "1",
+                  "subsections": [
+                    {
+                      "name": "dinky-flink-col1",
+                      "row-index": "0",
+                      "column-index": "0",
+                      "row-span": "1",
+                      "column-span": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "placement": {
+      "configuration-layout": "default",
+      "configs": [
+        {
+          "config": "application/flink.major.version",
+          "subsection-name": "dinky-flink-col1"
+        }
+      ]
+    },
+    "widgets": [
+      {
+        "config": "application/flink.major.version",
+        "widget": {
+          "type": "combo"
+        }
+      }
+    ]
+  }
+}
