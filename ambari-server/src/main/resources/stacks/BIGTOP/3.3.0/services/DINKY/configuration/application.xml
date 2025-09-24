@@ -37,22 +37,20 @@
         <name>spring.datasource.database.type</name>
         <value>mysql</value>
         <description>The type of database to use. Valid values are mysql, postgresql , you must input the mysql/postgresql</description>
+        <display-name>MySQL类型</display-name>
         <value-attributes>
             <type>value-list</type>
             <entries>
                 <entry>
                     <value>mysql</value>
-                    <description>
-                        mysql database
-                    </description>
+                    <label>mysql</label>
                 </entry>
                 <entry>
                     <value>pgsql</value>
-                    <description>
-                        postgresql database
-                    </description>
+                    <label>pgsql</label>
                 </entry>
             </entries>
+            <selection-cardinality>1</selection-cardinality>
         </value-attributes>
         <on-ambari-upgrade add="true"/>
     </property>
