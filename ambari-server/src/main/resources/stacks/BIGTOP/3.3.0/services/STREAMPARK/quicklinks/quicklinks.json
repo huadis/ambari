@@ -9,10 +9,10 @@
 
     "links": [
       {
-        "name": "dataease-ui",
-        "label": "DatEase Web UI",
+        "name": "StreamPark-ui",
+        "label": "StreamPark Web UI",
         "requires_user_name": "false",
-        "component_name": "DATAEASE_SERVER",
+        "component_name": "STREAMPARK_SERVER",
         "url": "%@://%@:%@",
         "port":{
           "http_property": "server.port",

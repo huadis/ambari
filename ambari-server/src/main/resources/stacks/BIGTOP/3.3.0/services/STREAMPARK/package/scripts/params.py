@@ -30,27 +30,27 @@ stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
 stack_version_formatted_major = format_stack_version(stack_version_unformatted)
 major_stack_version = get_major_version(stack_version_formatted_major)
 
-dataease_home = os.path.join(stack_root, "current", "dataease-server")
+streampark_home = os.path.join(stack_root, "current", "streampark-server")
 
-dataease_server_port = config['configurations']['application']['server.port']
-dataease_context = config['configurations']['application']['dataease.context']
-dataease_user = config['configurations']['application']["dataease_user"]
+streampark_server_port = config['configurations']['application']['server.port']
+streampark_user = config['configurations']['application']["streampark_user"]
 user_group = config["configurations"]["cluster-env"]["user_group"]
-dataease_pid_dir = config['configurations']['application']["dataease_pid_dir"]
-dataease_pid_filename = "dataease.pid"
-dataease_log_dir = config['configurations']['application']["dataease_log_dir"]
+streampark_pid_dir = config['configurations']['application']["streampark_pid_dir"]
+streampark_pid_filename = "streampark.pid"
+streampark_log_dir = config['configurations']['application']["streampark_log_dir"]
 
 start_script_name = "app.sh"
 start_script_template_file = start_script_name + ".j2"
-dataease_bin_dir = dataease_home + "/bin/"
-dataease_conf_dir = dataease_home + "/config"
+streampark_bin_dir = streampark_home + "/bin/"
+streampark_conf_dir = streampark_home + "/config"
 
-dataease_application_config_file = "application.yml"
-dataease_application_config_template_file = dataease_application_config_file + ".j2"
+streampark_application_config_file = "config.yml"
+streampark_application_config_template_file = streampark_application_config_file + ".j2"
 
-dataease_database_config = {'dataease_database_username': config['configurations']['application']['spring.datasource.database.username'],
-                            'dataease_database_password': config['configurations']['application']['spring.datasource.database.password'],
-                            'dataease_database_url': 'jdbc:mysql://' + config['configurations']['application']['spring.datasource.database.host'] \
+streampark_database_config = {'streampark_database_type': 'mysql',
+                              'streampark_database_username': config['configurations']['application']['spring.datasource.database.username'],
+                              'streampark_database_password': config['configurations']['application']['spring.datasource.database.password'],
+                              'streampark_database_url': 'jdbc:mysql://' + config['configurations']['application']['spring.datasource.database.host'] \
                                                      + ':' + config['configurations']['application']['spring.datasource.database.port'] \
                                                      + '/' + config['configurations']['application']['spring.datasource.database.name'] \
                                                      + '?useUnicode=true&characterEncoding=UTF-8'}

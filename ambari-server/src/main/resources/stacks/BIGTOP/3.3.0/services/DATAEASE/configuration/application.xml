@@ -17,9 +17,9 @@
 -->
 <configuration>
     <property>
-        <name>dinky_user</name>
-        <display-name>Dinky User</display-name>
-        <value>dinky</value>
+        <name>dataease_user</name>
+        <display-name>DataEase User</display-name>
+        <value>dataease</value>
         <property-type>USER</property-type>
         <value-attributes>
             <type>user</type>
@@ -34,56 +34,35 @@
         <on-ambari-upgrade add="false"/>
     </property>
     <property require-input="true">
-        <name>spring.datasource.database.type</name>
-        <value>mysql</value>
-        <description>The type of database to use. Valid values are mysql, postgresql , you must input the mysql/postgresql</description>
-        <display-name>MySQL类型</display-name>
-        <value-attributes>
-            <type>value-list</type>
-            <entries>
-                <entry>
-                    <value>mysql</value>
-                    <label>mysql</label>
-                </entry>
-                <entry>
-                    <value>pgsql</value>
-                    <label>pgsql</label>
-                </entry>
-            </entries>
-            <selection-cardinality>1</selection-cardinality>
-        </value-attributes>
-        <on-ambari-upgrade add="true"/>
-    </property>
-    <property require-input="true">
         <name>spring.datasource.database.host</name>
         <value>127.0.0.1</value>
-        <description>Dinky host ip/hostname</description>
+        <description>DataEase host ip/hostname</description>
         <on-ambari-upgrade add="true"/>
     </property>
     <property require-input="true">
         <name>spring.datasource.database.port</name>
         <value>3306</value>
-        <description>Dinky port</description>
+        <description>DataEase port</description>
         <property-type>PORT</property-type>
         <on-ambari-upgrade add="true"/>
     </property>
     <property require-input="true">
         <name>spring.datasource.database.name</name>
-        <value>dinky</value>
-        <description>Dinky Name</description>
+        <value>dataease</value>
+        <description>DataEase Name</description>
         <on-ambari-upgrade add="true"/>
     </property>
     <property require-input="true">
         <name>spring.datasource.database.username</name>
         <value>root</value>
-        <description>Dinky UserName</description>
+        <description>DataEase UserName</description>
         <on-ambari-upgrade add="true"/>
     </property>
     <property require-input="true">
         <name>spring.datasource.database.password</name>
         <value>Cestc_01</value>
         <property-type>PASSWORD</property-type>
-        <description>Dinky Password</description>
+        <description>DataEase Password</description>
         <value-attributes>
             <empty-value-valid>true</empty-value-valid>
             <type>password</type>
@@ -91,20 +70,20 @@
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>dinky_log_dir</name>
-        <display-name>Dinky Log directory</display-name>
-        <value>/var/log/dinky</value>
-        <description>Dinky Log Dir</description>
+        <name>dataease_log_dir</name>
+        <display-name>DataEase Log directory</display-name>
+        <value>/var/log/dataease</value>
+        <description>DataEase Log Dir</description>
         <value-attributes>
             <type>directory</type>
         </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
-        <name>dinky_pid_dir</name>
-        <display-name>Dinky PID directory</display-name>
-        <value>/var/run/dinky</value>
-        <description>Dinky Pid Dir</description>
+        <name>dataease_pid_dir</name>
+        <display-name>DataEase PID directory</display-name>
+        <value>/var/run/dataease</value>
+        <description>DataEase Pid Dir</description>
         <value-attributes>
             <type>directory</type>
         </value-attributes>
@@ -112,37 +91,14 @@
     </property>
     <property require-input="true">
         <name>server.port</name>
-        <value>8888</value>
+        <value>8010</value>
         <display-name>Server Port</display-name>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>flink.major.version</name>
-        <value>1.16</value>
-        <description>The version of flink major version such as: 1.18, 1.17, 1.16, 1.15, 1.14</description>
-        <display-name>Flink版本</display-name>
-        <value-attributes>
-            <type>value-list</type>
-            <entries>
-                <entry>
-                    <value>1.14</value>
-                    <label>1.14</label>
-                </entry>
-                <entry>
-                    <value>1.15</value>
-                    <label>1.15</label>
-                </entry>
-                <entry>
-                    <value>1.16</value>
-                    <label>1.16</label>
-                </entry>
-                <entry>
-                    <value>1.17</value>
-                    <label>1.17</label>
-                </entry>
-            </entries>
-            <selection-cardinality>1</selection-cardinality>
-        </value-attributes>
+        <name>dataease.context</name>
+        <value>/</value>
+        <description>DataEase Context</description>
         <on-ambari-upgrade add="true"/>
     </property>
 </configuration>

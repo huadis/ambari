@@ -1,0 +1,54 @@
+server:
+  port: {{ streampark_server_port }}
+  session:
+    ttl: 2h
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+
+datasource:
+  dialect: {{ streampark_database_config['streampark_database_type'] }}
+  username: {{ streampark_database_config['streampark_database_username'] }}
+  password: {{ streampark_database_config['streampark_database_password'] }}
+  url: {{ streampark_database_config['streampark_database_url'] }}
+
+logging:
+  level:
+    root: info
+
+streampark:
+  workspace:
+    local: /tmp/streampark
+    remote: hdfs:///streampark/
+  proxy:
+    lark-url:
+    yarn-url:
+  yarn:
+    http-auth: 'simple'  # default simple, or kerberos
+  hadoop-user-name: hdfs
+  project:
+    max-build: 16
+  openapi.white-list:
+
+security:
+  kerberos:
+    login:
+      debug: false
+      enable: false
+      keytab:
+      krb5:
+      principal:
+    ttl: 2h
+
+ldap:
+  base-dn: dc=streampark,dc=com
+  enable: false
+  username: cn=Manager,dc=streampark,dc=com
+  password: streampark
+  urls: ldap://99.99.99.99:389
+  user:
+    email-attribute: mail
+    identity-attribute: uid

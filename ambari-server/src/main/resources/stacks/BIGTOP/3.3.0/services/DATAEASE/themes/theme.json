@@ -11,7 +11,7 @@
             "display-name": "Settings",
             "layout": {
               "tab-rows": "1",
-              "tab-columns": "3",
+              "tab-columns": "2",
               "sections": [
                 {
                   "name": "section-database",
@@ -38,25 +38,6 @@
                       "column-span": "1"
                     }
                   ]
-                },
-                {
-                  "name": "section-flink",
-                  "display-name": "Flink",
-                  "row-index": "0",
-                  "column-index": "2",
-                  "row-span": "1",
-                  "column-span": "1",
-                  "section-rows": "1",
-                  "section-columns": "1",
-                  "subsections": [
-                    {
-                      "name": "subsection-flink-col1",
-                      "row-index": "0",
-                      "column-index": "0",
-                      "row-span": "1",
-                      "column-span": "1"
-                    }
-                  ]
                 }
               ]
             }
@@ -67,10 +48,6 @@
     "placement": {
       "configuration-layout": "default",
       "configs": [
-        {
-          "config": "application/spring.datasource.database.type",
-          "subsection-name": "subsection-database-col1"
-        },
         {
           "config": "application/spring.datasource.database.host",
           "subsection-name": "subsection-database-col1"
@@ -90,20 +67,10 @@
         {
           "config": "application/spring.datasource.database.password",
           "subsection-name": "subsection-database-col2"
-        },
-        {
-          "config": "application/flink.major.version",
-          "subsection-name": "subsection-flink-col1"
         }
       ]
     },
     "widgets": [
-      {
-        "config": "application/spring.datasource.database.type",
-        "widget": {
-          "type": "combo"
-        }
-      },
       {
         "config": "application/spring.datasource.database.host",
         "widget": {
@@ -132,12 +99,6 @@
         "config": "application/spring.datasource.database.password",
         "widget": {
           "type": "password"
-        }
-      },
-      {
-        "config": "application/flink.major.version",
-        "widget": {
-          "type": "combo"
         }
       }
     ]

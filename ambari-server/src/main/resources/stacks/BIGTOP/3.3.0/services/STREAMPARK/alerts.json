@@ -1,17 +1,17 @@
 {
-  "DATAEASE": {
+  "STREAMPARK": {
     "service": [],
-    "DATAEASE_SERVER": [
+    "STREAMPARK_SERVER": [
       {
-        "name": "dataease_server_port_check",
-        "label": "dataease_server_port_check",
-        "description": "dataease_server_port_check.",
+        "name": "streampark_server_port_check",
+        "label": "streampark_server_port_check",
+        "description": "streampark_server_port_check.",
         "interval": 10,
         "scope": "ANY",
         "source": {
           "type": "PORT",
           "uri": "{{ application/server.port }}",
-          "default_port": 8010,
+          "default_port": 10000,
           "reporting": {
             "ok": {
               "text": "TCP OK - {0:.3f}s response on port {1}"
