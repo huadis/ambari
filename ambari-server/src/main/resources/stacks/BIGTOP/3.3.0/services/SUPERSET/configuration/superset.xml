@@ -31,24 +31,24 @@
     <on-ambari-upgrade add="false"/>
   </property>
   <property>
+    <name>SUPERSET_BIND_ADDRESS</name>
+    <value>0.0.0.0</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>SUPERSET_PORT</name>
+    <value>9088</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
     <name>SUPERSET_WORKERS</name>
     <value>4</value>
     <value-attributes>
       <type>int</type>
       <minimum>0</minimum>
     </value-attributes>
-    <description></description>
-    <on-ambari-upgrade add="false"/>
-  </property>
-  <property>
-    <name>SUPERSET_WEBSERVER_PORT</name>
-    <value>9088</value>
-    <description></description>
-    <on-ambari-upgrade add="false"/>
-  </property>
-  <property>
-    <name>SUPERSET_WEBSERVER_ADDRESS</name>
-    <value>0.0.0.0</value>
     <description></description>
     <on-ambari-upgrade add="false"/>
   </property>
@@ -61,11 +61,15 @@
   <property require-input="true">
     <name>SUPERSET_DATABASE_TYPE</name>
     <display-name>Superset Database type</display-name>
-    <value>sqlite</value>
+    <value>postgresql</value>
     <value-attributes>
       <overridable>false</overridable>
       <type>value-list</type>
       <entries>
+        <entry>
+          <value>postgresql</value>
+          <label>POSTGRESQL</label>
+        </entry>
         <entry>
           <value>mysql</value>
           <label>MYSQL</label>
@@ -73,10 +77,6 @@
         <entry>
           <value>sqlite</value>
           <label>SQLITE</label>
-        </entry>
-        <entry>
-          <value>postgresql</value>
-          <label>POSTGRESQL</label>
         </entry>
       </entries>
     </value-attributes>
@@ -172,7 +172,34 @@
     <value-attributes>
       <type>password</type>
     </value-attributes>
-    <description>Secret Key used to encrypt user passwords. A Long Random String is recommended.</description>
+    <description>
+      Secret Key used to encrypt user passwords. A Long Random String is recommended.
+      You can generate a strong secure key with following command:
+        openssl rand -base64 42
+    </description>
     <on-ambari-upgrade add="false"/>
   </property>
+  <property>
+    <name>FLASK_DEBUG</name>
+    <display-name>Flask Debug</display-name>
+    <value>False</value>
+    <value-attributes>
+      <overridable>false</overridable>
+      <type>value-list</type>
+      <entries>
+        <entry>
+          <value>False</value>
+          <label>FALSE</label>
+        </entry>
+        <entry>
+          <value>True</value>
+          <label>TRUE</label>
+        </entry>
+      </entries>
+    </value-attributes>
+    <description>Enable debug or not for this flask app.
+    </description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+
 </configuration>

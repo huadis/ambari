@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -18,16 +17,18 @@ limitations under the License.
 """
 
 import socket
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import os
 import logging
 import ambari_simplejson as json
 from resource_management.libraries.script.script import Script
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+import importlib
 
-logger = logging.getLogger('ambari_alerts')
+importlib.reload(sys)
+sys.setdefaultencoding("utf-8")
+
+logger = logging.getLogger("ambari_alerts")
 
 config = Script.get_config()
 
@@ -40,11 +41,12 @@ def get_tokens():
     :rtype tuple
     """
 
+
 def get_info(url, connection_timeout):
     response = None
 
     try:
-        response = urllib2.urlopen(url, timeout=connection_timeout)
+        response = urllib.request.urlopen(url, timeout=connection_timeout)
         json_data = response.read()
         return json_data
     finally:
@@ -69,27 +71,24 @@ def execute(configurations={}, parameters={}, host_name=None):
     :type host_name str
     """
 
-    alert_name = parameters['alertName']
+    alert_name = parameters["alertName"]
 
-    dolphin_pidfile_dir = "/opt/soft/run/dolphinscheduler"
+    dolphin_pidfile_dir = "/usr/bigtop/current/dolphinscheduler"
 
     pid = "0"
-
 
     from resource_management.core import sudo
 
     is_running = True
     pid_file_path = ""
-    if alert_name == 'DOLPHIN_MASTER':
-        pid_file_path = dolphin_pidfile_dir + "/master-server.pid"
-    elif alert_name == 'DOLPHIN_WORKER':
-        pid_file_path = dolphin_pidfile_dir + "/worker-server.pid"
-    elif alert_name == 'DOLPHIN_ALERT':
-        pid_file_path = dolphin_pidfile_dir + "/alert-server.pid"
-    elif alert_name == 'DOLPHIN_LOGGER':
-        pid_file_path = dolphin_pidfile_dir + "/logger-server.pid"
-    elif alert_name == 'DOLPHIN_API':
-        pid_file_path = dolphin_pidfile_dir + "/api-server.pid"
+    if alert_name == "DOLPHIN_MASTER":
+        pid_file_path = dolphin_pidfile_dir + "/master-server/pid"
+    elif alert_name == "DOLPHIN_WORKER":
+        pid_file_path = dolphin_pidfile_dir + "/worker-server/pid"
+    elif alert_name == "DOLPHIN_ALERT":
+        pid_file_path = dolphin_pidfile_dir + "/alert-server/pid"
+    elif alert_name == "DOLPHIN_API":
+        pid_file_path = dolphin_pidfile_dir + "/api-server/pid"
 
     if not pid_file_path or not os.path.isfile(pid_file_path):
         is_running = False
@@ -117,9 +116,12 @@ def execute(configurations={}, parameters={}, host_name=None):
     else:
         result_code = "OK"
 
-    label = "The comment {0} of DOLPHIN_SCHEDULER on {1} is {2}".format(alert_name, host_name, result_code)
+    label = "The comment {0} of DOLPHIN_SCHEDULER on {1} is {2}".format(
+        alert_name, host_name, result_code
+    )
 
-    return ((result_code, [label]))
+    return (result_code, [label])
+
 
 if __name__ == "__main__":
     pass

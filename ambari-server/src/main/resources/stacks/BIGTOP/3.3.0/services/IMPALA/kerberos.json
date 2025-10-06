@@ -1,0 +1,157 @@
+{
+  "services": [
+    {
+      "name": "IMPALA",
+      "identities": [
+        {
+          "name": "impala_spnego",
+          "reference": "/spnego"
+        },
+        {
+          "name": "impala",
+          "principal": {
+            "value": "${impala-env/impala_user}${principal_suffix}@${realm}",
+            "type": "user",
+            "configuration": "impala-env/impala_principal_name",
+            "local_username": "${impala-env/impala_user}"
+          },
+          "keytab": {
+            "file": "${keytab_dir}/impala.headless.keytab",
+            "owner": {
+              "name": "${impala-env/impala_user}",
+              "access": "r"
+            },
+            "group": {
+              "name": "${cluster-env/user_group}",
+              "access": "r"
+            },
+            "configuration": "impala-env/impala_user_keytab"
+          }
+        },
+        {
+          "name": "impala_smokeuser",
+          "reference": "/smokeuser"
+        }
+      ],
+      "configurations": [
+        {
+          "impala-env": {
+            "impala.security.enabled": "true",
+            "impala.security.http.kerberos.enabled": "true"
+          }
+        }
+      ],
+      "components": [
+        {
+          "name": "IMPALA_STATE_STORE",
+          "identities": [
+            {
+              "name": "impala_statesore",
+              "principal": {
+                "value": "impala/_HOST@${realm}",
+                "type": "service",
+                "configuration": "impala-env/impala_state_store_kerberos_principal",
+                "local_username": "${impala-env/impala_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/impala.service.keytab",
+                "owner": {
+                  "name": "${impala-env/impala_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "impala-env/impala_state_store_kerberos_keytab_file"
+              }
+            },
+            {
+              "name": "impala_statesore_spnego",
+              "reference": "/spnego",
+              "principal": {
+                "configuration": "impala-env/impala_state_store_http_kerberos_principal"
+              },
+              "keytab": {
+                "configuration": "impala-env/impala_state_store_http_kerberos_keytab_file"
+              }
+            }
+          ]
+        },
+        {
+          "name": "IMPALA_CATALOG",
+          "identities": [
+            {
+              "name": "impala_catalog",
+              "principal": {
+                "value": "impala/_HOST@${realm}",
+                "type": "service",
+                "configuration": "impala-env/impala_catalog_kerberos_principal",
+                "local_username": "${impala-env/impala_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/impala.service.keytab",
+                "owner": {
+                  "name": "${impala-env/impala_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "impala-env/impala_catalog_kerberos_keytab_file"
+              }
+            },
+            {
+              "name": "impala_statesore_spnego",
+              "reference": "/spnego",
+              "principal": {
+                "configuration": "impala-env/impala_catalog_http_kerberos_principal"
+              },
+              "keytab": {
+                "configuration": "impala-env/impala_catalog_http_kerberos_keytab_file"
+              }
+            }
+          ]
+        },        
+        {
+          "name": "IMPALA_DAEMON",
+          "identities": [
+            {
+              "name": "impala_daemon",
+              "principal": {
+                "value": "impala/_HOST@${realm}",
+                "type": "service",
+                "configuration": "impala-env/impala_daemon_kerberos_principal",
+                "local_username": "${impala-env/impala_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/impala.service.keytab",
+                "owner": {
+                  "name": "${impala-env/impala_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "impala-env/impala_daemo_kerberos_keytab_file"
+              }
+            },
+            {
+              "name": "impala_daemo_spnego",
+              "reference": "/spnego",
+              "principal": {
+                "configuration": "impala-env/impala_daemo_http_kerberos_principal"
+              },
+              "keytab": {
+                "configuration": "impala-env/impala_daemo_http_kerberos_keytab_file"
+              }
+            }
+          ]
+        }
+
+      ]
+    }
+  ]
+}

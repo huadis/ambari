@@ -1,0 +1,133 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<configuration>
+	<property>
+		<name>seatunnel.fs.defaultFS</name>
+		<value>file:///tmp/</value>
+		<on-ambari-upgrade add="true"/>
+	</property>
+    <property>
+		<name>seatunnel.fs.type</name>
+		<value>hdfs</value>
+		<on-ambari-upgrade add="true"/>
+	</property>
+    <property>
+		<name>seatunnel.fs.hdfs.path</name>
+		<value>/seatunnel</value>
+		<on-ambari-upgrade add="true"/>
+	</property>
+  <property>
+    <name>seatunnel_log_dir_prefix</name>
+    <value>/var/log/seatunnel</value>
+    <description>Seatunnel Log Dir Prefix</description>
+    <display-name>Seatunnel Log Dir Prefix</display-name>
+    <value-attributes>
+      <type>directory</type>
+      <overridable>false</overridable>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property>
+  <property>
+    <name>seatunnel_pid_dir_prefix</name>
+    <value>/var/run/seatunnel</value>
+    <display-name>Seatunnel PID Dir Prefix</display-name>
+    <description>Seatunnel PID Dir Prefix</description>
+    <value-attributes>
+      <type>directory</type>
+      <overridable>false</overridable>
+      <editable-only-at-install>true</editable-only-at-install>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property> 
+  <property>
+    <name>seatunnel_user</name>
+    <display-name>Seatunnel User</display-name>
+    <value>seatunnel</value>
+    <property-type>USER</property-type>
+    <description>User to run Seatunnel as</description>
+    <value-attributes>
+      <type>user</type>
+      <overridable>false</overridable>
+      <user-groups>
+        <property>
+          <type>cluster-env</type>
+          <name>user_group</name>
+        </property>
+      </user-groups>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property>
+  <property>
+    <name>seatunnel_user_principal_name</name>
+	  <display-name>seatunnel user principal name</display-name>
+    <description>SEATUNNEL user principal name</description>
+    <property-type>KERBEROS_PRINCIPAL</property-type>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>seatunnel_user_keytab</name>
+    <description>SEATUNNEL user keytab path</description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>seatunnel_service_principal_name</name>
+	  <display-name>seatunnel service principal name</display-name>
+    <description>SEATUNNEL principal name</description>
+    <property-type>KERBEROS_PRINCIPAL</property-type>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>seatunnel_service_keytab</name>
+    <description>SEATUNNEL service keytab path</description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+	<property>
+		<name>content</name>
+		<display-name>seatunnel-env.sh</display-name>
+		<description>Seatunnel seatunnel-env.sh</description>
+		<value>#!/usr/bin/env bash
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# Home directory of spark distribution.
+SPARK_HOME=${SPARK_HOME:-/usr/bigtop/current/spark-client}
+# Home directory of flink distribution.
+FLINK_HOME=${FLINK_HOME:-/usr/bigtop/current/flink-client}
+
+		</value>
+    <value-attributes>
+			<type>content</type>
+			<empty-value-valid>false</empty-value-valid>
+			<show-property-name>false</show-property-name>
+		</value-attributes>
+		<on-ambari-upgrade add="true"/>
+	</property>
+</configuration>

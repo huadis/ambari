@@ -1,0 +1,99 @@
+{
+  "services": [
+    {
+      "name": "KUDU",
+      "identities": [
+        {
+          "name": "kudu_spnego",
+          "reference": "/spnego"
+        },
+        {
+          "name": "kudu",
+          "principal": {
+            "value": "${kudu-env/kudu_user}${principal_suffix}@${realm}",
+            "type": "user",
+            "configuration": "kudu-env/kudu_principal_name",
+            "local_username": "${kudu-env/kudu_user}"
+          },
+          "keytab": {
+            "file": "${keytab_dir}/kudu.headless.keytab",
+            "owner": {
+              "name": "${kudu-env/kudu_user}",
+              "access": "r"
+            },
+            "group": {
+              "name": "${cluster-env/user_group}",
+              "access": "r"
+            },
+            "configuration": "kudu-env/kudu_user_keytab"
+          }
+        },
+        {
+          "name": "kudu_smokeuser",
+          "reference": "/smokeuser"
+        }
+      ],
+      "configurations": [
+        {
+          "kudu-env": {
+            "rpc_authentication": "required"
+          }
+        }
+      ],
+      "components": [
+        {
+          "name": "KUDU_MASTER",
+          "identities": [
+            {
+              "name": "kudu_master",
+              "principal": {
+                "value": "kudu/_HOST@${realm}",
+                "type": "service",
+                "configuration": "kudu-env/principal_name",
+                "local_username": "${kudu-env/kudu_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/kudu.service.keytab",
+                "owner": {
+                  "name": "${kudu-env/kudu_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "kudu-env/keytab_file"
+              }
+            }
+          ]
+        },
+        {
+          "name": "KUDU_TSERVER",
+          "identities": [
+            {
+              "name": "kudu_catalog",
+              "principal": {
+                "value": "kudu/_HOST@${realm}",
+                "type": "service",
+                "configuration": "kudu-env/principal_name",
+                "local_username": "${kudu-env/kudu_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/kudu.service.keytab",
+                "owner": {
+                  "name": "${kudu-env/kudu_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "kudu-env/keytab_file"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Licensed to the Apache Software Foundation (ASF) under one
@@ -17,6 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import time
 from resource_management import *
 
@@ -26,37 +26,84 @@ from dolphin_env import dolphin_env
 class DolphinMasterService(Script):
     def install(self, env):
         import params
+
         env.set_params(params)
         self.install_packages(env)
-        Execute(('chmod', '-R', '777', params.dolphin_home))
-        Execute(('chown', '-R', params.dolphin_user + ":" + params.dolphin_group,  params.dolphin_home))
+        # Execute(('chmod', '-R', '777', params.dolphin_home))
+        # Execute(('chown', '-R', params.dolphin_user + ":" + params.dolphin_group,  params.dolphin_home))
 
     def configure(self, env):
         import params
-        params.pika_slave = True
+
+        # params.pika_slave = True
         env.set_params(params)
 
         dolphin_env()
 
     def start(self, env):
         import params
+        import status_params
+
         env.set_params(params)
         self.configure(env)
-        no_op_test = format("ls {dolphin_pidfile_dir}/master-server.pid >/dev/null 2>&1 && ps `cat {dolphin_pidfile_dir}/master-server.pid` | grep `cat {dolphin_pidfile_dir}/master-server.pid` >/dev/null 2>&1")
-        start_cmd = format("sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh start master-server")
-        Execute(start_cmd, user=params.dolphin_user, not_if=no_op_test)
+
+        # upgrade schema
+        upgrade_schema_cmd = format(
+            "sh " + params.dolphin_home + "/tools/bin/upgrade-schema.sh"
+        )
+        Execute(
+            upgrade_schema_cmd,
+            user=params.dolphin_user,
+            environment=params.dolphinExecEnv,
+        )
+
+        no_op_test = (
+            "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
+        ).format(status_params.dolphin_master_server_pidfile)
+        start_cmd = format(
+            "sh "
+            + params.dolphin_bin_dir
+            + "/dolphinscheduler-daemon.sh start master-server"
+        )
+        Execute(
+            start_cmd,
+            user=params.dolphin_user,
+            not_if=no_op_test,
+            environment=params.dolphinExecEnv,
+        )
 
     def stop(self, env):
         import params
+
         env.set_params(params)
-        stop_cmd = format("sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh stop master-server")
-        Execute(stop_cmd, user=params.dolphin_user)
+        stop_cmd = format(
+            "sh "
+            + params.dolphin_bin_dir
+            + "/dolphinscheduler-daemon.sh stop master-server"
+        )
+        Execute(stop_cmd, user=params.dolphin_user, environment=params.dolphinExecEnv)
         time.sleep(5)
 
     def status(self, env):
         import status_params
+
         env.set_params(status_params)
-        check_process_status(status_params.dolphin_run_dir + "master-server.pid")
+        check_process_status(status_params.dolphin_master_server_pidfile)
+
+    def upgrade_schema(self, env):
+        import params
+
+        env.set_params(params)
+        self.configure(env)
+        upgrade_schema_cmd = format(
+            "sh " + params.dolphin_home + "/tools/bin/upgrade-schema.sh"
+        )
+        Execute(
+            upgrade_schema_cmd,
+            user=params.dolphin_user,
+            environment=params.dolphinExecEnv,
+        )
+
 
 if __name__ == "__main__":
     DolphinMasterService().execute()

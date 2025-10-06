@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration supports_final="true">
+        <!-- [Global] -->
+        <property>
+            <name>Global.RunMode</name>
+            <value>release</value>
+            <description>[Global] RunMode</description>
+        </property>
+
+        <!-- [Log] -->
+        <property>
+            <name>Log.Dir</name>
+            <value>logs</value>
+            <description>[Log] log write dir</description>
+        </property>
+        <property>
+            <name>Log.Level</name>
+            <value>DEBUG</value>
+            <description>[Log] log level: DEBUG INFO WARNING ERROR</description>
+        </property>
+        <property>
+            <name>Log.Output</name>
+            <value>stdout</value>
+            <description>[Log] stdout, stderr, file</description>
+        </property>
+
+        <!-- [HTTP] -->
+        <property>
+            <name>HTTP.Host</name>
+            <value>0.0.0.0</value>
+            <description>[HTTP] http listening address</description>
+        </property>
+        <property>
+            <name>HTTP.Port</name>
+            <value>17000</value>
+            <description>[HTTP] http listening port</description>
+        </property>
+<!--        <property>-->
+<!--            <name>HTTP.CertFile</name>-->
+<!--            <value></value>-->
+<!--            <description>[HTTP] https cert file path</description>-->
+<!--        </property>-->
+<!--        <property>-->
+<!--            <name>HTTP.KeyFile</name>-->
+<!--            <value></value>-->
+<!--            <description>[HTTP] https key file path</description>-->
+<!--        </property>-->
+        <property>
+            <name>HTTP.PrintAccessLog</name>
+            <value>false</value>
+            <description>[HTTP] whether print access log</description>
+        </property>
+        <property>
+            <name>HTTP.PProf</name>
+            <value>true</value>
+            <description>[HTTP] whether enable pprof</description>
+        </property>
+        <property>
+            <name>HTTP.ExposeMetrics</name>
+            <value>true</value>
+            <description>[HTTP] expose prometheus /metrics?</description>
+        </property>
+        <property>
+            <name>HTTP.ShutdownTimeout</name>
+            <value>30</value>
+            <description>[HTTP] http graceful shutdown timeout, unit: s</description>
+        </property>
+        <property>
+            <name>HTTP.MaxContentLength</name>
+            <value>67108864</value>
+            <description>[HTTP] max content length: 64M</description>
+        </property>
+        <property>
+            <name>HTTP.ReadTimeout</name>
+            <value>20</value>
+            <description>[HTTP] http server read timeout, unit: s</description>
+        </property>
+        <property>
+            <name>HTTP.WriteTimeout</name>
+            <value>40</value>
+            <description>[HTTP] http server write timeout, unit: s</description>
+        </property>
+        <property>
+            <name>HTTP.IdleTimeout</name>
+            <value>120</value>
+            <description>[HTTP] http server idle timeout, unit: s</description>
+        </property>
+
+        <!-- [HTTP.ShowCaptcha] -->
+        <property>
+            <name>HTTP.ShowCaptcha.Enable</name>
+            <value>false</value>
+            <description>[HTTP.ShowCaptcha] Enable</description>
+        </property>
+
+        <!-- [HTTP.APIForAgent] -->
+        <property>
+            <name>HTTP.APIForAgent.Enable</name>
+            <value>true</value>
+            <description>[HTTP.APIForAgent] Enable</description>
+        </property>
+
+        <!-- [HTTP.APIForService] -->
+        <property>
+            <name>HTTP.APIForService.Enable</name>
+            <value>true</value>
+            <description>[HTTP.APIForService] Enable</description>
+        </property>
+        <property>
+            <name>HTTP.APIForService.BasicAuth.user001</name>
+            <value>ccc26da7b9aba533cbb263a36c07dcc5</value>
+            <description>[HTTP.APIForService.BasicAuth] user001</description>
+        </property>
+
+        <!-- [HTTP.JWTAuth] -->
+        <property>
+            <name>HTTP.JWTAuth.AccessExpired</name>
+            <value>1500</value>
+            <description>[HTTP.JWTAuth] AccessExpired, unit: min</description>
+        </property>
+        <property>
+            <name>HTTP.JWTAuth.RefreshExpired</name>
+            <value>10080</value>
+            <description>[HTTP.JWTAuth] RefreshExpired, unit: min</description>
+        </property>
+        <property>
+            <name>HTTP.JWTAuth.RedisKeyPrefix</name>
+            <value>/jwt/</value>
+            <description>[HTTP.JWTAuth] RedisKeyPrefix</description>
+        </property>
+
+        <!-- [HTTP.ProxyAuth] -->
+        <property>
+            <name>HTTP.ProxyAuth.Enable</name>
+            <value>false</value>
+            <description>[HTTP.ProxyAuth] Enable</description>
+        </property>
+        <property>
+            <name>HTTP.ProxyAuth.HeaderUserNameKey</name>
+            <value>X-User-Name</value>
+            <description>[HTTP.ProxyAuth] username key in http proxy header</description>
+        </property>
+        <property>
+            <name>HTTP.ProxyAuth.DefaultRoles</name>
+            <value>['Standard']</value>
+            <description>[HTTP.ProxyAuth] DefaultRoles</description>
+        </property>
+
+        <!-- [HTTP.RSA] -->
+        <property>
+            <name>HTTP.RSA.OpenRSA</name>
+            <value>false</value>
+            <description>[HTTP.RSA] OpenRSA</description>
+        </property>
+
+        <!-- [DB] -->
+        <property>
+            <name>DB.DSN</name>
+            <value>{{ nightingale_database_url}}</value>
+            <description>[DB] DSN</description>
+        </property>
+        <property>
+            <name>DB.Debug</name>
+            <value>false</value>
+            <description>[DB] enable debug mode or not</description>
+        </property>
+        <property>
+            <name>DB.DBType</name>
+            <value>{{ database_type }}</value>
+            <description>[DB] DBType</description>
+        </property>
+        <property>
+            <name>DB.MaxLifetime</name>
+            <value>7200</value>
+            <description>[DB] MaxLifetime, unit: s</description>
+        </property>
+        <property>
+            <name>DB.MaxOpenConns</name>
+            <value>150</value>
+            <description>[DB] MaxOpenConns</description>
+        </property>
+        <property>
+            <name>DB.MaxIdleConns</name>
+            <value>50</value>
+            <description>[DB] MaxIdleConns</description>
+        </property>
+
+        <!-- [Redis] -->
+        <property>
+            <name>Redis.Address</name>
+            <value></value>
+            <description>[Redis] Address 127.0.0.1:6379</description>
+        </property>
+        <property>
+            <name>Redis.RedisType</name>
+            <value>standalone</value>
+            <description>[Redis] RedisType</description>
+        </property>
+
+        <!-- [Alert] -->
+        <!-- [Alert.Heartbeat] -->
+<!--        <property>
+            <name>Alert.Heartbeat.IP</name>
+            <value></value>
+            <description>[Alert.Heartbeat] IP</description>
+        </property>-->
+        <property>
+            <name>Alert.Heartbeat.Interval</name>
+            <value>1000</value>
+            <description>[Alert.Heartbeat] Interval, unit ms</description>
+        </property>
+        <property>
+            <name>Alert.Heartbeat.EngineName</name>
+            <value>default</value>
+            <description>[Alert.Heartbeat] EngineName</description>
+        </property>
+
+        <!-- [Center] -->
+        <property>
+            <name>Center.MetricsYamlFile</name>
+            <value>./etc/metrics.yaml</value>
+            <description>[Center] MetricsYamlFile</description>
+        </property>
+        <property>
+            <name>Center.I18NHeaderKey</name>
+            <value>X-Language</value>
+            <description>[Center] I18NHeaderKey</description>
+        </property>
+
+        <!-- [Center.AnonymousAccess] -->
+        <property>
+            <name>Center.AnonymousAccess.PromQuerier</name>
+            <value>true</value>
+            <description>[Center.AnonymousAccess] PromQuerier</description>
+        </property>
+        <property>
+            <name>Center.AnonymousAccess.AlertDetail</name>
+            <value>true</value>
+            <description>[Center.AnonymousAccess] AlertDetail</description>
+        </property>
+
+        <!-- [Pushgw] -->
+        <property>
+            <name>Pushgw.LabelRewrite</name>
+            <value>true</value>
+            <description>[Pushgw] LabelRewrite</description>
+        </property>
+        <property>
+            <name>Pushgw.ForceUseServerTS</name>
+            <value>true</value>
+            <description>[Pushgw] ForceUseServerTS</description>
+        </property>
+
+        <!-- [[Pushgw.Writers]] -->
+        <property>
+            <name>Pushgw.Writers.Url</name>
+            <value>{{writer_url}}</value>
+            <description>[[Pushgw.Writers]] Url</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.BasicAuthUser</name>
+            <value>{{auth_user}}</value>
+            <description>[[Pushgw.Writers]] BasicAuthUser</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.BasicAuthPass</name>
+            <value>{{auth_pwd}}</value>
+            <description>[[Pushgw.Writers]] BasicAuthPass</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.Headers</name>
+            <value>['X-From', 'n9e']</value>
+            <description>[[Pushgw.Writers]] Headers</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.Timeout</name>
+            <value>10000</value>
+            <description>[[Pushgw.Writers]] Timeout, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.DialTimeout</name>
+            <value>3000</value>
+            <description>[[Pushgw.Writers]] DialTimeout, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.TLSHandshakeTimeout</name>
+            <value>30000</value>
+            <description>[[Pushgw.Writers]] TLSHandshakeTimeout, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.ExpectContinueTimeout</name>
+            <value>1000</value>
+            <description>[[Pushgw.Writers]] ExpectContinueTimeout, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.IdleConnTimeout</name>
+            <value>90000</value>
+            <description>[[Pushgw.Writers]] IdleConnTimeout, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.KeepAlive</name>
+            <value>30000</value>
+            <description>[[Pushgw.Writers]] KeepAlive, unit: ms</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.MaxConnsPerHost</name>
+            <value>0</value>
+            <description>[[Pushgw.Writers]] MaxConnsPerHost</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.MaxIdleConns</name>
+            <value>100</value>
+            <description>[[Pushgw.Writers]] MaxIdleConns</description>
+        </property>
+        <property>
+            <name>Pushgw.Writers.MaxIdleConnsPerHost</name>
+            <value>100</value>
+            <description>[[Pushgw.Writers]] MaxIdleConnsPerHost</description>
+        </property>
+
+        <!-- [Ibex] -->
+        <property>
+            <name>Ibex.Enable</name>
+            <value>false</value>
+            <description>[Ibex] Enable</description>
+        </property>
+        <property>
+            <name>Ibex.RPCListen</name>
+            <value>0.0.0.0:20090</value>
+            <description>[Ibex] RPCListen</description>
+        </property>
+</configuration>

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -17,54 +17,59 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 """
-import subprocess
 
-from config_seatunnel_web import configure_seatunnel_web
-from resource_management.core import shell
-from resource_management.core.exceptions import ComponentIsNotRunning, Fail
-from resource_management.core.resources.system import Execute
-from resource_management.libraries.functions.format import format
-from resource_management.libraries.script.script import Script
-from setup_ranger_seatunnel import setup_ranger_seatunnel
+from seatunnel import seatunnel
+from seatunnel_service import seatunnel_service
+from resource_management import *
+from resource_management import *
+from resource_management.libraries.functions import check_process_status
 
-class Seatunnel_web(Script):
+
+class SeatunnelWeb(Script):
     def install(self, env):
         import params
+
         env.set_params(params)
+        # configure the correct package name(metainfo.xml) so that stack-select can find it
         self.install_packages(env)
+        Logger.info("install seatunnel web successfully!")
 
-
-    def configure(self, env, upgrade_type=None):
+    def configure(self, env):
         import params
-        env.set_params(params)
-        configure_seatunnel_web()
 
-    def start(self, env, upgrade_type=None):
+        env.set_params(params)
+        seatunnel(name="seatunnel_web")
+        Logger.info("configure seatunnel web successfully!")
+
+    def start(self, env):
         import params
+
         env.set_params(params)
-        configure_seatunnel_web()
-        setup_ranger_seatunnel(upgrade_type=upgrade_type)
+        self.configure(env)  # for security reason
+        seatunnel_service("seatunnel_web", action="web_start")
+        Logger.info("start seatunnel web successfully!")
 
-        start_cmd = format('/usr/sbin/seatunnel-web start')
-        Execute(start_cmd, user=params.seatunnel_user)
-
-    def stop(self, env, upgrade_type=None):
+    def stop(self, env):
         import params
+
         env.set_params(params)
-        stop_cmd = format('/usr/sbin/seatunnel-web stop')
-        Execute(stop_cmd, user=params.seatunnel_user)
+        seatunnel_service("seatunnel_web", action="web_stop")
+        Logger.info("stop seatunnel web successfully!")
+
+    def restart(self, env):
+        self.stop(env)
+        self.start(env)
 
     def status(self, env):
         import params
-        env.set_params(params)
-        status_cmd = format('/usr/sbin/seatunnel-web status')
-        code, output, error = shell.call(status_cmd, user=params.seatunnel_user, stderr=subprocess.PIPE, logoutput=True)
-        if code != 0:
-            raise Fail(format("Failed to execute command {status_cmd}, error={error}"))
 
-        if output and "is not running" in output:
-            raise ComponentIsNotRunning("Seatunnel-web is not running")
+        check_process_status(params.seatunnel_web_pid_file)
+
+    def get_pid_files(self):
+        import params
+
+        return [params.seatunnel_web_pid_file]
 
 
 if __name__ == "__main__":
-    Seatunnel_web().execute()
+    SeatunnelWeb().execute()

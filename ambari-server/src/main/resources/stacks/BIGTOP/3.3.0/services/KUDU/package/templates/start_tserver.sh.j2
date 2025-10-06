@@ -1,0 +1,72 @@
+#
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+#
+
+
+#env
+export FLAGS_log_dir={{kudu_log_dir}}
+export FLAGS_rpc_bind_addresses={{kudu_tserver_rpc_bind_addresses}}
+
+RETVAL_SUCCESS=0
+
+STATUS_RUNNING=0
+STATUS_DEAD=1
+STATUS_DEAD_AND_LOCK=2
+STATUS_NOT_RUNNING=3
+STATUS_OTHER_ERROR=102
+
+RETVAL=0
+SLEEP_TIME=5
+DAEMON="kudu-tserver"
+DESC="Kudu Master Server"
+EXEC_PATH="{{kudu_sbin_home}}/$DAEMON"
+SVC_USER="kudu"
+CONF_PATH="{{kudu_conf_dir}}/tserver.gflagfile"
+RUNDIR="{{kudu_pid_dir}}"
+PIDFILE="$RUNDIR/$DAEMON-kudu.pid"
+INFOFILE="$RUNDIR/$DAEMON-kudu.json"
+LOGFILE="{{kudu_log_dir}}/kudu-tserver.INFO"
+
+rm -f $INFOFILE
+${EXEC_PATH} \
+--server_dump_info_path=$INFOFILE \
+--flagfile=${CONF_PATH} \
+> ${FLAGS_log_dir}/${DAEMON}.out 2>&1 &
+
+#wrtite id
+pid=$!
+echo $pid | cat > $PIDFILE
+
+#just start cmd status
+while :
+  do
+    if [ -f $INFOFILE ]; then
+      echo "Started ${DESC} (${DAEMON}).... "
+      break
+    fi
+    if !(ps -p $pid  &> /dev/null)
+    then
+      echo "Starte ${DESC} (${DAEMON}) failed, pls check out: ${FLAGS_log_dir}/${DAEMON}.out,and log: $LOGFILE"
+      rm -fr $PIDFILE
+      tail  ${FLAGS_log_dir}/${DAEMON}.out
+      exit 1
+    fi
+ sleep 3
+done

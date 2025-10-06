@@ -1,0 +1,44 @@
+
+doris -uroot -P9030 -hdatanode01
+
+
+-- none ha
+
+DROP catalog hive_catalog; 
+
+CREATE CATALOG hive_catalog PROPERTIES (
+    'type'='hms',
+    'hive.metastore.uris' = 'thrift://datanode01:9083',
+    'hadoop.username' = 'hive',
+	'fs.defaultFS' = 'hdfs://datanode01:8020'
+);
+
+SHOW catalogs;
+
+SWITCH hive_catalog;
+
+SHOW DATABASES;
+
+use default;
+
+show tables;
+
+#select * from dim_date;
+
+
+DROP catalog paimon_hive_catalog; 
+
+CREATE CATALOG paimon_hive_catalog PROPERTIES (
+    "type" = "paimon",
+    "paimon.catalog.type" = "hms",
+    'hive.metastore.uris' = 'thrift://datanode01:9083',
+    "warehouse" = "hdfs://datanode01:8020//warehouse/tablespace/managed/hive/tablespace/managed/hive",
+    'hadoop.username' = 'hive',
+	'fs.defaultFS' = 'hdfs://datanode01:8020'
+);
+
+SHOW catalogs;
+
+SWITCH paimon_hive_catalog;
+
+

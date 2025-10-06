@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>doris_user</name>
+        <value>doris</value>
+        <property-type>USER</property-type>
+        <description>Doris User</description>
+        <value-attributes>
+            <type>user</type>
+            <overridable>false</overridable>
+            <user-groups>
+                <property>
+                    <type>cluster-env</type>
+                    <name>user_group</name>
+                </property>
+            </user-groups>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>doris_group</name>
+        <value>hadoop</value>
+        <property-type>GROUP</property-type>
+        <description>Doris Group</description>
+    </property>
+  
+  <property>
+    <name>doris_user_keytab</name>
+    <description>Doris keytab path</description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>doris_user_principal</name>
+    <description>Doris principal</description>
+    <property-type>KERBEROS_PRINCIPAL</property-type>
+    <on-ambari-upgrade add="false"/>
+  </property> 
+
+</configuration>

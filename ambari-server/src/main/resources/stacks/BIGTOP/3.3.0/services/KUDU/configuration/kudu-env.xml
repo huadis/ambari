@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration supports_adding_forbidden="true">
+    <property>
+        <name>kudu_log_dir</name>
+        <value>/var/log/kudu</value>
+        <description>kudu Log Dir</description>
+        <display-name>kudu Log Dir</display-name>
+        <value-attributes>
+            <type>directory</type>
+            <overridable>false</overridable>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>kudu_pid_dir</name>
+        <value>/var/run/kudu</value>
+        <display-name>kudu PID Dir</display-name>
+        <description>kudu PID Dir</description>
+        <value-attributes>
+            <type>directory</type>
+            <overridable>false</overridable>
+            <editable-only-at-install>true</editable-only-at-install>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property> 
+    <property>
+        <name>kudu_user</name>
+        <display-name>kudu User</display-name>
+        <value>kudu</value>
+        <property-type>USER</property-type>
+        <description>User to run kudu as</description>
+        <value-attributes>
+            <type>user</type>
+            <overridable>false</overridable>
+            <user-groups>
+                <property>
+                    <type>cluster-env</type>
+                    <name>user_group</name>
+                </property>
+            </user-groups>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>rpc_authentication</name>
+        <value>optional</value>
+        <default>optional</default>
+        <description>rpc_authentication.</description>
+    </property>
+    <property>
+        <name>rpc_encryption</name>
+        <value>optional</value>
+        <default>optional</default>
+        <description>rpc_encryption.</description>
+    </property>
+    <property>
+        <name>principal_name</name>
+        <value>kudu/_HOST@EXAMPLE.COM</value>
+        <display-name>kudu principal name</display-name>
+        <description>kudu principal name</description>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>keytab_file</name>
+        <value>/etc/security/keytabs/kudu.service.keytab</value>
+        <description>impala keytab path</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>webserver_enabled</name>
+        <value>true</value>
+        <default>true</default>
+        <description>webserver_enabled.</description>
+    </property>
+    <property>
+        <name>user_acl</name>
+        <value>impala,hdfs,yarn,hive,spark,flink</value>
+        <default>impala</default>
+        <description>user_acl.</description>
+    </property>
+    <property>
+        <name>superuser_acl</name>
+        <value>kudu</value>
+        <default>hadoopadmin</default>
+        <description>superuser_acl.</description>
+    </property>
+    <property>
+        <name>enable_ranger</name>
+        <value>false</value>
+        <default>fasle</default>
+        <description>enable_ranger</description>
+        <depends-on>
+          <property>
+            <type>ranger-kudu-plugin-properties</type>
+            <name>ranger-kudu-plugin-enabled</name>
+          </property>
+        </depends-on>
+    </property>
+    <property>
+        <name>trusted_user_acl</name>
+        <value>impala,kudu,hdfs</value>
+        <default>impala,kudu</default>
+        <description>trusted_user_acl.</description>
+    </property>
+</configuration>

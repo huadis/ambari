@@ -2,43 +2,16 @@
   "name": "default",
   "description": "default quick links configuration",
   "configuration": {
-    "protocol": {
-      "type":"https",
-      "checks":[
-        {
-          "property":"seatunnel.web.ssl.enabled",
-          "desired":"true",
-          "site":"seatunnel-web-application"
-        }
-      ]
-    },
     "links": [
       {
-        "name": "seatunnel_web_ui",
-        "label": "Seatunnel-web UI",
-        "component_name": "SEATUNNEL-WEB",
-        "url": "%@://%@:%@/",
+        "name": "Seatunnel_WEB_UI",
+        "label": "Seatunnel Web UI",
         "requires_user_name": "false",
-        "port": {
-          "http_property": "http_port",
+        "component_name": "SEATUNNEL_WEB",
+        "url":"%@://%@:%@",
+        "port":{
+          "http_property": "seatunnel.web.port",
           "http_default_port": "8801",
-          "https_property": "https_port",
-          "https_default_port": "8443",
-          "regex": "^(\\d+)$",
-          "site": "seatunnel-web-application"
-        }
-      },
-      {
-        "name": "seatunnel_web_ui",
-        "label": "Seatunnel-web API Doc",
-        "component_name": "SEATUNNEL-WEB",
-        "url": "%@://%@:%@/swagger-ui.html",
-        "requires_user_name": "false",
-        "port": {
-          "http_property": "http_port",
-          "http_default_port": "8801",
-          "https_property": "https_port",
-          "https_default_port": "8443",
           "regex": "^(\\d+)$",
           "site": "seatunnel-web-application"
         }
@@ -46,4 +19,3 @@
     ]
   }
 }
-

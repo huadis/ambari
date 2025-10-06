@@ -1,0 +1,87 @@
+{
+  "services": [
+    {
+      "name": "SEATUNNEL",
+      "identities": [
+        {
+          "name": "seatunnel_server_hdfs",
+          "reference": "/HDFS/NAMENODE/hdfs",
+          "when" : {
+            "contains" : ["services", "HDFS"]
+          }
+        },
+        {
+          "name": "seatunnel_spnego",
+          "reference": "/spnego"
+        },
+        {
+          "name": "seatunnel",
+          "principal": {
+            "value": "${seatunnel-env/seatunnel_user}${principal_suffix}@${realm}",
+            "type": "user",
+            "configuration": "seatunnel-env/seatunnel_user_principal_name",
+            "local_username": "${seatunnel-env/seatunnel_user}"
+          },
+          "keytab": {
+            "file": "${keytab_dir}/seatunnel.headless.keytab",
+            "owner": {
+              "name": "${seatunnel-env/seatunnel_user}",
+              "access": "r"
+            },
+            "group": {
+              "name": "${cluster-env/user_group}",
+              "access": "r"
+            },
+            "configuration": "seatunnel-env/seatunnel_user_keytab"
+          }
+        },
+        {
+          "name": "seatunnel_smokeuser",
+          "reference": "/smokeuser"
+        }
+      ],
+      "configurations": [
+        {
+          "seatunnel-common": {
+            "hadoop.security.authentication.startup.state": "true"
+          }
+        }
+      ],
+      "components": [
+        {
+          "name": "SEATUNNEL_SERVER",
+          "identities": [
+            {
+              "name": "seatunnel_server_hdfs",
+              "reference": "/HDFS/NAMENODE/hdfs",
+              "when" : {
+                "contains" : ["services", "HDFS"]
+              }
+            },
+            {
+              "name": "seatunnel",
+              "principal": {
+                "value": "seatunnel/_HOST@${realm}",
+                "type" : "service" ,
+                "configuration": "seatunnel-env/seatunnel_service_principal_name",
+                "local_username": "${seatunnel-env/seatunnel_user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/seatunnel.service.keytab",
+                "owner": {
+                  "name": "${seatunnel-env/seatunnel_user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": "r"
+                },
+                "configuration": "seatunnel-env/seatunnel_service_keytab"
+              }
+            }      
+          ]
+        } 
+      ]
+    }
+  ]
+}

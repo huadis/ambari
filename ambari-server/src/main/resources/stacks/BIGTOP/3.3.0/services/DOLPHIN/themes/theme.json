@@ -90,22 +90,6 @@
                       "column-index": "0",
                       "row-span": "1",
                       "column-span": "1"
-                    },
-                    {
-                      "name": "dynamic-row1-col2",
-                      "display-name": "Kerberos Info",
-                      "row-index": "0",
-                      "column-index": "1",
-                      "row-span": "1",
-                      "column-span": "1"
-                    },
-                    {
-                      "name": "dynamic-row1-col3",
-                      "display-name": "Wechat Info",
-                      "row-index": "0",
-                      "column-index": "1",
-                      "row-span": "1",
-                      "column-span": "1"
                     }
                   ]
                 }
@@ -155,7 +139,7 @@
           "subsection-name": "dynamic-row1-col1"
         },
         {
-          "config": "dolphin-common/resource.upload.path",
+          "config": "dolphin-common/resource.storage.upload.base.path",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -177,7 +161,7 @@
           ]
         },
         {
-          "config": "dolphin-common/hdfs.root.user",
+          "config": "dolphin-common/resource.hdfs.root.user",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -199,7 +183,7 @@
           ]
         },
         {
-          "config": "dolphin-common/data.store2hdfs.basepath",
+          "config": "dolphin-common/resource.storage.upload.base.path",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -221,7 +205,7 @@
           ]
         },
         {
-          "config": "dolphin-common/fs.defaultFS",
+          "config": "dolphin-common/resource.hdfs.fs.defaultFS",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -243,7 +227,7 @@
           ]
         },
         {
-          "config": "dolphin-common/fs.s3a.endpoint",
+          "config": "dolphin-common/resource.aws.s3.endpoint",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -265,7 +249,7 @@
           ]
         },
         {
-          "config": "dolphin-common/fs.s3a.access.key",
+          "config": "dolphin-common/resource.aws.access.key.id",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -287,7 +271,7 @@
           ]
         },
         {
-          "config": "dolphin-common/fs.s3a.secret.key",
+          "config": "dolphin-common/resource.aws.secret.access.key",
           "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
@@ -309,18 +293,14 @@
           ]
         },
         {
-          "config": "dolphin-common/hadoop.security.authentication.startup.state",
-          "subsection-name": "dynamic-row1-col2"
-        },
-        {
-          "config": "dolphin-common/java.security.krb5.conf.path",
-          "subsection-name": "dynamic-row1-col2",
+          "config": "dolphin-common/resource.aws.region",
+          "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
               "configs":[
-                "dolphin-common/hadoop.security.authentication.startup.state"
+                "dolphin-common/resource.storage.type"
               ],
-              "if": "${dolphin-common/hadoop.security.authentication.startup.state}",
+              "if": "${dolphin-common/resource.storage.type} === S3",
               "then": {
                 "property_value_attributes": {
                   "visible": true
@@ -335,150 +315,14 @@
           ]
         },
         {
-          "config": "dolphin-common/login.user.keytab.username",
-          "subsection-name": "dynamic-row1-col2",
+          "config": "dolphin-common/resource.aws.s3.bucket.name",
+          "subsection-name": "dynamic-row1-col1",
           "depends-on": [
             {
               "configs":[
-                "dolphin-common/hadoop.security.authentication.startup.state"
+                "dolphin-common/resource.storage.type"
               ],
-              "if": "${dolphin-common/hadoop.security.authentication.startup.state}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-common/login.user.keytab.path",
-          "subsection-name": "dynamic-row1-col2",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-common/hadoop.security.authentication.startup.state"
-              ],
-              "if": "${dolphin-common/hadoop.security.authentication.startup.state}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-common/kerberos.expire.time",
-          "subsection-name": "dynamic-row1-col2",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-common/hadoop.security.authentication.startup.state"
-              ],
-              "if": "${dolphin-common/hadoop.security.authentication.startup.state}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-alert/enterprise.wechat.enable",
-          "subsection-name": "dynamic-row1-col3"
-        },
-        {
-          "config": "dolphin-alert/enterprise.wechat.corp.id",
-          "subsection-name": "dynamic-row1-col3",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-alert/enterprise.wechat.enable"
-              ],
-              "if": "${dolphin-alert/enterprise.wechat.enable}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-alert/enterprise.wechat.secret",
-          "subsection-name": "dynamic-row1-col3",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-alert/enterprise.wechat.enable"
-              ],
-              "if": "${dolphin-alert/enterprise.wechat.enable}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-alert/enterprise.wechat.agent.id",
-          "subsection-name": "dynamic-row1-col3",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-alert/enterprise.wechat.enable"
-              ],
-              "if": "${dolphin-alert/enterprise.wechat.enable}",
-              "then": {
-                "property_value_attributes": {
-                  "visible": true
-                }
-              },
-              "else": {
-                "property_value_attributes": {
-                  "visible": false
-                }
-              }
-            }
-          ]
-        },
-        {
-          "config": "dolphin-alert/enterprise.wechat.users",
-          "subsection-name": "dynamic-row1-col3",
-          "depends-on": [
-            {
-              "configs":[
-                "dolphin-alert/enterprise.wechat.enable"
-              ],
-              "if": "${dolphin-alert/enterprise.wechat.enable}",
+              "if": "${dolphin-common/resource.storage.type} === S3",
               "then": {
                 "property_value_attributes": {
                   "visible": true
@@ -498,7 +342,7 @@
       {
         "config": "dolphin-env/dolphin.database.type",
         "widget": {
-          "type": "combo"
+          "type": "text-field"
         }
       },
       {
@@ -551,107 +395,59 @@
       {
         "config": "dolphin-common/resource.storage.type",
         "widget": {
-          "type": "combo"
+          "type": "text-field"          
         }
       },
       {
-        "config": "dolphin-common/resource.upload.path",
+        "config": "dolphin-common/resource.storage.upload.base.path",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/hdfs.root.user",
+        "config": "dolphin-common/resource.hdfs.root.user",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/data.store2hdfs.basepath",
+        "config": "dolphin-common/resource.storage.upload.base.path",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/fs.defaultFS",
+        "config": "dolphin-common/resource.hdfs.fs.defaultFS",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/fs.s3a.endpoint",
+        "config": "dolphin-common/resource.aws.s3.endpoint",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/fs.s3a.access.key",
+        "config": "dolphin-common/resource.aws.access.key.id",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/fs.s3a.secret.key",
+        "config": "dolphin-common/resource.aws.secret.access.key",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/hadoop.security.authentication.startup.state",
-        "widget": {
-          "type": "toggle"
-        }
-      },
-      {
-        "config": "dolphin-common/java.security.krb5.conf.path",
+        "config": "dolphin-common/resource.aws.region",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "dolphin-common/login.user.keytab.username",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-common/login.user.keytab.path",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-common/kerberos.expire.time",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-alert/enterprise.wechat.enable",
-        "widget": {
-          "type": "toggle"
-        }
-      },
-      {
-        "config": "dolphin-alert/enterprise.wechat.corp.id",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-alert/enterprise.wechat.secret",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-alert/enterprise.wechat.agent.id",
-        "widget": {
-          "type": "text-field"
-        }
-      },
-      {
-        "config": "dolphin-alert/enterprise.wechat.users",
+        "config": "dolphin-common/resource.aws.s3.bucket.name",
         "widget": {
           "type": "text-field"
         }

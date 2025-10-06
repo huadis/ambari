@@ -1,0 +1,119 @@
+#
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+#
+
+
+#env
+source /etc/impala/conf/impala-env.sh
+
+cmdType=$1
+cmdArgs=''
+cmdResultRex=''
+cmdLog=''
+
+if [ $cmdType == 'catalogd' ]; then
+  cmdArgs=${IMPALA_CATALOG_ARGS}
+  cmdLog='catalogd.INFO'
+  cmdResultRex="CatalogService started on port"
+elif [ $cmdType == 'impalad' ]; then
+  cmdArgs=${IMPALA_SERVER_ARGS}
+  cmdLog='impalad.INFO'
+  cmdResultRex="Impala Beeswax Service listening on"
+elif [ $cmdType == 'statestored' ]; then
+  cmdArgs=${IMPALA_STATE_STORE_ARGS}
+  cmdLog='statestored.INFO'
+  cmdResultRex="ThriftServer 'StatestoreService' started on port"
+fi
+
+echo $cmdType
+echo $cmdArgs
+echo $cmdLog
+echo $cmdResultRex
+
+#logdir=/var/log/impala
+logdir={{impala_log_dir}}
+logfile=$logdir/impala-$cmdType.log
+loginfofile=$logdir/$cmdLog
+
+#pidfile=/var/run/impala/$cmdType.pid
+pidfile={{impala_pid_dir}}/$cmdType.pid
+
+#start cmd
+#/usr/hdp/current/impala/bin/$cmdType $cmdArgs > /var/log/impala/impala-$cmdType.log 2>&1 & 
+{{impala_bin_home}}/$cmdType $cmdArgs > $logfile 2>&1 & 
+
+#wrtite id
+pid=$!
+echo $pid | cat > $pidfile
+
+#just start cmd status
+while :
+  do
+    if cat $logfile | grep 'Redirecting stdout to' | grep ".$pid"  &> /dev/null
+    then
+      echo "start $cmdType, pls waiting "
+      break
+    fi
+    if !(ps -p $pid  &> /dev/null)
+    then
+      echo "start $cmdType, failed pls check log: $logfile"
+      rm -fr $pidfile
+      tail  $logfile
+      exit 1
+    fi
+ sleep 3
+done
+
+#just pid related log exists,becaust before cmd sometimes failed
+while :
+  do
+    if ( ls $logdir | grep "$cmdType" | grep ".$pid" &> /dev/null )
+    then
+      echo "start $cmdType, pls waiting ..."
+      break
+    fi
+ sleep 3
+done
+
+#just real cmd status 
+while :
+  do
+    if cat $loginfofile | grep "$cmdResultRex" &> /dev/null
+    then
+      echo "start $cmdType success"
+      break
+    fi
+    if cat $loginfofile | grep "Impalad exiting" &> /dev/null
+    then
+      echo "start $cmdType failed,pls check log: $loginfofile"
+      rm -fr $pidfile
+      tail  $loginfofile
+      exit 1
+    fi
+    if !(ps -p $pid  &> /dev/null)
+    then
+      echo "start $cmdType failed, pls check log: $loginfofile"
+      rm -fr $pidfile
+      tail  $loginfofile
+      exit 1
+    fi
+ sleep 10
+done
+

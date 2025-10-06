@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration supports_final="true">
+        <!-- [global] -->
+        <property>
+            <name>global.print_configs</name>
+            <value>false</value>
+            <description>[global] whether print configs</description>
+        </property>
+        <property require-input="false">
+            <name>global.hostname</name>
+            <value></value>
+            <value-attributes>
+                <empty-value-valid>true</empty-value-valid>
+                <overridable>false</overridable>
+            </value-attributes>
+            <description>[global] add label(agent_hostname) to series</description>
+        </property>
+        <property>
+            <name>global.omit_hostname</name>
+            <value>false</value>
+            <description>[global] will not add label(agent_hostname) if true</description>
+        </property>
+        <property>
+            <name>global.interval</name>
+            <value>15</value>
+            <description>[global] global collect interval, unit: second</description>
+        </property>
+        <property>
+            <name>global.providers</name>
+            <value>["local"]</value>
+            <description>[global] input provider settings; optional: local / http</description>
+        </property>
+        <property>
+            <name>global.concurrency</name>
+            <value>-1</value>
+            <description>[global] The concurrency setting controls the number of concurrent tasks</description>
+        </property>
+        <property>
+            <name>global.labels.region</name>
+            <value>shanghai</value>
+            <description>[global.labels] region</description>
+        </property>
+
+        <!-- [global.labels] -->
+        <!-- Uncomment and set values if needed -->
+        <!--
+
+        <property>
+            <name>global.labels.env</name>
+            <value>localhost</value>
+            <description>[global.labels] env</description>
+        </property>
+        <property>
+            <name>global.labels.sn</name>
+            <value>$sn</value>
+            <description>[global.labels] sn</description>
+        </property>
+        -->
+
+        <!-- [log] -->
+        <property>
+            <name>log.file_name</name>
+            <value>stdout</value>
+            <description>[log] file_name is the file to write logs to</description>
+        </property>
+        <property>
+            <name>log.max_size</name>
+            <value>100</value>
+            <description>[log] max_size is the maximum size in megabytes of the log file</description>
+        </property>
+        <property>
+            <name>log.max_age</name>
+            <value>1</value>
+            <description>[log] max_age is the maximum number of days to retain old log files</description>
+        </property>
+        <property>
+            <name>log.max_backups</name>
+            <value>1</value>
+            <description>[log] max_backups is the maximum number of old log files to retain</description>
+        </property>
+        <property>
+            <name>log.local_time</name>
+            <value>true</value>
+            <description>[log] local_time determines if the time used for formatting timestamps</description>
+        </property>
+        <property>
+            <name>log.compress</name>
+            <value>false</value>
+            <description>[log] Compress determines if the rotated log files should be compressed</description>
+        </property>
+
+        <!-- [writer_opt] -->
+        <property>
+            <name>writer_opt.batch</name>
+            <value>1000</value>
+            <description>[writer_opt] batch</description>
+        </property>
+        <property>
+            <name>writer_opt.chan_size</name>
+            <value>1000000</value>
+            <description>[writer_opt] chan_size</description>
+        </property>
+
+        <!-- [[writers]] -->
+        <property>
+            <name>writers.url</name>
+            <value>{{writer_url}}</value>
+            <description>[[writers]] url</description>
+        </property>
+        <property>
+            <name>writers.basic_auth_user</name>
+            <value>{{auth_user}}</value>
+            <description>[[writers]] Basic auth username</description>
+        </property>
+        <property>
+            <name>writers.basic_auth_pass</name>
+            <value>{{auth_pwd}}</value>
+            <description>[[writers]] Basic auth password</description>
+        </property>
+        <property>
+            <name>writers.timeout</name>
+            <value>5000</value>
+            <description>[[writers]] timeout settings, unit: ms</description>
+        </property>
+        <property>
+            <name>writers.dial_timeout</name>
+            <value>2500</value>
+            <description>[[writers]] dial_timeout settings, unit: ms</description>
+        </property>
+        <property>
+            <name>writers.max_idle_conns_per_host</name>
+            <value>100</value>
+            <description>[[writers]] max_idle_conns_per_host</description>
+        </property>
+
+        <!-- [http] -->
+        <property>
+            <name>http.enable</name>
+            <value>false</value>
+            <description>[http] enable</description>
+        </property>
+        <property>
+            <name>http.address</name>
+            <value>:9100</value>
+            <description>[http] address</description>
+        </property>
+        <property>
+            <name>http.print_access</name>
+            <value>false</value>
+            <description>[http] print_access</description>
+        </property>
+        <property>
+            <name>http.run_mode</name>
+            <value>release</value>
+            <description>[http] run_mode</description>
+        </property>
+        <property>
+            <name>http.ignore_hostname</name>
+            <value>false</value>
+            <description>[http] ignore_hostname</description>
+        </property>
+        <property require-input="false">
+            <name>http.agent_host_tag</name>
+            <value></value>
+            <value-attributes>
+                <empty-value-valid>true</empty-value-valid>
+                <overridable>false</overridable>
+            </value-attributes>
+            <description>[http] agent_host_tag</description>
+        </property>
+        <property>
+            <name>http.ignore_global_labels</name>
+            <value>false</value>
+            <description>[http] ignore_global_labels</description>
+        </property>
+
+        <!-- [ibex] -->
+        <property>
+            <name>ibex.enable</name>
+            <value>false</value>
+            <description>[ibex] enable</description>
+        </property>
+        <property>
+            <name>ibex.interval</name>
+            <value>1000ms</value>
+            <description>[ibex] ibex flush interval</description>
+        </property>
+        <property>
+            <name>ibex.servers</name>
+            <value>["127.0.0.1:20090"]</value>
+            <description>[ibex] n9e ibex server rpc address</description>
+        </property>
+        <property>
+            <name>ibex.meta_dir</name>
+            <value>./meta</value>
+            <description>[ibex] temp script dir</description>
+        </property>
+
+        <!-- [heartbeat] -->
+        <property>
+            <name>heartbeat.enable</name>
+            <value>true</value>
+            <description>[heartbeat] enable</description>
+        </property>
+        <property>
+            <name>heartbeat.url</name>
+            <value>{{heartbeat_url}}</value>
+            <description>[heartbeat] report os version cpu.util mem.util metadata</description>
+        </property>
+        <property>
+            <name>heartbeat.interval</name>
+            <value>10</value>
+            <description>[heartbeat] interval, unit: s</description>
+        </property>
+        <property require-input="false">
+            <name>heartbeat.basic_auth_user</name>
+            <value></value>
+            <value-attributes>
+                <empty-value-valid>true</empty-value-valid>
+                <overridable>false</overridable>
+            </value-attributes>
+            <description>[heartbeat] Basic auth username</description>
+        </property>
+        <property require-input="false">
+            <name>heartbeat.basic_auth_pass</name>
+            <value></value>
+            <value-attributes>
+                <empty-value-valid>true</empty-value-valid>
+                <overridable>false</overridable>
+            </value-attributes>
+            <description>[heartbeat] Basic auth password</description>
+        </property>
+        <property>
+            <name>heartbeat.timeout</name>
+            <value>5000</value>
+            <description>[heartbeat] timeout settings, unit: ms</description>
+        </property>
+        <property>
+            <name>heartbeat.dial_timeout</name>
+            <value>2500</value>
+            <description>[heartbeat] dial_timeout settings, unit: ms</description>
+        </property>
+        <property>
+            <name>heartbeat.max_idle_conns_per_host</name>
+            <value>100</value>
+            <description>[heartbeat] max_idle_conns_per_host</description>
+        </property>
+
+        <!-- [prometheus] -->
+        <property>
+            <name>prometheus.enable</name>
+            <value>false</value>
+            <description>[prometheus] enable</description>
+        </property>
+        <property>
+            <name>prometheus.scrape_config_file</name>
+            <value>/path/to/in_cluster_scrape.yaml</value>
+            <description>[prometheus] scrape_config_file</description>
+        </property>
+        <property>
+            <name>prometheus.log_level</name>
+            <value>info</value>
+            <description>[prometheus] log level, debug warn info error</description>
+        </property>
+        <!--
+        <property>
+            <name>prometheus.wal_storage_path</name>
+            <value>/path/to/storage</value>
+            <description>[prometheus] wal file storage path, default ./data-agent</description>
+        </property>
+        <property>
+            <name>prometheus.wal_min_duration</name>
+            <value>2</value>
+            <description>[prometheus] wal reserve time duration, default value is 2 hour</description>
+        </property>
+        -->
+
+</configuration>

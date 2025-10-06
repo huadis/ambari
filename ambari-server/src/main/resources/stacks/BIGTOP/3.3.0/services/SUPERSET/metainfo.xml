@@ -22,11 +22,11 @@
       <name>SUPERSET</name>
       <displayName>Superset</displayName>
       <comment>Superset is a data exploration platform designed to be visual, intuitive and interactive.</comment>
-      <version>0.15.0</version>
+      <version>4.0.2</version>
       <components>
         <component>
           <name>SUPERSET</name>
-          <displayName>Superset</displayName>
+          <displayName>Superset Server</displayName>
           <category>MASTER</category>
           <cardinality>1+</cardinality>
           <versionAdvertised>false</versionAdvertised>
@@ -46,11 +46,15 @@
           <fileName>theme.json</fileName>
           <default>true</default>
         </theme>
+        <theme>
+          <fileName>database.json</fileName>
+          <default>true</default>
+        </theme>
       </themes>
 
       <osSpecifics>
         <osSpecific>
-          <osFamily>redhat7,amazonlinux2,redhat6,suse11,suse12</osFamily>
+          <osFamily>redhat7,redhat8,redhat9,openeuler22</osFamily>
           <packages>
             <package>
               <name>superset_${stack_version}</name>

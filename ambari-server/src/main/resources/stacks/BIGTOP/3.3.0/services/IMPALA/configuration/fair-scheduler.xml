@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration supports_adding_forbidden="true">
+
+  <!-- /etc/impala/conf -->
+  <property>
+    <name>content</name>
+    <display-name>fair-scheduler.xml template</display-name>
+    <description>This is the xml template for fair-scheduler.xml file</description>
+    <value>
+<![CDATA[
+<allocations>
+    <queue name="root">
+        <aclSubmitApps> </aclSubmitApps>
+        <queue name="default">
+            <maxResources>50000 mb, 0 vcores</maxResources>
+            <aclSubmitApps>*</aclSubmitApps>
+        </queue>
+        <queue name="development">
+            <maxResources>200000 mb, 0 vcores</maxResources>
+            <aclSubmitApps>user1,user2 dev,ops,admin</aclSubmitApps>
+        </queue>
+        <queue name="production">
+            <maxResources>1000000 mb, 0 vcores</maxResources>
+            <aclSubmitApps> ops,admin</aclSubmitApps>
+        </queue>
+    </queue>
+    <queuePlacementPolicy>
+        <rule name="specified" create="false"/>
+        <rule name="default" />
+    </queuePlacementPolicy>
+</allocations>
+]]>
+    </value>
+    <value-attributes>
+      <type>content</type>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property>
+</configuration>

@@ -1,5 +1,5 @@
 {
-  "DOLPHIN": {
+  "DOLPHINSCHEDULER": {
     "service": [],
     "DOLPHIN_API": [
       {
@@ -10,35 +10,8 @@
         "scope": "ANY",
         "source": {
           "type": "PORT",
-          "uri": "{{dolphin-application-api/server.port}}",
+          "uri": "{{dolphin-api-server-application/server.port}}",
           "default_port": 12345,
-          "reporting": {
-            "ok": {
-              "text": "TCP OK - {0:.3f}s response on port {1}"
-            },
-            "warning": {
-              "text": "TCP OK - {0:.3f}s response on port {1}",
-              "value": 1.5
-            },
-            "critical": {
-              "text": "Connection failed: {0} to {1}:{2}",
-              "value": 5.0
-            }
-          }
-        }
-      }
-    ],
-    "DOLPHIN_LOGGER": [
-      {
-        "name": "dolphin_logger_port_check",
-        "label": "dolphin_logger_port_check",
-        "description": "dolphin_logger_port_check.",
-        "interval": 10,
-        "scope": "ANY",
-        "source": {
-          "type": "PORT",
-          "uri": "{{dolphin-common/loggerserver.rpc.port}}",
-          "default_port": 50051,
           "reporting": {
             "ok": {
               "text": "TCP OK - {0:.3f}s response on port {1}"
@@ -65,7 +38,7 @@
         "enabled": true,
         "source": {
           "type": "SCRIPT",
-          "path": "DOLPHIN/2.0.6/package/alerts/alert_dolphin_scheduler_status.py",
+          "path": "BIGTOP/3.3.0/services/DOLPHINSCHEDULER/package/alerts/alert_dolphin_scheduler_status.py",
           "parameters": [
 
             {
@@ -98,7 +71,7 @@
         "enabled": true,
         "source": {
           "type": "SCRIPT",
-          "path": "DOLPHIN/2.0.6/package/alerts/alert_dolphin_scheduler_status.py",
+          "path": "BIGTOP/3.3.0/services/DOLPHINSCHEDULER/package/alerts/alert_dolphin_scheduler_status.py",
           "parameters": [
 
             {
@@ -131,7 +104,7 @@
         "enabled": true,
         "source": {
           "type": "SCRIPT",
-          "path": "DOLPHIN/2.0.6/package/alerts/alert_dolphin_scheduler_status.py",
+          "path": "BIGTOP/3.3.0/services/DOLPHINSCHEDULER/package/alerts/alert_dolphin_scheduler_status.py",
           "parameters": [
 
             {

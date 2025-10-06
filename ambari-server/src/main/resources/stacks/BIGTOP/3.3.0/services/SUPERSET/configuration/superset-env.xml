@@ -1,23 +1,25 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
-  ~ Licensed to the Apache Software Foundation (ASF) under one
-  ~ or more contributor license agreements.  See the NOTICE file
-  ~ distributed with this work for additional information
-  ~ regarding copyright ownership.  The ASF licenses this file
-  ~ to you under the Apache License, Version 2.0 (the
-  ~ "License"); you may not use this file except in compliance
-  ~ with the License.  You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-<configuration>
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration supports_adding_forbidden="true">
   <property>
     <name>superset_log_dir</name>
     <value>/var/log/superset</value>
@@ -28,6 +30,7 @@
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_pid_dir</name>
     <value>/var/run/superset</value>
@@ -38,6 +41,7 @@
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_admin_user</name>
     <value>admin</value>
@@ -53,9 +57,10 @@
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
-  <property require-input="true">
+
+  <property>
     <name>superset_admin_password</name>
-    <value/>
+    <value>admin</value>
     <property-type>PASSWORD</property-type>
     <display-name>Superset Admin Password</display-name>
     <description>
@@ -69,21 +74,25 @@
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_admin_firstname</name>
-    <value></value>
+    <value>admin</value>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_admin_lastname</name>
-    <value></value>
+    <value>admin</value>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_admin_email</name>
-    <value></value>
+    <value>admin@admin.com</value>
     <on-ambari-upgrade add="true"/>
   </property>
+
   <property>
     <name>superset_user</name>
     <display-name>Superset User</display-name>
@@ -102,35 +111,40 @@
     </value-attributes>
     <on-ambari-upgrade add="false"/>
   </property>
+
+  <property>
+    <name>superset_flask_app</name>
+    <display-name>Superset Flask App</display-name>
+    <value>superset.app:create_app()</value>
+    <on-ambari-upgrade add="false"/>
+  </property>
+
   <property>
     <name>content</name>
-    <display-name>superset-env template</display-name>
+    <description>superset-env template</description>
     <value>
-      # Set environment variables here.
-      
-      export LC_ALL=en_US.UTF-8
-      export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-      # Superset Home Dir
-      export SUPERSET_CONFIG_DIR={{superset_config_dir}}
+export FLASK_APP="{{superset_flask_app}}"
 
-      # Superset Log Dir
-      export SUPERSET_LOG_DIR={{superset_log_dir}}
+export SUPERSET_BIN_DIR={{superset_bin_dir}}
 
-      # Superset Log Dir
-      export SUPERSET_BIN_DIR={{superset_bin_dir}}
+export SUPERSET_CONFIG_DIR={{superset_config_dir}}
+export SUPERSET_CONFIG_PATH={{superset_config_dir}}/superset_config.py
 
-      # Superset PID Dir
-      export SUPERSET_PID_DIR={{superset_pid_dir}}
+export SUPERSET_LOG_DIR={{superset_log_dir}}
 
-      # Add superset_config.py to PYTHONPATH
-      export PYTHONPATH=$PYTHONPATH:{{superset_config_dir}}
+export SUPERSET_PID_DIR={{superset_pid_dir}}
 
-      export SUPERSET_WEBSERVER_PORT={{superset_webserver_port}}
-      export SUPERSET_WEBSERVER_ADDRESS={{superset_webserver_address}}
-      export SUPERSET_TIMEOUT={{superset_timeout}}
-      export SUPERSET_WORKERS={{superset_workers}}
+export SUPERSET_BIND_ADDRESS={{superset_bind_address}}
+export SUPERSET_PORT={{superset_port}}
+export SUPERSET_TIMEOUT={{superset_timeout}}
+export SUPERSET_WORKERS={{superset_workers}}
     </value>
+    <value-attributes>
+      <type>content</type>
+    </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
 </configuration>

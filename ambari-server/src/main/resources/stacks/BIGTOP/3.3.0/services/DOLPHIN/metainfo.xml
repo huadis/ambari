@@ -19,8 +19,8 @@
         <service>
             <name>DOLPHIN</name>
             <displayName>Dolphin Scheduler</displayName>
-            <comment>分布式易扩展的可视化DAG工作流任务调度系统</comment>
-            <version>2.0.6</version>
+            <comment>Apache DolphinScheduler is the modern data workflow orchestration platform. </comment>
+            <version>3.2.2</version>
             <components>
                 <component>
                     <name>DOLPHIN_MASTER</name>
@@ -32,46 +32,33 @@
                         <scriptType>PYTHON</scriptType>
                         <timeout>600</timeout>
                     </commandScript>
+                    <customCommands>
+                        <customCommand>
+                            <name>UPGRADE_SCHEMA</name>
+                            <commandScript>
+                                <script>scripts/dolphin_master_service.py</script>
+                                <scriptType>PYTHON</scriptType>
+                                <timeout>600</timeout>
+                            </commandScript>
+                        </customCommand>
+                    </customCommands>
                 </component>
-
-                <component>
-                    <name>DOLPHIN_LOGGER</name>
-                    <displayName>DS Logger</displayName>
-                    <category>SLAVE</category>
-                    <cardinality>1+</cardinality>
-                    <commandScript>
-                        <script>scripts/dolphin_logger_service.py</script>
-                        <scriptType>PYTHON</scriptType>
-                        <timeout>600</timeout>
-                    </commandScript>
-                </component>
-
                 <component>
                     <name>DOLPHIN_WORKER</name>
                     <displayName>DS Worker</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
-                    <dependencies>
-                        <dependency>
-                            <name>DOLPHIN/DOLPHIN_LOGGER</name>
-                            <scope>host</scope>
-                            <auto-deploy>
-                                <enabled>true</enabled>
-                            </auto-deploy>
-                        </dependency>
-                    </dependencies>
                     <commandScript>
                         <script>scripts/dolphin_worker_service.py</script>
                         <scriptType>PYTHON</scriptType>
                         <timeout>600</timeout>
                     </commandScript>
                 </component>
-
                 <component>
                     <name>DOLPHIN_ALERT</name>
                     <displayName>DS Alert</displayName>
                     <category>SLAVE</category>
-                    <cardinality>1</cardinality>
+                    <cardinality>1+</cardinality>
                     <commandScript>
                         <script>scripts/dolphin_alert_service.py</script>
                         <scriptType>PYTHON</scriptType>
@@ -83,7 +70,7 @@
                     <name>DOLPHIN_API</name>
                     <displayName>DS_Api</displayName>
                     <category>SLAVE</category>
-                    <cardinality>1</cardinality>
+                    <cardinality>1+</cardinality>
                     <commandScript>
                         <script>scripts/dolphin_api_service.py</script>
                         <scriptType>PYTHON</scriptType>
@@ -94,6 +81,7 @@
 
             <requiredServices>
                 <service>ZOOKEEPER</service>
+                <service>HDFS</service>
             </requiredServices>
 
             <osSpecifics>
@@ -101,20 +89,50 @@
                     <osFamily>redhat7,redhat8,redhat9,openeuler22</osFamily>
                     <packages>
                         <package>
-                            <name>dolphin_${stack_version}</name>
+                            <name>dolphinscheduler_${stack_version}</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-alert-server</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-api-server</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-master-server</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-worker-server</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-ui</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-tools</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-bin</name>
+                        </package>
+                        <package>
+                            <name>dolphinscheduler_${stack_version}-standalone-server</name>
                         </package>
                     </packages>
                 </osSpecific>
             </osSpecifics>
 
             <configuration-dependencies>
-                <config-type>dolphin-registry</config-type>
-                <config-type>dolphin-application-api</config-type>
-                <config-type>dolphin-application-mysql</config-type>
                 <config-type>dolphin-common</config-type>
                 <config-type>dolphin-env</config-type>
-                <config-type>dolphin-master</config-type>
-                <config-type>dolphin-worker</config-type>
+                <config-type>dolphin-alert-server-application</config-type>
+                <config-type>dolphin-api-server-application</config-type>
+                <config-type>dolphin-master-server-application</config-type>
+                <config-type>dolphin-worker-server-application</config-type>
+                <config-type>dolphin-tools-application</config-type>
+                <config-type>dolphin-alert-server-logback-spring</config-type>
+                <config-type>dolphin-api-server-logback-spring</config-type>
+                <config-type>dolphin-master-server-logback-spring</config-type>
+                <config-type>dolphin-worker-server-logback-spring</config-type>
+                <config-type>hdfs-site</config-type>
+                <config-type>core-site</config-type>
             </configuration-dependencies>
 
             <themes>
@@ -124,7 +142,6 @@
                 </theme>
             </themes>
 
-            <quickLinksConfigurations-dir>quicklinks</quickLinksConfigurations-dir>
             <quickLinksConfigurations>
                 <quickLinksConfiguration>
                     <fileName>quicklinks.json</fileName>

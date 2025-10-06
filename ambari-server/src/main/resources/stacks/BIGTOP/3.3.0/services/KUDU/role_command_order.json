@@ -1,0 +1,8 @@
+{
+  "general_deps" : {
+    "_comment" : "dependencies for KUDU",
+    "KUDU_SERVICE_CHECK-SERVICE_CHECK" : ["KUDU_MASTER-START","KUDU_TSERVER-START"],
+    "KUDU_MASTER-START" : ["NAMENODE-START", "DATANODE-START","RANGER_ADMIN-START"],
+    "KUDU_TSERVER-START" : ["KUDU_MASTER-START"]
+  }
+}

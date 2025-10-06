@@ -17,7 +17,7 @@
 <configuration>
     <property>
         <name>data.basedir.path</name>
-        <value>/data/dolphinscheduler</value>
+        <value>/tmp/dolphinscheduler</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
@@ -26,7 +26,7 @@
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>resource.upload.path</name>
+        <name>resource.storage.upload.base.path</name>
         <value>/dolphinscheduler</value>
         <on-ambari-upgrade add="true"/>
     </property>
@@ -37,7 +37,7 @@
     </property>
     <property>
         <name>java.security.krb5.conf.path</name>
-        <value>/opt/krb5.conf</value>
+        <value>/etc/krb5.conf</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
@@ -47,7 +47,7 @@
     </property>
     <property>
         <name>login.user.keytab.path</name>
-        <value>/opt/hdfs.headless.keytab</value>
+        <value>/etc/security/hdfs.headless.keytab</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
@@ -56,28 +56,58 @@
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>hdfs.root.user</name>
+        <name>resource.hdfs.root.user</name>
         <value>hdfs</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://testhdfsha:8020</value>
+        <name>resource.hdfs.fs.defaultFS</name>
+        <value>{{namenode_address}}</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>fs.s3a.endpoint</name>
-        <value>http://192.168.xx.xx:9010</value>
+        <name>resource.azure.client.id</name>
+        <value>minioadmin</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>fs.s3a.access.key</name>
-        <value>A3DXS30FO22544RE</value>
+        <name>resource.azure.client.secret</name>
+        <value>minioadmin</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
-        <name>fs.s3a.secret.key</name>
-        <value>OloCLq3n+8+sdPHUhJ21XrSxTC+JK</value>
+        <name>resource.azure.tenant.id</name>
+        <value>minioadmin</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.azure.subId</name>
+        <value>minioadmin</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.aws.s3.endpoint</name>
+        <value>http://localhost:9000</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.aws.access.key.id</name>
+        <value>minioadmin</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.aws.secret.access.key</name>
+        <value>minioadmin</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.aws.region</name>
+        <value>cn-north-1</value>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>resource.aws.s3.bucket.name</name>
+        <value>dolphinscheduler</value>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
@@ -123,11 +153,6 @@
     <property>
         <name>development.state</name>
         <value>false</value>
-        <on-ambari-upgrade add="true"/>
-    </property>
-    <property>
-        <name>datasource.plugin.dir</name>
-        <value>lib/plugin/datasource</value>
         <on-ambari-upgrade add="true"/>
     </property>
 </configuration>

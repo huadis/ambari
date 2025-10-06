@@ -33,51 +33,88 @@ fi
 
 command=$1
 
-CONF_DIR="${SUPERSET_CONFIG_DIR:=/etc/superset/conf}"
-LOG_DIR="${SUPERSET_LOG_DIR:=/var/log/superset}"
-PID_DIR="${SUPERSET_PID_DIR:=/var/run/superset}"
-TIMEOUT="${SUPERSET_TIMEOUT:=60}"
-WEBSERVER_ADDRESS="${SUPERSET_WEBSERVER_ADDRESS:=0.0.0.0}"
-WEBSERVER_PORT="${SUPERSET_WEBSERVER_PORT:=9088}"
-WORKERS="${SUPERSET_WORKERS:=4}"
-BIN_DIR="${SUPERSET_BIN_DIR}"
+BIN_DIR="${SUPERSET_BIN_DIR:-/usr/bigtop/current/superset/bin}"
+CONF_DIR="${SUPERSET_CONFIG_DIR:-/etc/superset/conf}"
+LOG_DIR="${SUPERSET_LOG_DIR:-/var/log/superset}"
+PID_DIR="${SUPERSET_PID_DIR:-/var/run/superset}"
 
-pid=$PID_DIR/superset.pid
+GROUP="${SUPERSET_GROUP:-hadoop}"
+USER="${SUPERSET_USER:-superset}"
+
+BIND_ADDRESS="${SUPERSET_BIND_ADDRESS:-0.0.0.0}"
+PORT="${SUPERSET_PORT:-9088}"
+
+PID_FILE="${PID_DIR}/${SUPERSET_PID_FILE:-superset.pid}"
+ACCESS_LOG_FILE="${LOG_DIR}/${SUPERSET_ACCESS_LOG_FILE:-superset-access.log}"
+ERROR_LOG_FILE="${LOG_DIR}/${SUPERSET_ERROR_LOG_FILE:-superset-error.log}"
+LOG_LEVEL="${SUPERSET_LOG_LEVEL:-info}"
+WORKERS="${SUPERSET_WORKERS:-4}"
+WORKER_CLASS="${SUPERSET_WORKER_CLASS:-gthread}"
+THREADS="${SUPERSET_THREADS:-20}"
+GUNICORN_TIMEOUT="${SUPERSET_TIMEOUT:-60}"
+GUNICORN_KEEPALIVE="${SUPERSET_KEEPALIVE:-2}"
+WORKER_MAX_REQUESTS="${SUPERSET_MAX_REQUESTS:-0}"
+WORKER_MAX_REQUESTS_JITTER="${SUPERSET_MAX_REQUESTS_JITTER:-0}"
+SERVER_LIMIT_REQUEST_LINE="${SUPERSET_SERVER_LIMIT_REQUEST_LINE:-0}"
+SERVER_LIMIT_REQUEST_FIELD_SIZE="${SUPERSET_SERVER_LIMIT_REQUEST_FIELD_SIZE:-0}"
+
+FLASK_APP="${SUPERSET_FLASK_APP:-superset.app:create_app()}"
+
+# pid=$PID_DIR/superset.pid
 
 case $command in
   (start)
 
-    if [ -f $pid ]; then
-      if kill -0 `cat $pid| head -n 1` > /dev/null 2>&1; then
-        echo Superset node running as process `cat $pid | head -n 1`.  Stop it first.
+    if [ -f ${PID_FILE} ]; then
+      if kill -0 `cat ${PID_FILE}| head -n 1` > /dev/null 2>&1; then
+        echo Superset node running as process `cat ${PID_FILE} | head -n 1`.  Stop it first.
         exit 1
       fi
     fi
 
-    $BIN_DIR/gunicorn -D --workers $WORKERS -p $pid --log-file $LOG_DIR/superset.log -t $TIMEOUT -b $WEBSERVER_ADDRESS:$WEBSERVER_PORT --limit-request-line 0 --limit-request-field_size 0 superset:app
+    ${SUPERSET_BIN_DIR}/gunicorn \
+      --daemon \
+      --reload \
+      --group "${GROUP}" \
+      --user "${USER}" \
+      --bind "${BIND_ADDRESS}:${PORT}" \
+      --pid "${PID_FILE}" \
+      --access-logfile "${ACCESS_LOG_FILE}" \
+      --error-logfile "${ERROR_LOG_FILE}" \
+      --log-level "${LOG_LEVEL}" \
+      --workers ${WORKERS} \
+      --worker-class ${WORKER_CLASS} \
+      --threads ${THREADS} \
+      --timeout ${GUNICORN_TIMEOUT} \
+      --keep-alive ${GUNICORN_KEEPALIVE} \
+      --max-requests ${WORKER_MAX_REQUESTS} \
+      --max-requests-jitter ${WORKER_MAX_REQUESTS_JITTER} \
+      --limit-request-line ${SERVER_LIMIT_REQUEST_LINE} \
+      --limit-request-field_size ${SERVER_LIMIT_REQUEST_FIELD_SIZE} \
+      "${FLASK_APP}"
 
     echo "Started Superset"
     ;;
 
   (stop)
 
-    if [ -f $pid ]; then
-      TARGET_PID=`cat $pid | head -n 1`
+    if [ -f ${PID_FILE} ]; then
+      TARGET_PID=`cat ${PID_FILE} | head -n 1`
       if kill -0 $TARGET_PID > /dev/null 2>&1; then
-        echo Stopping process `cat $pid | head -n 1`...
+        echo Stopping process `cat ${PID_FILE} | head -n 1`...
         kill $TARGET_PID
       else
         echo No superset node to stop
       fi
-      rm -f $pid
+      rm -f ${PID_FILE}
     else
       echo No superset node to stop
     fi
     ;;
 
    (status)
-    if [ -f $pid ]; then
-      if kill -0 `cat $pid | head -n 1` > /dev/null 2>&1; then
+    if [ -f ${PID_FILE} ]; then
+      if kill -0 `cat ${PID_FILE} | head -n 1` > /dev/null 2>&1; then
         echo RUNNING
         exit 0
       else

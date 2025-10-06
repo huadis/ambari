@@ -17,9 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 """
+
 from resource_management.libraries.script.script import Script
 
 config = Script.get_config()
 
-superset_pid_dir = config['configurations']['superset-env']['superset_pid_dir']
-
+superset_pid_dir = config["configurations"]["superset-env"]["superset_pid_dir"]

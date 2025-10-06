@@ -1,0 +1,114 @@
+{
+  "services": [
+    {
+      "name": "DOLPHINSCHEDULER",
+      "identities": [
+        {
+          "name": "dolphin_master_hdfs",
+          "reference": "/HDFS/NAMENODE/hdfs",
+          "when" : {
+            "contains" : ["services", "HDFS"]
+          }
+        },
+        {
+          "name": "dolphinscheduler_spnego",
+          "reference": "/spnego"
+        },
+        {
+          "name": "dolphinscheduler",
+          "principal": {
+            "value": "${dolphin-env/dolphin.user}${principal_suffix}@${realm}",
+            "type": "user",
+            "configuration": "dolphin-common/login.user.keytab.username",
+            "local_username": "${dolphin-env/dolphin.user}"
+          },
+          "keytab": {
+            "file": "${keytab_dir}/dolphinscheduler.headless.keytab",
+            "owner": {
+              "name": "${dolphin-env/dolphin.user}",
+              "access": "r"
+            },
+            "group": {
+              "name": "${cluster-env/user_group}",
+              "access": "r"
+            },
+            "configuration": "dolphin-common/login.user.keytab.path"
+          }
+        },
+        {
+          "name": "dolphinscheduler_smokeuser",
+          "reference": "/smokeuser"
+        }
+      ],
+      "configurations": [
+        {
+          "dolphin-common": {
+            "hadoop.security.authentication.startup.state": "true"
+          }
+        }
+      ],
+      "components": [
+        {
+          "name": "DOLPHIN_MASTER",
+          "identities": [
+            {
+              "name": "dolphin_master_hdfs",
+              "reference": "/HDFS/NAMENODE/hdfs",
+              "when" : {
+                "contains" : ["services", "HDFS"]
+              }
+            },
+            {
+              "name": "dolphinscheduler",
+              "principal": {
+                "value": "${dolphin-env/dolphin.user}${principal_suffix}@${realm}",
+                "type" : "service" ,
+                "configuration": "dolphin-common/login.user.keytab.username",
+                "local_username": "${dolphin-env/dolphin.user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/dolphinscheduler.headless.keytab",
+                "owner": {
+                  "name": "${dolphin-env/dolphin.user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "dolphin-common/login.user.keytab.path"
+              }
+            }      
+          ]
+        },
+
+        {
+          "name": "DOLPHIN_WORKER",
+          "identities": [
+            {
+              "name": "dolphinscheduler",
+              "principal": {
+                "value": "${dolphin-env/dolphin.user}${principal_suffix}@${realm}",
+                "type" : "service" ,
+                "configuration": "dolphin-common/login.user.keytab.username",
+                "local_username": "${dolphin-env/dolphin.user}"
+              },
+              "keytab": {
+                "file": "${keytab_dir}/dolphinscheduler.headless.keytab",
+                "owner": {
+                  "name": "${dolphin-env/dolphin.user}",
+                  "access": "r"
+                },
+                "group": {
+                  "name": "${cluster-env/user_group}",
+                  "access": ""
+                },
+                "configuration": "dolphin-common/login.user.keytab.path"
+              }
+            }      
+          ]
+        }
+      ]
+    }
+  ]
+}

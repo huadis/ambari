@@ -1,0 +1,117 @@
+{
+  "IMPALA": {
+    "service": [
+      {
+        "name": "impala_daemon_process_percent",
+        "label": "Impala Daemon Process Available",
+        "description": "This alert is triggered if the number of down Impala Daemon in the cluster is greater than the configured critical threshold. It aggregates the results of Impala Daemon process checks.",
+        "interval": 1,
+        "scope": "SERVICE",
+        "enabled": true,
+        "source": {
+          "type": "AGGREGATE",
+          "alert_name": "impala_daemon_process",
+          "reporting": {
+            "ok": {
+              "text": "affected: [{1}], total: [{0}]"
+            },
+            "warning": {
+              "text": "affected: [{1}], total: [{0}]",
+              "value": 10
+            },
+            "critical": {
+              "text": "affected: [{1}], total: [{0}]",
+              "value": 30
+            },
+            "units": "%",
+            "type": "PERCENT"
+          }
+        }
+      }
+    ],
+    "IMPALA_STATE_STORE": [
+      {
+        "name": "impala_statestore_process",
+        "label": "Impala State Store Process",
+        "description": "This host-level alert is triggered if the individual Impala State Store cannot be established to be up and listening on the network.",
+        "interval": 1,
+        "scope": "HOST",
+        "enabled": true,
+        "source": {
+          "type": "PORT",
+          "uri": "{{impala_state_store_host}}",
+          "default_port": 24000,
+          "reporting": {
+            "ok": {
+              "text": "TCP OK - {0:.3f}s response on port {1}"
+            },
+            "warning": {
+              "text": "TCP OK - {0:.3f}s response on port {1}",
+              "value": 1.5
+            },
+            "critical": {
+              "text": "Connection failed: {0} to {1}:{2}",
+              "value": 5.0
+            }
+          }
+        }
+      }
+    ],
+    "IMPALA_CATALOG": [
+      {
+        "name": "impala_catalog_process",
+        "label": "Impala Catalog Process",
+        "description": "This host-level alert is triggered if the individual Impala Catalog cannot be established to be up and listening on the network.",
+        "interval": 1,
+        "scope": "HOST",
+        "enabled": true,
+        "source": {
+          "type": "PORT",
+          "uri": "{{impala_catalog_host}}",
+          "default_port": "26000",
+          "reporting": {
+            "ok": {
+              "text": "TCP OK - {0:.3f}s response on port {1}"
+            },
+            "warning": {
+              "text": "TCP OK - {0:.3f}s response on port {1}",
+              "value": 1.5
+            },
+            "critical": {
+              "text": "Connection failed: {0} to {1}:{2}",
+              "value": 5.0
+            }
+          }
+        }
+      }
+    ],
+    "IMPALA_DAEMON": [
+      {
+        "name": "impala_daemon_process",
+        "label": "Impala Daemon Process",
+        "description": "This host-level alert is triggered if the individual Impala Daemon processes cannot be established to be up and listening on the network.",
+        "interval": 1,
+        "scope": "HOST",
+        "enabled": true,
+        "source": {
+          "type": "PORT",
+          "uri": "0.0.0.0",
+          "default_port": 21000,
+          "reporting": {
+            "ok": {
+              "text": "TCP OK - {0:.3f}s response on port {1}"
+            },
+            "warning": {
+              "text": "TCP OK - {0:.3f}s response on port {1}",
+              "value": 1.5
+            },
+            "critical": {
+              "text": "Connection failed: {0} to {1}:{2}",
+              "value": 5.0
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+version=`bigtop-select status hadoop-client | sed 's/hadoop-client - \(.*\)/\1/' | tr -d '\r'`
+impala_path='/usr/bigtop/'${version}
+ln -sf  `echo -e $impala_path'/hadoop/lib/native/libhadoop.so /usr/lib/impala/lib/libhadoop.so' | tr -d '\r' | tr -d '?'`
+ln -sf  `echo -e $impala_path'/hadoop/lib/native/libhadoop.so.1.0.0 /usr/lib/impala/lib/libhadoop.so.1.0.0' | tr -d '\r' | tr -d '?'`
+ln -sf  `echo -e $impala_path'/usr/lib/libhdfs.so /usr/lib/impala/lib/libhdfs.so' | tr -d '\r' | tr -d '?'`
+ln -sf  `echo -e $impala_path'/usr/lib/libhdfs.so.0.0.0 /usr/lib/impala/lib/libhdfs.so.0.0.0' | tr -d '\r' | tr -d '?'`
+# add java-home
+# JAVA_HOME='/usr/jdk64/'`ls /usr/jdk64 | xargs echo`
+source /etc/profile
+EXPORT_JAVA_HOME='export JAVA_HOME='$JAVA_HOME
+x=`grep "$EXPORT_JAVA_HOME" /etc/default/bigtop-utils | wc -l`
+if [ $x = 0 ];
+then
+echo -e $EXPORT_JAVA_HOME |  tr -d '\r' >> /etc/default/bigtop-utils
+fi

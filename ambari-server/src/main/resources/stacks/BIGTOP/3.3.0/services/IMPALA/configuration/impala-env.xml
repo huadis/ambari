@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration supports_adding_forbidden="true">
+    <property>
+        <name>impala_log_dir</name>
+        <value>/var/log/impala</value>
+        <description>impala Log Dir</description>
+        <display-name>impala Log Dir</display-name>
+        <value-attributes>
+            <type>directory</type>
+            <overridable>false</overridable>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_pid_dir</name>
+        <value>/var/run/impala</value>
+        <display-name>impala PID Dir</display-name>
+        <description>impala PID Dir</description>
+        <value-attributes>
+            <type>directory</type>
+            <overridable>false</overridable>
+            <editable-only-at-install>true</editable-only-at-install>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_root_logger</name>
+        <value>INFO,RFA</value>
+        <display-name>impala Root Logger</display-name>
+        <description>impala Root Logger</description>
+        <value-attributes>
+            <overridable>false</overridable>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_user</name>
+        <display-name>impala User</display-name>
+        <value>impala</value>
+        <property-type>USER</property-type>
+        <description>User to run impala as</description>
+        <value-attributes>
+            <type>user</type>
+            <overridable>false</overridable>
+            <user-groups>
+                <property>
+                    <type>cluster-env</type>
+                    <name>user_group</name>
+                </property>
+            </user-groups>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_principal_name</name>
+        <display-name>impala principal name</display-name>
+        <description>impala principal name</description>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>impala_user_keytab</name>
+        <description>impala keytab path</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+
+    <property>
+        <name>enable_ranger</name>
+        <value>false</value>
+        <description>disable or enable ranger</description>
+    </property>
+    <property>
+        <name>ranger_service_name</name>
+        <value>impala_cluster</value>
+        <description>ranger_plugin_hive_service_name</description>
+    </property>
+    <property>
+        <name>impala_scratch_dir</name>
+        <value>/tmp/impala_scratch</value>
+        <description>impala scratch dir</description>
+    </property>
+    <property>
+        <name>impala_state_store_port</name>
+        <value>24000</value>
+        <description>IMPALA_STATE_STORE_PORT</description>
+    </property>
+    <property>
+        <name>impala_backend_port</name>
+        <value>22000</value>
+        <description>IMPALA_BACKEND_PORT</description>
+    </property>
+    <property>
+        <name>kerberos_reinit_interval</name>
+        <value>60</value>
+        <description>kerberos_reinit_interval</description>
+    </property>
+    <property>
+        <name>mem_limit</name>
+        <value>2gb</value>
+        <description>memory limit . etc 70%,10mb,10gb,10tb</description>
+    </property>
+    <property>
+        <name>impala_state_store_kerberos_principal</name>
+        <value>impala/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_state_store_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/impala.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Statesore server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_state_store_http_kerberos_principal</name>
+        <value>HTTP/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_state_store_http_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/spnego.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Statesore server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+    
+    <property>
+        <name>impala_catalog_kerberos_principal</name>
+        <value>impala/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_catalog_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/impala.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Catalog server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_catalog_http_kerberos_principal</name>
+        <value>HTTP/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_catalog_http_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/spnego.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Catalog server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+
+    <property>
+        <name>impala_daemon_kerberos_principal</name>
+        <value>impala/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_daemo_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/impala.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Catalog server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>impala_daemo_http_kerberos_principal</name>
+        <value>HTTP/_HOST@EXAMPLE.COM</value>
+        <property-type>KERBEROS_PRINCIPAL</property-type>
+        <value-attributes>
+          <empty-value-valid>true</empty-value-valid>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+       <name>impala_daemo_http_kerberos_keytab_file</name>
+       <value>/etc/security/keytabs/spnego.service.keytab</value>
+       <description>The path to the Kerberos Keytab file containing the Impala Catalog server's service principal.</description>
+       <on-ambari-upgrade add="true"/>
+    </property>
+  <property>
+    <name>impala_principal_name</name>
+    <description>Impala principal name</description>
+    <property-type>KERBEROS_PRINCIPAL</property-type>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala_user_keytab</name>
+    <description>Impala keytab path</description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala_http_policy</name>
+    <value>HTTP_ONLY</value>
+    <description>The following values are supported:
+      - HTTP_ONLY : Service is provided only on http
+      - HTTPS_ONLY : Service is provided only on https
+      - HTTP_AND_HTTPS : Service is provided both on http and https. </description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <!-- /etc/impala/conf -->
+  <property>
+    <name>content</name>
+    <display-name>impala-env template</display-name>
+    <description>This is the jinja template for impala-env.sh file</description>
+    <value>
+
+IMPALA_CATALOG_SERVICE_HOST={{impala_catalog_host}}
+IMPALA_STATE_STORE_HOST={{impala_state_store_host}}
+IMPALA_STATE_STORE_PORT={{impala_env['impala_state_store_port']}}
+IMPALA_BACKEND_PORT={{impala_env['impala_backend_port']}}
+IMPALA_LOG_DIR={{impala_log_dir}}
+IMPALA_SCRATCH_DIR={{impala_env['impala_scratch_dir']}}
+MEM_LIMIT={{impala_env['mem_limit']}}
+
+export IMPALA_CATALOG_ARGS=" \
+    -log_dir=${IMPALA_LOG_DIR} \
+    -state_store_host=${IMPALA_STATE_STORE_HOST} \
+    {% if enable_ranger %}
+    -server_name=impala_cluster  \
+    -ranger_service_type=hive \
+    -ranger_app_id=impala \
+    -authorization_provider=ranger \
+    {% endif %}
+    {% if security_enabled %}
+    -kerberos_reinit_interval={{impala_env['kerberos_reinit_interval']}} \
+    -principal={{impala_env['impala_catalog_kerberos_principal']}} \
+    -keytab_file={{impala_env['impala_catalog_kerberos_keytab_file']}} \
+    -load_auth_to_local_rules=true \
+    {% endif %}
+	"
+
+export IMPALA_STATE_STORE_ARGS=" \
+    -log_dir=${IMPALA_LOG_DIR} \
+    -state_store_port=${IMPALA_STATE_STORE_PORT} \
+	{% if security_enabled %}
+    -kerberos_reinit_interval={{impala_env['kerberos_reinit_interval']}} \
+    -principal={{impala_env['impala_state_store_kerberos_principal']}} \
+    -keytab_file={{impala_env['impala_state_store_kerberos_keytab_file']}} \
+    -load_auth_to_local_rules=true \
+	{% endif %}
+	"
+
+export IMPALA_SERVER_ARGS=" \
+    -log_dir=${IMPALA_LOG_DIR} \
+	--scratch_dirs=${IMPALA_SCRATCH_DIR} \
+	--authorized_proxy_user_config=hue=* \
+	-mem_limit=${MEM_LIMIT} \
+    -catalog_service_host=${IMPALA_CATALOG_SERVICE_HOST} \
+    -state_store_port=${IMPALA_STATE_STORE_PORT} \
+    -state_store_host=${IMPALA_STATE_STORE_HOST} \
+    -be_port=${IMPALA_BACKEND_PORT} \
+    {% if enable_ranger %}
+    -server_name=impala_cluster  \
+    -ranger_service_type=hive \
+    -ranger_app_id=impala \
+    -authorization_provider=ranger \
+    {% endif %}
+    {% if kudu_master_host_num > 0 %}
+    -kudu_master_hosts={{kudu_master_hosts}} \
+    {% endif %}
+	{% if security_enabled %}
+    -kerberos_reinit_interval={{impala_env['kerberos_reinit_interval']}} \
+    -principal={{impala_env['impala_daemon_kerberos_principal']}} \
+    -keytab_file={{impala_env['impala_daemo_kerberos_keytab_file']}} \
+    -load_auth_to_local_rules=true \
+	{% endif %}
+	"
+
+export ENABLE_CORE_DUMPS=true
+export LIBHDFS_OPTS=-Djava.library.path=/usr/bigtop/current/impala/lib
+
+    </value>
+    <value-attributes>
+      <type>content</type>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property>
+</configuration>

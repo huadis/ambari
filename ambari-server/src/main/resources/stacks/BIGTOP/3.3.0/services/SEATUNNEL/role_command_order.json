@@ -1,11 +1,9 @@
 {
-  "general_deps": {
-    "_comment": "dependencies for Seatunnel"
-  },
-  "commandParams": {
-    "roleCommandOrder": {
-      "SEATUNNEL-START": ["SEATUNNEL-WEB-START"],
-      "SEATUNNEL-WEB-STOP": ["SEATUNNEL-STOP"]
-    }
+	"general_deps" : {
+	  "_comment" : "dependencies for SEATUNNEL",
+	  "SEATUNNEL_MASTER-START" : ["NAMENODE-START","SECONDARY_NAMENODE-START","DATANODE-START"],
+	  "SEATUNNEL_WORKER-START" : ["SEATUNNEL_MASTER-START"],
+	  "SEATUNNEL_CLIENT-START" : ["SEATUNNEL_MASTER-START","SEATUNNEL_WORKER-START"]
+	}
   }
-}
+   

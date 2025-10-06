@@ -1,0 +1,26 @@
+{
+  "name": "default",
+  "description": "default quick links configuration",
+  "configuration": {
+    "protocol": {
+      "type": "HTTP_ONLY"
+    },
+    "links": [
+      {
+        "name": "Nightingale web ui",
+        "label": "Nightingale Web UI",
+        "component_name": "NIGHTINGALE_SERVER",
+        "requires_user_name": "false",
+        "url": "%@://%@:%@",
+        "port": {
+          "http_property": "HTTP.Port",
+          "http_default_port": "17000",
+          "https_property": "HTTP.Port",
+          "https_default_port": "17000",
+          "regex": "^(\\d+)$",
+          "site": "nightingale"
+        }
+      }
+    ]
+  }
+}

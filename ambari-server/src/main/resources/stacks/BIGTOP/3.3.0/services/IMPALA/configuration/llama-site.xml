@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<!-- Put site-specific property overrides in this file. -->
+<configuration xmlns:xi="http://www.w3.org/2001/XInclude" supports_final="true">
+  <!-- ResourceManager -->
+  <property>
+    <name>llama.am.throttling.maximum.placed.reservations.root.default</name>
+    <value>10</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>llama.am.throttling.maximum.queued.reservations.root.default</name>
+    <value>50</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-default-query-options.root.default</name>
+    <value>mem_limit=128m,query_timeout_s=20,max_io_buffers=10</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-queue-timeout-ms.root.default</name>
+    <value>30000</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>llama.am.throttling.maximum.placed.reservations.root.development</name>
+    <value>50</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>llama.am.throttling.maximum.queued.reservations.root.development</name>
+    <value>100</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-default-query-options.root.development</name>
+    <value>mem_limit=256m,query_timeout_s=30,max_io_buffers=10</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-queue-timeout-ms.root.development</name>
+    <value>15000</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>llama.am.throttling.maximum.placed.reservations.root.production</name>
+    <value>100</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>llama.am.throttling.maximum.queued.reservations.root.production</name>
+    <value>200</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-default-query-options.root.production</name>
+    <value>mem_limit=386m,query_timeout_s=30,max_io_buffers=10</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+    <name>impala.admission-control.pool-queue-timeout-ms.root.production</name>
+    <value>30000</value>
+    <description></description>
+    <on-ambari-upgrade add="false"/>
+  </property>
+</configuration>

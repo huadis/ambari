@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration supports_final="true">
+    <property>
+        <name>nightingale_user</name>
+        <display-name>Cloudbeaver User</display-name>
+        <value>nightingale</value>
+        <property-type>USER</property-type>
+        <value-attributes>
+            <type>user</type>
+            <overridable>false</overridable>
+            <user-groups>
+                <property>
+                    <type>cluster-env</type>
+                    <name>user_group</name>
+                </property>
+                <property>
+                    <type>nightingale-env</type>
+                    <name>nightingale_group</name>
+                </property>
+            </user-groups>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>nightingale_group</name>
+        <display-name>Cloudbeaver Group</display-name>
+        <value>hadoop</value>
+        <property-type>GROUP</property-type>
+        <description>nightingale group</description>
+        <value-attributes>
+            <type>user</type>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>nightingale_log_dir</name>
+        <display-name>Cloudbeaver Log directory</display-name>
+        <value>/var/log/nightingale</value>
+        <description>Cloudbeaver Log Dir</description>
+        <value-attributes>
+            <type>directory</type>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+    <property>
+        <name>nightingale_pid_dir</name>
+        <display-name>Cloudbeaver PID directory</display-name>
+        <value>/var/run/nightingale</value>
+        <description>Cloudbeaver Log Dir</description>
+        <value-attributes>
+            <type>directory</type>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+
+
+    <property>
+        <name>nightingale.database.type</name>
+        <value></value>
+        <description>Nightingale DataBase Type Which Is Select</description>
+        <display-name>Nightingale Database Type</display-name>
+        <value-attributes>
+            <type>value-list</type>
+            <entries>
+                <entry>
+                    <value>mysql</value>
+                    <label>Mysql</label>
+                </entry>
+                <entry>
+                    <value>postgres</value>
+                    <label>Postgresql</label>
+                </entry>
+            </entries>
+            <selection-cardinality>1</selection-cardinality>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+    <property>
+        <name>nightingale.database.host</name>
+        <value></value>
+        <display-name>Nightingale Database Host</display-name>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+    <property>
+        <name>nightingale.database.port</name>
+        <value>5432</value>
+        <display-name>Nightingale Database Port</display-name>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+    <property>
+        <name>nightingale.database.username</name>
+        <value>n9e</value>
+        <display-name>Nightingale Database Username</display-name>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+    <property>
+        <name>nightingale.database.password</name>
+        <value></value>
+        <display-name>Nightingale Database Password</display-name>
+        <property-type>PASSWORD</property-type>
+        <value-attributes>
+            <type>password</type>
+        </value-attributes>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+
+    <property>
+        <name>nightingale.database.name</name>
+        <value>nightingale</value>
+        <display-name>Nightingale Database name</display-name>
+        <on-ambari-upgrade add="true"/>
+    </property>
+
+</configuration>

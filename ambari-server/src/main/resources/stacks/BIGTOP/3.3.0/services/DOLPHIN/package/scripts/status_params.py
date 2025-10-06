@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -22,3 +21,8 @@ from resource_management import *
 config = Script.get_config()
 
 dolphin_run_dir = "/var/run/dolphinscheduler/"
+
+dolphin_alert_server_pidfile = "/usr/bigtop/current/dolphinscheduler/alert-server/pid"
+dolphin_api_server_pidfile = "/usr/bigtop/current/dolphinscheduler/api-server/pid"
+dolphin_master_server_pidfile = "/usr/bigtop/current/dolphinscheduler/master-server/pid"
+dolphin_worker_server_pidfile = "/usr/bigtop/current/dolphinscheduler/worker-server/pid"

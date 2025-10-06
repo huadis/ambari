@@ -13,7 +13,7 @@
         "label": "DolphinApplication UI",
         "requires_user_name": "false",
         "component_name": "DOLPHIN_API",
-        "url": "%@://%@:%@/dolphinscheduler/ui/view/login/index.html",
+        "url": "%@://%@:%@/dolphinscheduler/",
         "port":{
           "http_property": "server.port",
           "http_default_port": "12345",
