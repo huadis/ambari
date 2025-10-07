@@ -18,7 +18,7 @@
           "http_property": "server.port",
           "http_default_port": "8010",
           "regex": "^(\\d+)$",
-          "site": "application"
+          "site": "dataease-application"
         }
       }
     ]

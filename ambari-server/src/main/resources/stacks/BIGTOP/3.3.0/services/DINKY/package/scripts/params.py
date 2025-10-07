@@ -32,12 +32,12 @@ major_stack_version = get_major_version(stack_version_formatted_major)
 
 dinky_home = os.path.join(stack_root, "current", "dinky-server")
 
-dinky_server_port = config['configurations']['application']['server.port']
-dinky_user = config['configurations']['application']["dinky_user"]
+dinky_server_port = config['configurations']['dinky-application']['server.port']
+dinky_user = config['configurations']['dinky-application']["dinky_user"]
 user_group = config["configurations"]["cluster-env"]["user_group"]
-dinky_pid_dir = config['configurations']['application']["dinky_pid_dir"]
+dinky_pid_dir = config['configurations']['dinky-application']["dinky_pid_dir"]
 dinky_pid_filename = "dinky.pid"
-dinky_log_dir = config['configurations']['application']["dinky_log_dir"]
+dinky_log_dir = config['configurations']['dinky-application']["dinky_log_dir"]
 
 start_script_name = "auto.sh"
 start_script_template_file = start_script_name + ".j2"
@@ -53,22 +53,22 @@ dinky_application_mysql_config_template_file = dinky_application_mysql_config_fi
 dinky_application_pgsql_config_file = "application-pgsql.yml"
 dinky_application_pgsql_config_template_file = dinky_application_pgsql_config_file + ".j2"
 
-dinky_database_config = {'dinky_database_type': config['configurations']['application']['spring.datasource.database.type'],
-                         'dinky_database_username': config['configurations']['application']['spring.datasource.database.username'],
-                         'dinky_database_password': config['configurations']['application']['spring.datasource.database.password']}
+dinky_database_config = {'dinky_database_type': config['configurations']['dinky-application']['spring.datasource.database.type'],
+                         'dinky_database_username': config['configurations']['dinky-application']['spring.datasource.database.username'],
+                         'dinky_database_password': config['configurations']['dinky-application']['spring.datasource.database.password']}
 
 if 'mysql' == dinky_database_config['dinky_database_type']:
     dinky_database_config['dinky_database_driver'] = 'com.mysql.jdbc.Driver'
-    dinky_database_config['dinky_database_url'] = 'jdbc:mysql://' + config['configurations']['application']['spring.datasource.database.host'] \
-                                                  + ':' + config['configurations']['application']['spring.datasource.database.port'] \
-                                                  + '/' + config['configurations']['application']['spring.datasource.database.name'] \
+    dinky_database_config['dinky_database_url'] = 'jdbc:mysql://' + config['configurations']['dinky-application']['spring.datasource.database.host'] \
+                                                  + ':' + config['configurations']['dinky-application']['spring.datasource.database.port'] \
+                                                  + '/' + config['configurations']['dinky-application']['spring.datasource.database.name'] \
                                                   + '?useUnicode=true&characterEncoding=UTF-8'
 else:
     dinky_database_config['dinky_database_driver'] = 'org.postgresql.Driver'
-    dinky_database_config['dinky_database_url'] = 'jdbc:postgresql://' + config['configurations']['application']['spring.datasource.database.host'] \
-                                                  + ':' + config['configurations']['application']['spring.datasource.database.port'] \
-                                                  + '/' + config['configurations']['application']['spring.datasource.database.name'] \
+    dinky_database_config['dinky_database_url'] = 'jdbc:postgresql://' + config['configurations']['dinky-application']['spring.datasource.database.host'] \
+                                                  + ':' + config['configurations']['dinky-application']['spring.datasource.database.port'] \
+                                                  + '/' + config['configurations']['dinky-application']['spring.datasource.database.name'] \
                                                   + '?stringtype=unspecified'
 
 
-dinky_flink_major_version = config['configurations']['application']['flink.major.version']
+dinky_flink_major_version = config['configurations']['dinky-application']['flink.major.version']

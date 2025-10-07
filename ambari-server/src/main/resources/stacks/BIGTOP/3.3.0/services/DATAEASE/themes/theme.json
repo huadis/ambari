@@ -49,54 +49,54 @@
       "configuration-layout": "default",
       "configs": [
         {
-          "config": "application/spring.datasource.database.host",
+          "config": "dataease-application/spring.datasource.database.host",
           "subsection-name": "subsection-database-col1"
         },
         {
-          "config": "application/spring.datasource.database.port",
+          "config": "dataease-application/spring.datasource.database.port",
           "subsection-name": "subsection-database-col1"
         },
         {
-          "config": "application/spring.datasource.database.name",
+          "config": "dataease-application/spring.datasource.database.name",
           "subsection-name": "subsection-database-col2"
         },
         {
-          "config": "application/spring.datasource.database.username",
+          "config": "dataease-application/spring.datasource.database.username",
           "subsection-name": "subsection-database-col2"
         },
         {
-          "config": "application/spring.datasource.database.password",
+          "config": "dataease-application/spring.datasource.database.password",
           "subsection-name": "subsection-database-col2"
         }
       ]
     },
     "widgets": [
       {
-        "config": "application/spring.datasource.database.host",
+        "config": "dataease-application/spring.datasource.database.host",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "application/spring.datasource.database.port",
+        "config": "dataease-application/spring.datasource.database.port",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "application/spring.datasource.database.name",
+        "config": "dataease-application/spring.datasource.database.name",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "application/spring.datasource.database.username",
+        "config": "dataease-application/spring.datasource.database.username",
         "widget": {
           "type": "text-field"
         }
       },
       {
-        "config": "application/spring.datasource.database.password",
+        "config": "dataease-application/spring.datasource.database.password",
         "widget": {
           "type": "password"
         }

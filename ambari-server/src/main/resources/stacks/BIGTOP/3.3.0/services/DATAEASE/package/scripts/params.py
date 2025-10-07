@@ -32,13 +32,13 @@ major_stack_version = get_major_version(stack_version_formatted_major)
 
 dataease_home = os.path.join(stack_root, "current", "dataease-server")
 
-dataease_server_port = config['configurations']['application']['server.port']
-dataease_context = config['configurations']['application']['dataease.context']
-dataease_user = config['configurations']['application']["dataease_user"]
+dataease_server_port = config['configurations']['dataease-application']['server.port']
+dataease_context = config['configurations']['dataease-application']['dataease.context']
+dataease_user = config['configurations']['dataease-application']["dataease_user"]
 user_group = config["configurations"]["cluster-env"]["user_group"]
-dataease_pid_dir = config['configurations']['application']["dataease_pid_dir"]
+dataease_pid_dir = config['configurations']['dataease-application']["dataease_pid_dir"]
 dataease_pid_filename = "dataease.pid"
-dataease_log_dir = config['configurations']['application']["dataease_log_dir"]
+dataease_log_dir = config['configurations']['dataease-application']["dataease_log_dir"]
 
 start_script_name = "app.sh"
 start_script_template_file = start_script_name + ".j2"
@@ -48,9 +48,9 @@ dataease_conf_dir = dataease_home + "/config"
 dataease_application_config_file = "application.yml"
 dataease_application_config_template_file = dataease_application_config_file + ".j2"
 
-dataease_database_config = {'dataease_database_username': config['configurations']['application']['spring.datasource.database.username'],
-                            'dataease_database_password': config['configurations']['application']['spring.datasource.database.password'],
-                            'dataease_database_url': 'jdbc:mysql://' + config['configurations']['application']['spring.datasource.database.host'] \
-                                                     + ':' + config['configurations']['application']['spring.datasource.database.port'] \
-                                                     + '/' + config['configurations']['application']['spring.datasource.database.name'] \
+dataease_database_config = {'dataease_database_username': config['configurations']['dataease-application']['spring.datasource.database.username'],
+                            'dataease_database_password': config['configurations']['dataease-application']['spring.datasource.database.password'],
+                            'dataease_database_url': 'jdbc:mysql://' + config['configurations']['dataease-application']['spring.datasource.database.host'] \
+                                                     + ':' + config['configurations']['dataease-application']['spring.datasource.database.port'] \
+                                                     + '/' + config['configurations']['dataease-application']['spring.datasource.database.name'] \
                                                      + '?useUnicode=true&characterEncoding=UTF-8'}
