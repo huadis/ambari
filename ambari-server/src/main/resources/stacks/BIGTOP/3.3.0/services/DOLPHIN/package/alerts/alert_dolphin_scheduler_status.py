@@ -22,11 +22,6 @@ import os
 import logging
 import ambari_simplejson as json
 from resource_management.libraries.script.script import Script
-import sys
-import importlib
-
-importlib.reload(sys)
-sys.setdefaultencoding("utf-8")
 
 logger = logging.getLogger("ambari_alerts")
 
@@ -72,8 +67,11 @@ def execute(configurations={}, parameters={}, host_name=None):
     """
 
     alert_name = parameters["alertName"]
+    config = Script.get_config()
 
-    dolphin_pidfile_dir = "/usr/bigtop/current/dolphinscheduler"
+    stack_root = Script.get_stack_root()
+
+    dolphin_pidfile_dir = os.path.join(stack_root, "current", "dolphinscheduler")
 
     pid = "0"
 

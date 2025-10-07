@@ -112,9 +112,6 @@
                         <package>
                             <name>dolphinscheduler_${stack_version}-bin</name>
                         </package>
-                        <package>
-                            <name>dolphinscheduler_${stack_version}-standalone-server</name>
-                        </package>
                     </packages>
                 </osSpecific>
             </osSpecifics>

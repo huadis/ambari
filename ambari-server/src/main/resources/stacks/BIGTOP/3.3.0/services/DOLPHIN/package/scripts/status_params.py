@@ -22,7 +22,7 @@ config = Script.get_config()
 
 dolphin_run_dir = "/var/run/dolphinscheduler/"
 
-dolphin_alert_server_pidfile = "/usr/bigtop/current/dolphinscheduler/alert-server/pid"
-dolphin_api_server_pidfile = "/usr/bigtop/current/dolphinscheduler/api-server/pid"
-dolphin_master_server_pidfile = "/usr/bigtop/current/dolphinscheduler/master-server/pid"
-dolphin_worker_server_pidfile = "/usr/bigtop/current/dolphinscheduler/worker-server/pid"
+dolphin_alert_server_pidfile = "/usr/hdp/current/dolphinscheduler/alert-server/pid"
+dolphin_api_server_pidfile = "/usr/hdp/current/dolphinscheduler/api-server/pid"
+dolphin_master_server_pidfile = "/usr/hdp/current/dolphinscheduler/master-server/pid"
+dolphin_worker_server_pidfile = "/usr/hdp/current/dolphinscheduler/worker-server/pid"

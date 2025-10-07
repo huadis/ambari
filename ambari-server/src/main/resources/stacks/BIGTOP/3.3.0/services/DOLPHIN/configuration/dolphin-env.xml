@@ -32,7 +32,7 @@
 	</property>
 	<property>
 		<name>dolphin.database.type</name>
-		<value>postgresql</value>
+		<value>mysql</value>
 		<description>Dolphin Scheduler DataBase Type Which Is Select</description>
 		<display-name>Dolphin Database Type</display-name>
 		<value-attributes>
@@ -40,11 +40,11 @@
 			<entries>
 				<entry>
 					<value>mysql</value>
-					<label>Mysql</label>
+					<label>mysql</label>
 				</entry>
 				<entry>
 					<value>postgresql</value>
-					<label>Postgresql</label>
+					<label>postgresql</label>
 				</entry>
 			</entries>
 			<selection-cardinality>1</selection-cardinality>
@@ -54,28 +54,28 @@
 
 	<property>
 		<name>dolphin.database.host</name>
-		<value>postgresql-dolphinscheduler</value>
+		<value>centos-31</value>
 		<display-name>Dolphin Database Host</display-name>
 		<on-ambari-upgrade add="true"/>
 	</property>
 
 	<property>
 		<name>dolphin.database.port</name>
-		<value>5432</value>
+		<value>3306</value>
 		<display-name>Dolphin Database Port</display-name>
 		<on-ambari-upgrade add="true"/>
 	</property>
 
 	<property>
 		<name>dolphin.database.username</name>
-		<value>dolphinscheduler</value>
+		<value>root</value>
 		<display-name>Dolphin Database Username</display-name>
 		<on-ambari-upgrade add="true"/>
 	</property>
 
 	<property>
 		<name>dolphin.database.password</name>
-		<value>dolphinscheduler</value>
+		<value>Cestc_01</value>
 		<display-name>Dolphin Database Password</display-name>
 		<property-type>PASSWORD</property-type>
 		<value-attributes>
@@ -83,7 +83,7 @@
 		</value-attributes>
 		<on-ambari-upgrade add="true"/>
 	</property>
-	
+
 	<property>
 		<name>dolphinscheduler-env-content</name>
 		<display-name>Dolphinscheduler Env template</display-name>
@@ -110,7 +110,7 @@
 export JAVA_HOME=${JAVA_HOME:-{{ java64_home }} }
 
 # Database related configuration, set database type, username and password
-#export DATABASE=${DATABASE:-postgresql}
+#export DATABASE=${DATABASE:-mysql}
 export DATABASE=${DATABASE:-{{ dolphin_database_config['dolphin_database_type'] }} }
 export SPRING_PROFILES_ACTIVE=${DATABASE}
 export SPRING_DATASOURCE_URL={{ dolphin_database_config['dolphin_database_url'] }}
@@ -127,16 +127,16 @@ export REGISTRY_TYPE=${REGISTRY_TYPE:-zookeeper}
 export REGISTRY_ZOOKEEPER_CONNECT_STRING=${REGISTRY_ZOOKEEPER_CONNECT_STRING:-{{ zookeeper_quorum }} }
 
 # Tasks related configurations, need to change the configuration if you use the related tasks.
-export HADOOP_HOME=${HADOOP_HOME:-/usr/bigtop/current/hadoop}
+export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop}
 export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-/etc/hadoop/conf}
-export SPARK_HOME2=${SPARK_HOME1:-/usr/bigtop/current/spark2}
-export SPARK_HOME3=${SPARK_HOME2:-/usr/bigtop/current/spark3}
+export SPARK_HOME2=${SPARK_HOME1:-/usr/hdp/current/spark2}
+export SPARK_HOME3=${SPARK_HOME2:-/usr/hdp/current/spark3}
 export PYTHON_HOME=${PYTHON_HOME:-/usr/bin/python}
-export HIVE_HOME=${HIVE_HOME:-/usr/bigtop/current/hive}
-export FLINK_HOME=${FLINK_HOME:-/usr/bigtop/current/flink}
-# export DATAX_HOME=${DATAX_HOME:-/opt/soft/datax}
-export SEATUNNEL_HOME=${SEATUNNEL_HOME:-/usr/bigtop/current/seatunnel}
-# export CHUNJUN_HOME=${CHUNJUN_HOME:-/opt/soft/chunjun}
+export HIVE_HOME=${HIVE_HOME:-/usr/hdp/current/hive}
+export FLINK_HOME=${FLINK_HOME:-/usr/hdp/current/flink}
+# export DATAX_HOME=${DATAX_HOME:-/usr/hdp/datax}
+export SEATUNNEL_HOME=${SEATUNNEL_HOME:-/usr/hdp/current/seatunnel}
+# export CHUNJUN_HOME=${CHUNJUN_HOME:-/usr/hdp/chunjun}
 
 export PATH=$HADOOP_HOME/bin:$SPARK_HOME2/bin:$SPARK_HOME3/bin:$PYTHON_HOME/bin:$JAVA_HOME/bin:$HIVE_HOME/bin:$FLINK_HOME/bin:$DATAX_HOME/bin:$SEATUNNEL_HOME/bin:$CHUNJUN_HOME/bin:$PATH
 

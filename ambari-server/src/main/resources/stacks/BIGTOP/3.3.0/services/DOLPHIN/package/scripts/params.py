@@ -16,7 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import sys
 from resource_management import *
 from resource_management.core.logger import Logger
 from resource_management.libraries.functions import default
@@ -25,21 +24,20 @@ from resource_management.libraries.functions import conf_select, stack_select
 from resource_management.libraries.functions.get_not_managed_resources import (
     get_not_managed_resources,
 )
-import importlib
-
+import os
 
 Logger.initialize_logger()
 # server configurations
 config = Script.get_config()
 
-# conf_dir = "/etc/"
-dolphin_home = "/usr/bigtop/current/dolphinscheduler"
-# dolphin_conf_dir = dolphin_home + "/conf"
-# dolphin_log_dir = dolphin_home + "/logs"
+stack_root = Script.get_stack_root()
+stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
+stack_version_formatted_major = format_stack_version(stack_version_unformatted)
+major_stack_version = get_major_version(stack_version_formatted_major)
+
+dolphin_home = os.path.join(stack_root, "current", "dolphinscheduler")
+
 dolphin_bin_dir = dolphin_home + "/bin"
-
-# dolphin_pidfile_dir = "/var/run/dolphinscheduler"
-
 
 rmHosts = default("/clusterHostInfo/rm_host", [])
 
