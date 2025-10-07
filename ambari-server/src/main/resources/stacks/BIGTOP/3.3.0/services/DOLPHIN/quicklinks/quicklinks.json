@@ -10,7 +10,7 @@
     "links": [
       {
         "name": "dolphin-application-ui",
-        "label": "DolphinApplication UI",
+        "label": "Dolphin UI",
         "requires_user_name": "false",
         "component_name": "DOLPHIN_API",
         "url": "%@://%@:%@/dolphinscheduler/",
