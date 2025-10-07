@@ -24,7 +24,7 @@
             <components>
                 <component>
                     <name>DOLPHIN_MASTER</name>
-                    <displayName>DS Master</displayName>
+                    <displayName>Dolphin Master</displayName>
                     <category>MASTER</category>
                     <cardinality>1+</cardinality>
                     <commandScript>
@@ -45,7 +45,7 @@
                 </component>
                 <component>
                     <name>DOLPHIN_WORKER</name>
-                    <displayName>DS Worker</displayName>
+                    <displayName>Dolphin Worker</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <commandScript>
@@ -56,7 +56,7 @@
                 </component>
                 <component>
                     <name>DOLPHIN_ALERT</name>
-                    <displayName>DS Alert</displayName>
+                    <displayName>Dolphin Alert</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <commandScript>
@@ -68,7 +68,7 @@
 
                 <component>
                     <name>DOLPHIN_API</name>
-                    <displayName>DS_Api</displayName>
+                    <displayName>Dolphin Api</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <commandScript>
