@@ -747,15 +747,15 @@
       },
       "STREAMPARK": {
         "STREAMPARK_SERVER": {
-          "STACK-SELECT-PACKAGE": "streampark",
+          "STACK-SELECT-PACKAGE": "streampark-server",
           "INSTALL": [
-            "streampark"
+            "streampark-server"
           ],
           "PATCH": [
-            "streampark"
+            "streampark-server"
           ],
           "STANDARD": [
-            "streampark"
+            "streampark-server"
           ]
         }
       },
