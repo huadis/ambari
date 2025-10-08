@@ -40,7 +40,7 @@ tips() {
 }
 
 updatePid() {
-  pid=$(ps -ef | grep [D]inky  | awk '{print $2}' | head -1)
+  pid=$(ps -ef | grep -i dinky | awk '{print $2}' | head -1)
   echo $pid >"${PID_PATH}"/${PID_FILE}
 }
 

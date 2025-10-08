@@ -10,7 +10,7 @@
         "scope": "ANY",
         "source": {
           "type": "PORT",
-          "uri": "{{application/server.port}}",
+          "uri": "{{dinky-application/server.port}}",
           "default_port": 8888,
           "reporting": {
             "ok": {

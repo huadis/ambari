@@ -10,8 +10,8 @@
         "scope": "ANY",
         "source": {
           "type": "PORT",
-          "uri": "{{ application/server.port }}",
-          "default_port": 8010,
+          "uri": "{{ dataease-application/server.port }}",
+          "default_port": 8810,
           "reporting": {
             "ok": {
               "text": "TCP OK - {0:.3f}s response on port {1}"
