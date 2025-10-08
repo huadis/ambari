@@ -57,7 +57,7 @@
             </commandScript>
 
             <configuration-dependencies>
-                <config-type>application</config-type>
+                <config-type>streampark-application</config-type>
             </configuration-dependencies>
 
             <themes>

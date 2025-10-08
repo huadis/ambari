@@ -18,7 +18,6 @@ limitations under the License.
 """
 
 from resource_management import *
-from resource_management.libraries.functions import get_unique_id_and_date
 
 
 class ServiceCheck(Script):

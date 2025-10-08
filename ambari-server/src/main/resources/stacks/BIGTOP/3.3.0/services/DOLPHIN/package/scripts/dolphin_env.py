@@ -24,26 +24,6 @@ from resource_management import *
 
 def dolphin_env():
     import params
-
-    #     Directory(params.dolphin_pidfile_dir,
-    #               mode=0755,
-    #               owner=params.dolphin_user,
-    #               group=params.dolphin_group,
-    #               create_parents=True
-    #               )
-    #     Directory(params.dolphin_log_dir,
-    #               mode=0755,
-    #               owner=params.dolphin_user,
-    #               group=params.dolphin_group,
-    #               create_parents=True
-    #               )
-    #     Directory(params.dolphin_conf_dir,
-    #               mode=0755,
-    #               owner=params.dolphin_user,
-    #               group=params.dolphin_group,
-    #               create_parents=True
-    #               )
-
     Directory(
         params.dolphin_common_map["data.basedir.path"],
         mode=0o777,
@@ -67,13 +47,6 @@ def dolphin_env():
         owner=params.dolphin_user,
         group=params.dolphin_group,
     )
-
-    #     File(format(params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh"),
-    #                mode=0755,
-    #                content=Template("dolphin-daemon.sh.j2"),
-    #                owner=params.dolphin_user,
-    #                group=params.dolphin_group
-    #                )
 
     # alert-server
     File(

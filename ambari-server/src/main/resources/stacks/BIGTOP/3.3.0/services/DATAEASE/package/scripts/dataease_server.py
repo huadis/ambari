@@ -43,17 +43,18 @@ class DataEaseService(Script):
 
         self.configure(env)
 
-        no_op_test = format(
-            "ls {dataease_pid_dir}/{dataease_pid_filename} >/dev/null 2>&1 && ps `cat {dataease_pid_dir}/{dataease_pid_filename}` >/dev/null 2>&1")
+        no_op_test = (
+            "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
+        ).format(params.dataease_pid_dir + "/" + params.dataease_pid_filename)
 
         start_cmd = format(
-            "sh " + params.dataease_bin_dir + params.start_script_name + " start ")
+            "sh " + params.dataease_bin_dir + params.start_script_name + " start")
         Execute(start_cmd, user=params.dataease_user, not_if=no_op_test)
 
     def stop(self, env, upgrade_type=None):
         import params
         env.set_params(params)
-        stop_cmd = format("sh " + params.dataease_bin_dir + params.start_script_name + " stop ")
+        stop_cmd = format("sh " + params.dataease_bin_dir + params.start_script_name + " stop")
         Execute(stop_cmd, user=params.dataease_user)
         time.sleep(5)
 

@@ -55,20 +55,6 @@
 
     <conversionRule conversionWord="messsage"
                     converterClass="org.apache.dolphinscheduler.service.log.SensitiveDataConverter"/>
-    <appender name="TASKLOGFILE" class="ch.qos.logback.classic.sift.SiftingAppender">
-        <sift>
-            <appender name="FILE-${taskAppId}" class="ch.qos.logback.core.FileAppender">
-                <file>${log.base}/${taskAppId}.log</file>
-                <encoder>
-                    <pattern>
-                        [%level] %date{yyyy-MM-dd HH:mm:ss.SSS Z} - %messsage%n
-                    </pattern>
-                    <charset>UTF-8</charset>
-                </encoder>
-                <append>true</append>
-            </appender>
-        </sift>
-    </appender>
     <appender name="WORKERLOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.base}/dolphinscheduler-worker.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -92,7 +78,6 @@
                 <appender-ref ref="STDOUT"/>
             </then>
         </if>
-        <appender-ref ref="TASKLOGFILE"/>
         <appender-ref ref="WORKERLOGFILE"/>
     </root>
 </configuration>

@@ -43,17 +43,18 @@ class StreamParkService(Script):
 
         self.configure(env)
 
-        no_op_test = format(
-            "ls {streampark_pid_dir}/{streampark_pid_filename} >/dev/null 2>&1 && ps `cat {streampark_pid_dir}/{streampark_pid_filename}` >/dev/null 2>&1")
+        no_op_test = (
+            "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
+        ).format(params.streampark_pid_dir + "/" + params.streampark_pid_filename)
 
         start_cmd = format(
-            "sh " + params.streampark_bin_dir + params.start_script_name + " start ")
+            "sh " + params.streampark_bin_dir + params.start_script_name + " start")
         Execute(start_cmd, user=params.streampark_user, not_if=no_op_test)
 
     def stop(self, env, upgrade_type=None):
         import params
         env.set_params(params)
-        stop_cmd = format("sh " + params.streampark_bin_dir + params.start_script_name + " stop ")
+        stop_cmd = format("sh " + params.streampark_bin_dir + params.start_script_name + " stop")
         Execute(stop_cmd, user=params.streampark_user)
         time.sleep(5)
 

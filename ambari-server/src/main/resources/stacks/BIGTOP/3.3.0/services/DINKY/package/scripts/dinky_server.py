@@ -44,17 +44,18 @@ class DinkyService(Script):
 
         self.configure(env)
 
-        no_op_test = format(
-            "ls {dinky_pid_dir}/{dinky_pid_filename} >/dev/null 2>&1 && ps `cat {dinky_pid_dir}/{dinky_pid_filename}` >/dev/null 2>&1")
+        no_op_test = (
+            "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
+        ).format(params.dinky_pid_dir + "/" + params.dinky_pid_filename)
 
         start_cmd = format(
-            "sh " + params.dinky_bin_dir + params.start_script_name + " start ")
+            "sh " + params.dinky_bin_dir + params.start_script_name + " start")
         Execute(start_cmd, user=params.dinky_user, not_if=no_op_test)
 
     def stop(self, env, upgrade_type=None):
         import params
         env.set_params(params)
-        stop_cmd = format("sh " + params.dinky_bin_dir + params.start_script_name + " stop ")
+        stop_cmd = format("sh " + params.dinky_bin_dir + params.start_script_name + " stop")
         Execute(stop_cmd, user=params.dinky_user)
         time.sleep(5)
 

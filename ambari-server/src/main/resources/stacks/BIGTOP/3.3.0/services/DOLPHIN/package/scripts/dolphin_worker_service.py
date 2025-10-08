@@ -28,18 +28,15 @@ class DolphinWorkerService(Script):
 
         env.set_params(params)
         self.install_packages(env)
-        # Execute(('chmod', '-R', '777', params.dolphin_home))
-        # Execute(('chown', '-R', params.dolphin_user + ":" + params.dolphin_group,  params.dolphin_home))
 
-    def configure(self, env):
+    def configure(self, env, upgrade_type=None, config_dir=None):
         import params
 
-        # params.pika_slave = True
         env.set_params(params)
 
         dolphin_env()
 
-    def start(self, env):
+    def start(self, env, upgrade_type=None):
         import params
         import status_params
 
@@ -51,9 +48,7 @@ class DolphinWorkerService(Script):
         ).format(status_params.dolphin_worker_server_pidfile)
 
         start_cmd = format(
-            "sh "
-            + params.dolphin_bin_dir
-            + "/dolphinscheduler-daemon.sh start worker-server"
+            "sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh start worker-server"
         )
         Execute(
             start_cmd,
@@ -62,14 +57,12 @@ class DolphinWorkerService(Script):
             environment=params.dolphinExecEnv,
         )
 
-    def stop(self, env):
+    def stop(self, env, upgrade_type=None):
         import params
 
         env.set_params(params)
         stop_cmd = format(
-            "sh "
-            + params.dolphin_bin_dir
-            + "/dolphinscheduler-daemon.sh stop worker-server"
+            "sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh stop worker-server"
         )
         Execute(stop_cmd, user=params.dolphin_user, environment=params.dolphinExecEnv)
         time.sleep(5)

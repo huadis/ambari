@@ -29,18 +29,15 @@ class DolphinMasterService(Script):
 
         env.set_params(params)
         self.install_packages(env)
-        # Execute(('chmod', '-R', '777', params.dolphin_home))
-        # Execute(('chown', '-R', params.dolphin_user + ":" + params.dolphin_group,  params.dolphin_home))
 
-    def configure(self, env):
+    def configure(self, env, upgrade_type=None, config_dir=None):
         import params
 
-        # params.pika_slave = True
         env.set_params(params)
 
         dolphin_env()
 
-    def start(self, env):
+    def start(self, env, upgrade_type=None):
         import params
         import status_params
 
@@ -60,10 +57,9 @@ class DolphinMasterService(Script):
         no_op_test = (
             "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
         ).format(status_params.dolphin_master_server_pidfile)
+
         start_cmd = format(
-            "sh "
-            + params.dolphin_bin_dir
-            + "/dolphinscheduler-daemon.sh start master-server"
+            "sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh start master-server"
         )
         Execute(
             start_cmd,
@@ -72,14 +68,12 @@ class DolphinMasterService(Script):
             environment=params.dolphinExecEnv,
         )
 
-    def stop(self, env):
+    def stop(self, env, upgrade_type=None):
         import params
 
         env.set_params(params)
         stop_cmd = format(
-            "sh "
-            + params.dolphin_bin_dir
-            + "/dolphinscheduler-daemon.sh stop master-server"
+            "sh " + params.dolphin_bin_dir + "/dolphinscheduler-daemon.sh stop master-server"
         )
         Execute(stop_cmd, user=params.dolphin_user, environment=params.dolphinExecEnv)
         time.sleep(5)
