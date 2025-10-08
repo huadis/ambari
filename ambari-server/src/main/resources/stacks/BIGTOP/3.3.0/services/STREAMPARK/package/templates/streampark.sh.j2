@@ -18,6 +18,7 @@ APP_LIB="$APP_BASE"/lib
 APP_LOG={{ streampark_log_dir }}
 APP_PID={{ streampark_pid_dir }}/{{ streampark_pid_filename }}
 APP_OUT="$APP_LOG"/streampark.out
+APP_SCHEMA_OUT="$APP_LOG"/streampark-schema.out
 APP_TMPDIR="$APP_BASE"/temp
 
 CLASSPATH=
@@ -223,6 +224,12 @@ restart() {
   start
 }
 
+init_schema() {
+  nohup $RUN_JAVA \
+    -cp .:$APP_HOME/tools/sql-tools-1.0.jar com.huadis.SQLScriptExecutor \
+    $APP_HOME/conf/config.yaml $APP_HOME/script/schema/mysql-schema.sql t_user >> "$APP_SCHEMA_OUT" 2>&1 "&"
+}
+
 main() {
   case "$1" in
     "start")
@@ -241,6 +248,10 @@ main() {
     "restart")
         restart
         (( $? == 0 )) && print_logo "start"
+        ;;
+    "schema")
+        print_logo
+        init_schema
         ;;
     *)
         echo_r "Unknown command: $1"

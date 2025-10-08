@@ -40,8 +40,14 @@ class StreamParkService(Script):
         import params
 
         env.set_params(params)
-
         self.configure(env)
+
+        # init schema
+        schema_cmd = format(
+            "sh " + params.streampark_bin_dir + "streampark.sh schema")
+        Execute(
+            schema_cmd,
+            user=params.streampark_user)
 
         no_op_test = (
             "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
