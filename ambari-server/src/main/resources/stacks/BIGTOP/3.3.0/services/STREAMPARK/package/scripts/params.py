@@ -39,12 +39,12 @@ streampark_pid_dir = config['configurations']['streampark-application']["streamp
 streampark_pid_filename = "streampark.pid"
 streampark_log_dir = config['configurations']['streampark-application']["streampark_log_dir"]
 
-start_script_name = "app.sh"
+start_script_name = "streampark.sh"
 start_script_template_file = start_script_name + ".j2"
 streampark_bin_dir = streampark_home + "/bin/"
-streampark_conf_dir = streampark_home + "/config"
+streampark_conf_dir = streampark_home + "/conf"
 
-streampark_application_config_file = "config.yml"
+streampark_application_config_file = "config.yaml"
 streampark_application_config_template_file = streampark_application_config_file + ".j2"
 
 streampark_database_config = {'streampark_database_type': 'mysql',

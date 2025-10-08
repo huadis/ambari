@@ -90,14 +90,8 @@
     </property>
     <property require-input="true">
         <name>server.port</name>
-        <value>8010</value>
+        <value>10000</value>
         <display-name>Server Port</display-name>
-        <on-ambari-upgrade add="true"/>
-    </property>
-    <property>
-        <name>streampark.context</name>
-        <value>/</value>
-        <description>StreamPark Context</description>
         <on-ambari-upgrade add="true"/>
     </property>
 </configuration>

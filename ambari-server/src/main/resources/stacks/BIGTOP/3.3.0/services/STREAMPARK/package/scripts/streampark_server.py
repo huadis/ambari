@@ -48,13 +48,13 @@ class StreamParkService(Script):
         ).format(params.streampark_pid_dir + "/" + params.streampark_pid_filename)
 
         start_cmd = format(
-            "sh " + params.streampark_bin_dir + params.start_script_name + " start")
+            "sh " + params.streampark_bin_dir + "streampark.sh start")
         Execute(start_cmd, user=params.streampark_user, not_if=no_op_test)
 
     def stop(self, env, upgrade_type=None):
         import params
         env.set_params(params)
-        stop_cmd = format("sh " + params.streampark_bin_dir + params.start_script_name + " stop")
+        stop_cmd = format("sh " + params.streampark_bin_dir + "streampark.sh stop")
         Execute(stop_cmd, user=params.streampark_user)
         time.sleep(5)
 

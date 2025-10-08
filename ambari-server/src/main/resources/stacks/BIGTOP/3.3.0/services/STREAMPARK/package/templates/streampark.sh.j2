@@ -1,0 +1,253 @@
+#!/bin/bash
+
+# 输出函数
+echo_r() { echo "[StreamPark] Error: $1"; }
+echo_g() { echo "[StreamPark] Success: $1"; }
+echo_y() { echo "[StreamPark] Warning: $1"; }
+echo_w() { echo "[StreamPark] Info: $1"; }
+
+APP_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
+APP_BASE="$APP_HOME"
+APP_CONF="$APP_BASE"/conf
+APP_LIB="$APP_BASE"/lib
+APP_LOG={{ streampark_log_dir }}
+APP_PID={{ streampark_pid_dir }}/{{ streampark_pid_filename }}
+APP_OUT="$APP_LOG"/streampark.out
+APP_TMPDIR="$APP_BASE"/temp
+
+CLASSPATH=
+[[ -r "$APP_BASE/bin/setenv.sh" ]] && . "$APP_BASE/bin/setenv.sh"
+[[ -r "$APP_HOME/bin/setenv.sh" ]] && . "$APP_HOME/bin/setenv.sh"
+
+case ${APP_HOME} in
+  *:*) echo "Using APP_HOME:   $APP_HOME";
+       echo "Unable to start as APP_HOME contains a colon (:) character";
+       exit 1;
+esac
+case ${APP_BASE} in
+  *:*) echo "Using APP_BASE:   $APP_BASE";
+       echo "Unable to start as APP_BASE contains a colon (:) character";
+       exit 1;
+esac
+
+if [[ -r "$APP_HOME"/bin/setclasspath.sh ]]; then
+  . "$APP_HOME"/bin/setclasspath.sh
+else
+  echo "Cannot find $APP_HOME/bin/setclasspath.sh"
+  echo "This file is needed to run this program"
+  exit 1
+fi
+
+[[ -n "$CLASSPATH" ]] && CLASSPATH="$CLASSPATH":
+CLASSPATH="$CLASSPATH"
+
+JDK_VERSION=$("$_RUNJAVA" -version 2>&1 | grep -i 'version' | head -n 1 | cut -d '"' -f 2)
+MAJOR_VER=$(echo "$JDK_VERSION" | cut -d '.' -f 1)
+[[ $MAJOR_VER -eq 1 ]] && MAJOR_VER=$(echo "$JDK_VERSION" | cut -d '.' -f 2)
+MIN_VERSION=8
+
+if (( MAJOR_VER < MIN_VERSION )); then
+  echo "JDK Version: \"${JDK_VERSION}\", the version cannot be lower than 1.8"
+  exit 1
+fi
+
+CONFIG="${APP_CONF}/application.yml"
+if [[ -f "$CONFIG" ]]; then
+  echo_y "application.yml is deprecated. Use config.yaml instead. It will be removed in version 2.2.0."
+else
+  CONFIG="${APP_CONF}/config.yaml"
+  if [[ ! -f "$CONFIG" ]]; then
+    echo_r "Cannot find config.yaml in conf directory."
+    exit 1
+  fi
+fi
+
+BASH_UTIL="org.apache.streampark.console.base.util.BashJavaUtils"
+APP_MAIN="org.apache.streampark.console.StreamParkConsoleBootstrap"
+JVM_OPTS_FILE="${APP_HOME}/bin/jvm_opts.sh"
+
+JVM_ARGS=""
+[[ -f "$JVM_OPTS_FILE" ]] && while read line; do
+  [[ "$line" == -* ]] && JVM_ARGS="${JVM_ARGS} $line"
+done < "$JVM_OPTS_FILE"
+
+JAVA_OPTS=${JAVA_OPTS:-"${JVM_ARGS}"}
+JAVA_OPTS="$JAVA_OPTS -XX:HeapDumpPath=${APP_HOME}/logs/dump.hprof"
+JAVA_OPTS="$JAVA_OPTS -Xloggc:${APP_HOME}/logs/gc.log"
+(( MAJOR_VER > MIN_VERSION )) && JAVA_OPTS="$JAVA_OPTS --add-opens java.base/jdk.internal.loader=ALL-UNNAMED --add-opens jdk.zipfs/jdk.nio.zipfs=ALL-UNNAMED"
+(( MAJOR_VER >= 17 )) && JAVA_OPTS="$JAVA_OPTS -Djava.security.manager=allow"
+
+SERVER_PORT=$($_RUNJAVA -cp "$APP_LIB/*" $BASH_UTIL --get_yaml "server.port" "$CONFIG")
+
+print_logo() {
+  printf '\n'
+  printf '      %s    _____ __                                             __       %s\n'
+  printf '      %s   / ___// /_________  ____ _____ ___  ____  ____ ______/ /__     %s\n'
+  printf '      %s   \__ \/ __/ ___/ _ \/ __ `/ __ `__ \/ __ \  __ `/ ___/ //_/     %s\n'
+  printf '      %s  ___/ / /_/ /  /  __/ /_/ / / / / / / /_/ / /_/ / /  / ,<        %s\n'
+  printf '      %s /____/\__/_/   \___/\__,_/_/ /_/ /_/ ____/\__,_/_/  /_/|_|       %s\n'
+  printf '      %s                                   /_/                            %s\n\n'
+  printf '      %s   Version:  2.1.6 %s\n'
+  printf '      %s   WebSite:  https://streampark.apache.org%s\n'
+  printf '      %s   GitHub :  http://github.com/apache/streampark%s\n\n'
+  printf '      %s   ──────── Apache StreamPark, Make stream processing easier ô~ô!%s\n\n'
+  [[ "$1" == "start" ]] && printf '      %s                  http://localhost:'"$SERVER_PORT"' %s\n\n'
+}
+
+get_pid() {
+  if [[ -f "$APP_PID" && -s "$APP_PID" ]]; then
+    local PID=$(cat "$APP_PID")
+    if kill -0 "$PID" >/dev/null 2>&1; then
+      echo "$PID"
+      return 0
+    fi
+    rm -f "$APP_PID"
+  fi
+
+  if [[ -z "$SERVER_PORT" ]]; then
+    echo_r "server.port is required, check $CONFIG"
+    exit 1
+  fi
+
+  local used=$($_RUNJAVA -cp "$APP_LIB/*" $BASH_UTIL --check_port "$SERVER_PORT")
+  if [[ "$used" == "used" ]]; then
+    local PID=$(jps -l | grep "$APP_MAIN" | awk '{print $1}')
+    [[ -n "$PID" ]] && echo "$PID" || echo 0
+  else
+    echo 0
+  fi
+}
+
+start() {
+  local PID=$(get_pid)
+  if (( PID > 0 )); then
+    echo_r "StreamPark is already running pid: $PID"
+    exit 1
+  fi
+
+  echo_w "Using APP_BASE:   $APP_BASE"
+  echo_w "Using APP_HOME:   $APP_HOME"
+  [[ "$1" == "debug" ]] && echo_w "Using JAVA_HOME:   $JAVA_HOME" || echo_w "Using JRE_HOME:   $JRE_HOME"
+  echo_w "Using APP_PID:   $APP_PID"
+
+  local workspace=$($_RUNJAVA -cp "$APP_LIB/*" $BASH_UTIL --get_yaml "streampark.workspace.local" "$CONFIG")
+  if [[ ! -d "$workspace" ]]; then
+    echo_r "ERROR: streampark.workspace.local: \"$workspace\" is invalid"
+    echo_r "NOTE: Should not be set under APP_HOME($APP_HOME) directory"
+    exit 1
+  fi
+
+  if [[ ! -w "$workspace" || ! -r "$workspace" ]]; then
+    echo_r "ERROR: streampark.workspace.local: \"$workspace\" Permission denied!"
+    exit 1
+  fi
+
+  [[ -z "$HADOOP_HOME" ]] && echo_y "HADOOP_HOME is undefined" || echo_w "Using HADOOP_HOME:   $HADOOP_HOME"
+
+  local APP_CLASSPATH=".:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib"
+  local JARS=$(ls "$APP_LIB"/*.jar | grep -v "$APP_LIB/streampark-flink-shims_.*.jar$")
+  for jar in $JARS; do
+    APP_CLASSPATH="$APP_CLASSPATH:$jar"
+  done
+
+  if [[ -n "$HADOOP_CONF_DIR" && -d "$HADOOP_CONF_DIR" ]]; then
+    echo_w "Using HADOOP_CONF_DIR:   $HADOOP_CONF_DIR"
+    APP_CLASSPATH+=":$HADOOP_CONF_DIR"
+  else
+    APP_CLASSPATH+=":$HADOOP_HOME/etc/hadoop"
+  fi
+
+  echo_g "JAVA_OPTS:  $JAVA_OPTS"
+
+  eval nohup $_RUNJAVA $JAVA_OPTS \
+    -classpath "$APP_CLASSPATH" \
+    -Dapp.home="${APP_HOME}" \
+    -Djava.io.tmpdir="$APP_TMPDIR" \
+    -Dlogging.config="${APP_CONF}/logback-spring.xml" \
+    $APP_MAIN "$@" >> "$APP_OUT" 2>&1 "&"
+
+  local PID=$!
+  if [[ "$PID" =~ ^[0-9]+$ ]] && kill -0 "$PID" > /dev/null 2>&1; then
+    echo "$PID" > "$APP_PID"
+    echo_g "StreamPark start successful. pid: $PID"
+  else
+    echo_r "StreamPark start failed."
+    exit 1
+  fi
+}
+
+stop() {
+  local PID=$(get_pid)
+  if (( PID == 0 )); then
+    echo_r "StreamPark is not running"
+    exit 1
+  fi
+
+  shift
+  local SLEEP=3
+  echo_g "StreamPark stopping with PID: $PID"
+  kill -9 "$PID"
+
+  while (( SLEEP >= 0 )); do
+    if ! kill -0 "$PID" >/dev/null 2>&1; then
+      rm -f "$APP_PID" >/dev/null 2>&1 || { [[ -w "$APP_PID" ]] && cat /dev/null > "$APP_PID"; }
+      echo_g "StreamPark stopped."
+      break
+    fi
+
+    (( SLEEP > 0 )) && sleep 1
+    (( SLEEP-- ))
+  done
+
+  if (( SLEEP < 0 )); then
+    echo_r "StreamPark has not been killed completely"
+  fi
+}
+
+status() {
+  local PID=$(get_pid)
+  if (( PID == 0 )); then
+    echo_r "StreamPark is not running"
+  else
+    echo_g "StreamPark is running pid is: $PID"
+  fi
+}
+
+restart() {
+  stop
+  start
+}
+
+main() {
+  case "$1" in
+    "start")
+        shift
+        start "$@"
+        (( $? == 0 )) && print_logo "start"
+        ;;
+    "stop")
+        print_logo
+        stop
+        ;;
+    "status")
+        print_logo
+        status
+        ;;
+    "restart")
+        restart
+        (( $? == 0 )) && print_logo "start"
+        ;;
+    *)
+        echo_r "Unknown command: $1"
+        echo_w "Usage: streampark.sh ( commands ... )"
+        echo_w "commands:"
+        echo_w "  start \$conf              Start StreamPark with config"
+        echo_w "  stop                      Stop StreamPark"
+        echo_w "  status                    Check StreamPark status"
+        echo_w "  restart \$conf            Restart StreamPark"
+        exit 0
+        ;;
+  esac
+}
+
+main "$@"
