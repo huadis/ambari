@@ -91,13 +91,13 @@
     </property>
     <property require-input="true">
         <name>server.port</name>
-        <value>8010</value>
+        <value>8810</value>
         <display-name>Server Port</display-name>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
         <name>dataease.context</name>
-        <value>/</value>
+        <value>/dataease</value>
         <description>DataEase Context</description>
         <on-ambari-upgrade add="true"/>
     </property>

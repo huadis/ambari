@@ -13,4 +13,4 @@ spring:
     url: {{ dataease_database_config['dataease_database_url'] }}
     username: {{ dataease_database_config['dataease_database_username'] }}
     password: {{ dataease_database_config['dataease_database_password'] }}
-basePath: ${DATAEASE_HOME: {{ dataease_home }} }
+basePath: ${DATAEASE_HOME:-{{ dataease_home }}}
