@@ -32,6 +32,14 @@ def streampark_env():
               create_parents=True
               )
 
+    Directory(
+        "/tmp/streampark",
+        mode=0o775,
+        owner=params.streampark_user,
+        group=params.user_group,
+        create_parents=True
+    )
+
     File(format(params.streampark_bin_dir + params.start_script_name),
          mode=0o755,
          content=Template(params.start_script_template_file),
