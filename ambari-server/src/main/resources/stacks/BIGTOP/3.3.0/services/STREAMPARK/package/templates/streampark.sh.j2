@@ -186,7 +186,7 @@ stop() {
   local PID=$(get_pid)
   if (( PID == 0 )); then
     echo_r "StreamPark is not running"
-    exit 1
+    exit 0
   fi
 
   shift
