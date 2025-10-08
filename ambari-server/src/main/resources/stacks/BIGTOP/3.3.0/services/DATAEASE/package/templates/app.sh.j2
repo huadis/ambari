@@ -2,7 +2,7 @@
 
 DATAEASE_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
 
-. /usr/lib/bigtop-utils/bigtop-detect-javahome
+. /usr/lib/bigtop-utils/find_javahome 21
 
 PID_FILE={{ dataease_pid_filename }}
 
@@ -30,7 +30,7 @@ tips() {
 }
 
 updatePid() {
-  pid=$(ps -ef | grep -i dataease | awk '{print $2}' | head -1)
+  pid=$(ps -ef |grep -v grep | grep "dataease-server/lib/CoreApplication.jar" | awk '{print $2}' | head -1)
   echo $pid >"${PID_PATH}"/${PID_FILE}
 }
 

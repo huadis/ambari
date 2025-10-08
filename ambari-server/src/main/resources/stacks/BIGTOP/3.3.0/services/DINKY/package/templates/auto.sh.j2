@@ -9,7 +9,7 @@ DINKY_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
 # Use FLINK_HOME:
 CLASS_PATH=".:${DINKY_HOME}/lib/*:${DINKY_HOME}/config/*:${DINKY_HOME}/extends/*:${DINKY_HOME}/plugins/*:${DINKY_HOME}/customJar/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/*"
 
-. /usr/lib/bigtop-utils/bigtop-detect-javahome
+. /usr/lib/bigtop-utils/find_javahome 8
 
 PID_FILE={{ dinky_pid_filename }}
 
@@ -40,14 +40,14 @@ tips() {
 }
 
 updatePid() {
-  pid=$(ps -ef | grep -i dinky | awk '{print $2}' | head -1)
+  pid=$(ps -ef | grep -v grep |grep "org.dinky.Dinky" | awk '{print $2}' | head -1)
   echo $pid >"${PID_PATH}"/${PID_FILE}
 }
 
 start() {
   updatePid
   if [ -z "$pid" ]; then
-    nohup java -Ddruid.mysql.usePingMethod=false -Dlog4j2.isThreadContextMapInheritable=true -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
+    nohup java -Ddruid.mysql.usePingMethod=false -Dlog4j2.isThreadContextMapInheritable=true -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
     echo $! >"${PID_PATH}"/${PID_FILE}
     echo "FLINK VERSION : $FLINK_VERSION"
     echo "........................................Start Dinky Successfully........................................"
@@ -59,7 +59,7 @@ start() {
 startOnPending() {
   updatePid
   if [ -z "$pid" ]; then
-    java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none -cp "${CLASS_PATH}" org.dinky.Dinky
+    java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky
     echo "FLINK VERSION : $FLINK_VERSION"
     echo "........................................Start Dinky Successfully........................................"
   else
