@@ -128,7 +128,7 @@ start() {
   local PID=$(get_pid)
   if (( PID > 0 )); then
     echo_r "StreamPark is already running pid: $PID"
-    exit 1
+    exit 0
   fi
 
   echo_w "Using APP_BASE:   $APP_BASE"
