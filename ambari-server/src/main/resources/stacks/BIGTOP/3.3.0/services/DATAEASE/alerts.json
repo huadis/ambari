@@ -7,10 +7,10 @@
         "label": "dataease_server_port_check",
         "description": "dataease_server_port_check.",
         "interval": 10,
-        "scope": "ANY",
+        "scope": "HOST",
         "source": {
           "type": "PORT",
-          "uri": "{{ dataease-application/server.port }}",
+          "uri": "{{dataease-application/server.port}}",
           "default_port": 8810,
           "reporting": {
             "ok": {

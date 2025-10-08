@@ -7,7 +7,7 @@
         "label": "dinky_server_port_check",
         "description": "dinky_server_port_check.",
         "interval": 10,
-        "scope": "ANY",
+        "scope": "HOST",
         "source": {
           "type": "PORT",
           "uri": "{{dinky-application/server.port}}",
