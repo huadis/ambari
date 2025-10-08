@@ -9,7 +9,7 @@ DINKY_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
 # Use FLINK_HOME:
 CLASS_PATH=".:${DINKY_HOME}/lib/*:${DINKY_HOME}/config/*:${DINKY_HOME}/extends/*:${DINKY_HOME}/plugins/*:${DINKY_HOME}/customJar/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/plugins/flink${FLINK_VERSION}/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/dinky/*:${DINKY_HOME}/extends/flink${FLINK_VERSION}/*"
 
-. /usr/lib/bigtop-utils/find_javahome 8
+. /usr/lib/bigtop-utils/find_javahome 17
 
 echo -e "JAVA_HOME=${JAVA_HOME}"
 RUN_JAVA="$JAVA_HOME/bin/java"
