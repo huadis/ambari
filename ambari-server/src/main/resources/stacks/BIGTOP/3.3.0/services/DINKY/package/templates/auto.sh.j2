@@ -11,6 +11,9 @@ CLASS_PATH=".:${DINKY_HOME}/lib/*:${DINKY_HOME}/config/*:${DINKY_HOME}/extends/*
 
 . /usr/lib/bigtop-utils/find_javahome 8
 
+echo -e "JAVA_HOME=${JAVA_HOME}"
+RUN_JAVA="$JAVA_HOME/bin/java"
+
 PID_FILE={{ dinky_pid_filename }}
 
 # JMX path
@@ -47,7 +50,7 @@ updatePid() {
 start() {
   updatePid
   if [ -z "$pid" ]; then
-    nohup java -Ddruid.mysql.usePingMethod=false -Dlog4j2.isThreadContextMapInheritable=true -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
+    nohup $RUN_JAVA -Ddruid.mysql.usePingMethod=false -Dlog4j2.isThreadContextMapInheritable=true -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
     echo $! >"${PID_PATH}"/${PID_FILE}
     echo "FLINK VERSION : $FLINK_VERSION"
     echo "........................................Start Dinky Successfully........................................"
@@ -59,7 +62,7 @@ start() {
 startOnPending() {
   updatePid
   if [ -z "$pid" ]; then
-    java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky
+    $RUN_JAVA -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -cp "${CLASS_PATH}" org.dinky.Dinky
     echo "FLINK VERSION : $FLINK_VERSION"
     echo "........................................Start Dinky Successfully........................................"
   else
@@ -70,7 +73,7 @@ startOnPending() {
 startWithJmx() {
   updatePid
   if [ -z "$pid" ]; then
-    nohup java -Ddruid.mysql.usePingMethod=false -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M "${JMX}" -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
+    nohup $RUN_JAVA -Ddruid.mysql.usePingMethod=false -Ddinky.logs.path=${DINKY_HOME}/logs/ -Xms512M -Xmx2048M "${JMX}" -cp "${CLASS_PATH}" org.dinky.Dinky --spring.config.location=${DINKY_HOME}/config/ >${DINKY_HOME}/logs/dinky.out 2>&1 &
 #    echo $! >"${PID_PATH}"/${PID_FILE}
     updatePid
     echo "........................................Start Dinky with Jmx Successfully.....................................

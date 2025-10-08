@@ -4,6 +4,9 @@ DATAEASE_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
 
 . /usr/lib/bigtop-utils/find_javahome 21
 
+echo -e "JAVA_HOME=${JAVA_HOME}"
+RUN_JAVA="$JAVA_HOME/bin/java"
+
 PID_FILE={{ dataease_pid_filename }}
 
 # Check whether the pid path exists
@@ -37,7 +40,7 @@ updatePid() {
 start() {
   updatePid
   if [ -z "$pid" ]; then
-    nohup java -Dfile.encoding=utf-8 -Dloader.path=${DATAEASE_HOME} -Dspring.config.additional-location=${DATAEASE_HOME}/config/ -XX:+ExitOnOutOfMemoryError -cp . -jar ${DATAEASE_HOME}/lib/CoreApplication.jar >${DATAEASE_HOME}/logs/dataease.out 2>&1 &
+    nohup $RUN_JAVA -Dfile.encoding=utf-8 -Dloader.path=${DATAEASE_HOME} -Dspring.config.additional-location=${DATAEASE_HOME}/config/ -XX:+ExitOnOutOfMemoryError -cp . -jar ${DATAEASE_HOME}/lib/CoreApplication.jar >${DATAEASE_HOME}/logs/dataease.out 2>&1 &
     echo $! >"${PID_PATH}"/${PID_FILE}
     echo "........................................Start DataEase Successfully........................................"
   else
