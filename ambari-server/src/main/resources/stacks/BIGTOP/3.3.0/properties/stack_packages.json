@@ -107,6 +107,20 @@
           ]
         }
       },
+      "GRAVITINO": {
+        "GRAVITINO-SERVER": {
+          "STACK-SELECT-PACKAGE": "gravitino-server",
+          "INSTALL": [
+            "gravitino-server"
+          ],
+          "PATCH": [
+            "gravitino-server"
+          ],
+          "STANDARD": [
+            "gravitino-server"
+          ]
+        }
+      },
       "KUDU": {
         "KUDU_MASTER": {
           "STACK-SELECT-PACKAGE": "kudu",
@@ -1504,6 +1518,9 @@
       },
       "ATLAS": {
         "packages": ["atlas"]
+      },
+      "GRAVITINO": {
+        "packages": ["gravitino"]
       },
       "HBASE": {
         "packages": [
