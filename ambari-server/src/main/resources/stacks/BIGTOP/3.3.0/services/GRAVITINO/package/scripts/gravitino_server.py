@@ -48,13 +48,13 @@ class GravitinoService(Script):
         ).format(params.gravitino_pid_dir + "/" + params.gravitino_pid_filename)
 
         start_cmd = format(
-            "sh " + params.gravitino_bin_dir + params.gravitino_sh_name + " start")
+            "sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " start")
         Execute(start_cmd, user=params.gravitino_user, not_if=no_op_test)
 
     def stop(self, env, upgrade_type=None):
         import params
         env.set_params(params)
-        stop_cmd = format("sh " + params.gravitino_bin_dir + params.gravitino_sh_name + " stop")
+        stop_cmd = format("sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " stop")
         Execute(stop_cmd, user=params.gravitino_user)
         time.sleep(5)
 
@@ -63,14 +63,14 @@ class GravitinoService(Script):
         env.set_params(params)
         # check_process_status(params.gravitino_pid_dir + "/" + params.gravitino_pid_filename)
         status_cmd = format(
-            "sh " + params.gravitino_bin_dir + params.gravitino_sh_name + " status")
+            "sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " status")
         Execute(status_cmd, user=params.gravitino_user)
 
     def restart(self, env):
         import params
         env.set_params(params)
         restart_cmd = format(
-            "sh " + params.gravitino_bin_dir + params.gravitino_sh_name + " restart")
+            "sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " restart")
         Execute(restart_cmd, user=params.gravitino_user)
 
 

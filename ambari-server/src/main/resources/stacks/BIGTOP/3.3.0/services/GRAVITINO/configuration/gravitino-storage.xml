@@ -72,7 +72,7 @@
     </property>
     <property>
         <name>gravitino.entity.store.relational.storagePath</name>
-        <value>${GRAVITINO_HOME}/data/jdbc</value>
+        <value>/data/jdbc</value>
         <description>The storage path for embedded JDBC storage implementation.</description>
         <value-attributes>
             <type>directory</type>
