@@ -1312,8 +1312,8 @@ class MySQLConfig(LinuxDBMSConfig):
       options, "database_port", properties, JDBC_PORT_PROPERTY, "3306"
     )
 
-    self.database_url_pattern = "jdbc:mysql://{0}:{1}/{2}"
-    self.database_url_pattern_alt = "jdbc:mysql://{0}:{1}/{2}"
+    self.database_url_pattern = "jdbc:mysql://{0}:{1}/{2}?characterEncoding=UTF-8"
+    self.database_url_pattern_alt = "jdbc:mysql://{0}:{1}/{2}?characterEncoding=UTF-8"
 
     self.JDBC_DRIVER_INSTALL_MSG = (
       "Before starting Ambari Server, "
