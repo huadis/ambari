@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+# -*- coding: utf-8 -*-
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+-->
+<configuration>
+    <property>
+        <name>gravitino.entity.store</name>
+        <value>relational</value>
+        <description>Which entity storage implementation to use.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational</name>
+        <value>2000</value>
+        <description>The maximum skew time of transactions in milliseconds.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.deleteAfterTimeMs</name>
+        <value>604800000</value>
+        <description>The maximum time in milliseconds that deleted and old-version data is kept. Set to at least 10 minutes and no longer than 30 days.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.versionRetentionCount</name>
+        <value>1</value>
+        <description>The Count of versions allowed to be retained, including the current version, used to delete old versions data. Set to at least 1 and no greater than 10.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational</name>
+        <value>JDBCBackend</value>
+        <description>Detailed implementation of Relational storage. H2, MySQL and PostgreSQL is currently supported, and the implementation is JDBCBackend.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.jdbcUrl</name>
+        <value>jdbc:h2</value>
+        <description>The database url that the JDBCBackend needs to connect to.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.jdbcDriver</name>
+        <value>org.h2.Driver</value>
+        <description>The jdbc driver name that the JDBCBackend needs to use. You should place the driver Jar package in the ${GRAVITINO_HOME}/libs/ directory.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.jdbcUser</name>
+        <value>gravitino</value>
+        <description>The username that the JDBCBackend needs to use when connecting the database. It is required for MySQL.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.jdbcPassword</name>
+        <value>gravitino</value>
+        <description>The password that the JDBCBackend needs to use when connecting the database. It is required for MySQL.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.storagePath</name>
+        <value>${GRAVITINO_HOME}/data/jdbc</value>
+        <description>The storage path for embedded JDBC storage implementation.</description>
+        <value-attributes>
+            <type>directory</type>
+        </value-attributes>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.maxConnections</name>
+        <value>100</value>
+        <description>The maximum number of connections for the JDBC Backend connection pool.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+    <property>
+        <name>gravitino.entity.store.relational.maxWaitMillis</name>
+        <value>1000</value>
+        <description>The maximum wait time in milliseconds for a connection from the JDBC Backend connection pool.</description>
+        <on-ambari-upgrade add="false"/>
+    </property>
+</configuration>

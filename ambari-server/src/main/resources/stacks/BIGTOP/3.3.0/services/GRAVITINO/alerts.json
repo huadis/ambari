@@ -1,0 +1,32 @@
+{
+  "GRAVITINO": {
+    "service": [],
+    "GRAVITINO_SERVER": [
+      {
+        "name": "gravitino_server_port_check",
+        "label": "gravitino_server_port_check",
+        "description": "gravitino_server_port_check.",
+        "interval": 10,
+        "scope": "HOST",
+        "source": {
+          "type": "PORT",
+          "uri": "{{gravitino-httpserver/gravitino.server.webserver.httpPort}}",
+          "default_port": 8090,
+          "reporting": {
+            "ok": {
+              "text": "TCP OK - {0:.3f}s response on port {1}"
+            },
+            "warning": {
+              "text": "TCP OK - {0:.3f}s response on port {1}",
+              "value": 1.5
+            },
+            "critical": {
+              "text": "Connection failed: {0} to {1}:{2}",
+              "value": 5.0
+            }
+          }
+        }
+      }
+    ]
+  }
+}

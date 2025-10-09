@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<metainfo>
+    <schemaVersion>1.0</schemaVersion>
+    <services>
+        <service>
+            <name>GRAVITINO</name>
+            <displayName>gravitino</displayName>
+            <comment>Apache Gravitino 是一款高性能、地理分布式的联邦元数据湖。它可直接管理不同来源、类型和区域的元数据，并为用户提供数据与 AI 资产的统一元数据访问能力</comment>
+            <version>1.0.0</version>
+            <components>
+                <component>
+                    <name>GRAVITINO_SERVER</name>
+                    <displayName>gravitino</displayName>
+                    <category>MASTER</category>
+                    <cardinality>1+</cardinality>
+                    <commandScript>
+                        <script>scripts/gravitino_server.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1800</timeout>
+                    </commandScript>
+                </component>
+            </components>
+
+            <osSpecifics>
+                <osSpecific>
+                    <osFamily>any</osFamily>
+                    <packages>
+                        <package>
+                            <name>gravitino_${stack_version}</name>
+                        </package>
+                    </packages>
+                </osSpecific>
+            </osSpecifics>
+
+            <commandScript>
+                <script>scripts/service_check.py</script>
+                <scriptType>PYTHON</scriptType>
+                <timeout>300</timeout>
+            </commandScript>
+
+            <configuration-dependencies>
+                <config-type>gravitino-application</config-type>
+            </configuration-dependencies>
+
+            <themes>
+                <theme>
+                    <fileName>theme.json</fileName>
+                    <default>true</default>
+                </theme>
+            </themes>
+
+            <quickLinksConfigurations>
+                <quickLinksConfiguration>
+                    <fileName>quicklinks.json</fileName>
+                    <default>true</default>
+                </quickLinksConfiguration>
+            </quickLinksConfigurations>
+
+            <restartRequiredAfterChange>false</restartRequiredAfterChange>
+            <restartRequiredAfterUpgrade>true</restartRequiredAfterUpgrade>
+
+        </service>
+    </services>
+</metainfo>

@@ -1,0 +1,9 @@
+GRAVITINO_VERSION=0.9.1
+
+. /usr/lib/bigtop-utils/find_javahome 17
+
+echo -e "JAVA_HOME=${JAVA_HOME}"
+
+export GRAVITINO_HOME={{ gravitino_home }}
+export GRAVITINO_CONF_DIR={{ gravitino_home }}/conf
+export GRAVITINO_LOG_DIR={{ gravitino_home }}/logs

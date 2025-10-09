@@ -1,0 +1,26 @@
+{
+  "name": "default",
+  "description": "default quick links configuration",
+  "configuration": {
+    "protocol":
+    {
+      "type":"http"
+    },
+
+    "links": [
+      {
+        "name": "gravitino-ui",
+        "label": "Gravitino Web UI",
+        "requires_user_name": "false",
+        "component_name": "GRAVITINO_SERVER",
+        "url": "%@://%@:%@/",
+        "port":{
+          "http_property": "gravitino.server.webserver.httpPort",
+          "http_default_port": "8090",
+          "regex": "^(\\d+)$",
+          "site": "gravitino-httpserver"
+        }
+      }
+    ]
+  }
+}
