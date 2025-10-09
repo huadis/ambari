@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# 输出函数
 echo_r() { echo "[StreamPark] Error: $1"; }
 echo_g() { echo "[StreamPark] Success: $1"; }
 echo_y() { echo "[StreamPark] Warning: $1"; }
@@ -261,6 +260,7 @@ main() {
         echo_w "  stop                      Stop StreamPark"
         echo_w "  status                    Check StreamPark status"
         echo_w "  restart \$conf            Restart StreamPark"
+        echo_w "  schema                    Init StreamPark Schema"
         exit 0
         ;;
   esac
