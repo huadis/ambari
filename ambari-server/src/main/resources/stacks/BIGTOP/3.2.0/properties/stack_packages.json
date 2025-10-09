@@ -524,29 +524,29 @@
       },
       "DATAEASE": {
         "DATAEASE_SERVER": {
-          "STACK-SELECT-PACKAGE": "dataease",
+          "STACK-SELECT-PACKAGE": "dataease-server",
           "INSTALL": [
-            "dataease"
+            "dataease-server"
           ],
           "PATCH": [
-            "dataease"
+            "dataease-server"
           ],
           "STANDARD": [
-            "dataease"
+            "dataease-server"
           ]
         }
       },
       "STREAMPARK": {
         "STREAMPARK_SERVER": {
-          "STACK-SELECT-PACKAGE": "streampark",
+          "STACK-SELECT-PACKAGE": "streampark-server",
           "INSTALL": [
-            "streampark"
+            "streampark-server"
           ],
           "PATCH": [
-            "streampark"
+            "streampark-server"
           ],
           "STANDARD": [
-            "streampark"
+            "streampark-server"
           ]
         }
       },
