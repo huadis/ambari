@@ -43,6 +43,10 @@ class GravitinoService(Script):
 
         self.configure(env)
 
+        # init schema
+        schema_cmd = format("sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " schema")
+        Execute(schema_cmd, user=params.gravitino_user)
+
         no_op_test = (
             "ls {0} >/dev/null 2>&1 && ps `cat {0}` | grep `cat {0}` >/dev/null 2>&1"
         ).format(params.gravitino_pid_dir + "/" + params.gravitino_pid_filename)
