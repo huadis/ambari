@@ -29,6 +29,7 @@ stack_root = Script.get_stack_root()
 stack_version_unformatted = config["clusterLevelParams"]["stack_version"]
 stack_version_formatted_major = format_stack_version(stack_version_unformatted)
 major_stack_version = get_major_version(stack_version_formatted_major)
+ambari_server_hostname = config['clusterHostInfo']['ambari_server_host'][0]
 
 dataease_home = os.path.join(stack_root, "current", "dataease-server")
 

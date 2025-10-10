@@ -342,7 +342,7 @@
       {
         "config": "dolphin-env/dolphin.database.type",
         "widget": {
-          "type": "text-field"
+          "type": "combo"
         }
       },
       {
@@ -395,7 +395,7 @@
       {
         "config": "dolphin-common/resource.storage.type",
         "widget": {
-          "type": "text-field"          
+          "type": "text-field"
         }
       },
       {
