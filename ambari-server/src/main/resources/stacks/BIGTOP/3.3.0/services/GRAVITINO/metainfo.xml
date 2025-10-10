@@ -20,7 +20,7 @@
     <services>
         <service>
             <name>GRAVITINO</name>
-            <displayName>gravitino</displayName>
+            <displayName>Gravitino</displayName>
             <comment>Apache Gravitino 是一款高性能、地理分布式的联邦元数据湖。它可直接管理不同来源、类型和区域的元数据，并为用户提供数据与 AI 资产的统一元数据访问能力</comment>
             <version>1.0.0</version>
             <components>
@@ -55,7 +55,11 @@
             </commandScript>
 
             <configuration-dependencies>
-                <config-type>gravitino-application</config-type>
+                <config-type>gravitino-cache</config-type>
+                <config-type>gravitino-env</config-type>
+                <config-type>gravitino-httpserver</config-type>
+                <config-type>gravitino-log4j</config-type>
+                <config-type>gravitino-storage</config-type>
             </configuration-dependencies>
 
             <themes>

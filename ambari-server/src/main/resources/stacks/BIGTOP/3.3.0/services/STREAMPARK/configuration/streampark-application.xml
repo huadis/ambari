@@ -91,6 +91,7 @@
     <property require-input="true">
         <name>server.port</name>
         <value>10000</value>
+        <property-type>PORT</property-type>
         <display-name>Server Port</display-name>
         <on-ambari-upgrade add="true"/>
     </property>

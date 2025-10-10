@@ -33,48 +33,72 @@
         <name>gravitino.server.webserver.minThreads</name>
         <value>24</value>
         <description>The minimum number of threads in the thread pool used by the Jetty webserver. minThreads is 8 if the value is less than 8.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="true"/>
     </property>
     <property require-input="true">
         <name>gravitino.server.webserver.maxThreads</name>
         <value>200</value>
         <description>The maximum number of threads in the thread pool used by the Jetty webserver. maxThreads is 8 if the value is less than 8, and maxThreads must be great or equal to minThreads.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="true"/>
     </property>
     <property>
         <name>gravitino.server.webserver.threadPoolWorkQueueSize</name>
         <value>100</value>
         <description>The size of the queue in the thread pool used by the Jetty webserver.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.server.webserver.stopTimeout</name>
         <value>30000</value>
         <description>Time in milliseconds to gracefully shut down the Jetty webserver.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.server.webserver.idleTimeout</name>
         <value>30000</value>
         <description>The timeout in milliseconds of idle connections.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.server.webserver.requestHeaderSize</name>
         <value>131072</value>
         <description>Maximum size of HTTP requests.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.server.webserver.responseHeaderSize</name>
         <value>131072</value>
         <description>Maximum size of HTTP responses.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.server.shutdown.timeout</name>
         <value>3000</value>
         <description>Time in milliseconds to gracefully shut down of the Gravitino webserver.</description>
+        <value-attributes>
+            <type>int</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
 </configuration>

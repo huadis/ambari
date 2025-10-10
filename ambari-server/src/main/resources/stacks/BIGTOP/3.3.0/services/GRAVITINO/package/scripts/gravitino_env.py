@@ -32,6 +32,14 @@ def gravitino_env():
         group=params.gravitino_group,
     )
 
+    File(
+        format(params.gravitino_log4j_path),
+        mode=0o755,
+        content=InlineTemplate(params.gravitino_log4j_content),
+        owner=params.gravitino_user,
+        group=params.gravitino_group,
+    )
+
     File(format(params.gravitino_conf_dir + "/" + params.gravitino_conf_name),
          mode=0o755,
          content=Template(params.gravitino_conf_template_name),
@@ -45,3 +53,11 @@ def gravitino_env():
          owner=params.gravitino_user,
          group=params.gravitino_group
          )
+
+    File(
+        format(params.gravitino_tools_config_path),
+        mode=0o755,
+        content=Template(params.gravitino_tools_config_template_name),
+        owner=params.gravitino_user,
+        group=params.gravitino_group,
+    )

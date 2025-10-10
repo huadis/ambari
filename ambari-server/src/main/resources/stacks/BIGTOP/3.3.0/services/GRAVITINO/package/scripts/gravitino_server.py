@@ -61,17 +61,13 @@ class GravitinoService(Script):
     def status(self, env):
         import params
         env.set_params(params)
-        # check_process_status(params.gravitino_pid_dir + "/" + params.gravitino_pid_filename)
-        status_cmd = format(
-            "sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " status")
-        Execute(status_cmd, user=params.gravitino_user)
+        check_process_status(params.gravitino_pid_dir + "/" + params.gravitino_pid_filename)
+        #status_cmd = format("sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " status")
+        #Execute(status_cmd, user=params.gravitino_user)
 
     def restart(self, env):
-        import params
-        env.set_params(params)
-        restart_cmd = format(
-            "sh " + params.gravitino_bin_dir + "/" + params.gravitino_sh_name + " restart")
-        Execute(restart_cmd, user=params.gravitino_user)
+        self.stop(env)
+        self.start(env)
 
 
 if __name__ == "__main__":

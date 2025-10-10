@@ -20,6 +20,9 @@
         <name>gravitino.cache.enabled</name>
         <value>true</value>
         <description>Whether to enable caching.</description>
+        <value-attributes>
+            <type>boolean</type>
+        </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>

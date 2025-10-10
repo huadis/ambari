@@ -35,7 +35,12 @@ gravitino_home = os.path.join(stack_root, "current", "gravitino-server")
 gravitino_env_map = {}
 gravitino_env_map.update(config["configurations"]["gravitino-env"])
 gravitino_env_content = gravitino_env_map["env-content"]
-gravitino_env_path = gravitino_home + "conf/gravitino-env.sh"
+gravitino_env_path = gravitino_home + "/conf/gravitino-env.sh"
+
+gravitino_log4j_map = {}
+gravitino_log4j_map.update(config["configurations"]["gravitino-log4j"])
+gravitino_log4j_content = gravitino_log4j_map["log4j-content"]
+gravitino_log4j_path = gravitino_home + "/conf/log4j2.properties"
 
 gravitino_pid_dir = "/var/run/gravitino"
 gravitino_pid_filename = "gravitino.pid"
@@ -56,3 +61,11 @@ gravitino_sh_name = "gravitino.sh"
 gravitino_sh_template_name = gravitino_sh_name + ".j2"
 gravitino_bin_dir = gravitino_home + "/bin"
 
+gravitino_tools_config_name = "config.yaml"
+gravitino_tools_config_template_name = gravitino_tools_config_name + ".j2"
+gravitino_tools_config_path = gravitino_home + "/tools/" + gravitino_tools_config_name
+
+gravitino_database_config = {'gravitino_database_type': 'mysql',
+                              'gravitino_database_username': gravitino_conf_map['gravitino.entity.store.relational.jdbcUser'],
+                              'gravitino_database_password': gravitino_conf_map['gravitino.entity.store.relational.jdbcPassword'],
+                              'gravitino_database_url': gravitino_conf_map['gravitino.entity.store.relational.jdbcUrl']}

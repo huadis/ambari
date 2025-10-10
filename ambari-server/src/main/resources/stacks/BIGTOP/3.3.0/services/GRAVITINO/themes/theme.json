@@ -38,6 +38,25 @@
                       "column-span": "1"
                     }
                   ]
+                },
+                {
+                  "name": "section-cache",
+                  "display-name": "Cache",
+                  "row-index": "1",
+                  "column-index": "0",
+                  "row-span": "1",
+                  "column-span": "1",
+                  "section-rows": "1",
+                  "section-columns": "1",
+                  "subsections": [
+                    {
+                      "name": "subsection-cache-col1",
+                      "row-index": "0",
+                      "column-index": "0",
+                      "row-span": "1",
+                      "column-span": "1"
+                    }
+                  ]
                 }
               ]
             }
@@ -67,6 +86,10 @@
         {
           "config": "gravitino-storage/gravitino.entity.store.relational.storagePath",
           "subsection-name": "subsection-database-col2"
+        },
+        {
+          "config": "gravitino-cache/gravitino.cache.enabled",
+          "subsection-name": "subsection-cache-col1"
         }
       ]
     },

@@ -48,34 +48,34 @@
     </property>
     <property>
         <name>gravitino.entity.store.relational.jdbcUrl</name>
-        <value>jdbc:h2</value>
+        <value>jdbc:mysql://host:3306/gravitino?useUnicode=true&characterEncoding=UTF-8</value>
+        <display-name>Gravitino Database Url</display-name>
         <description>The database url that the JDBCBackend needs to connect to.</description>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.entity.store.relational.jdbcDriver</name>
-        <value>org.h2.Driver</value>
+        <value>com.mysql.jdbc.Driver</value>
+        <display-name>Gravitino Database Driver</display-name>
         <description>The jdbc driver name that the JDBCBackend needs to use. You should place the driver Jar package in the ${GRAVITINO_HOME}/libs/ directory.</description>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.entity.store.relational.jdbcUser</name>
         <value>gravitino</value>
+        <display-name>Gravitino Database Username</display-name>
         <description>The username that the JDBCBackend needs to use when connecting the database. It is required for MySQL.</description>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
         <name>gravitino.entity.store.relational.jdbcPassword</name>
-        <value>gravitino</value>
+        <value>Cestc_01</value>
+        <property-type>PASSWORD</property-type>
+        <display-name>Gravitino Database Password</display-name>
         <description>The password that the JDBCBackend needs to use when connecting the database. It is required for MySQL.</description>
-        <on-ambari-upgrade add="false"/>
-    </property>
-    <property>
-        <name>gravitino.entity.store.relational.storagePath</name>
-        <value>/data/jdbc</value>
-        <description>The storage path for embedded JDBC storage implementation.</description>
         <value-attributes>
-            <type>directory</type>
+            <empty-value-valid>true</empty-value-valid>
+            <type>password</type>
         </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>

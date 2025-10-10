@@ -3,6 +3,12 @@
 USAGE="-e Usage: bin/gravitino.sh [--config <conf-dir>]\n\t
         {start|run|stop|restart|status}"
 
+APP_HOME=$(dirname "$(cd "$(dirname "$0")" && pwd)")
+APP_PID={{ gravitino_pid_dir }}/{{ gravitino_pid_filename }}
+APP_LOG={{ gravitino_log_dir }}
+APP_SCHEMA_OUT="$APP_LOG"/gravitino-schema.out
+GRAVITINO_VERSION=${GRAVITINO_VERSION:-1.0.0}
+
 if [[ "$1" == "--config" ]]; then
   shift
   conf_dir="$1"
@@ -29,12 +35,21 @@ function check_process_status() {
   if [[ -z "${pid}" ]]; then
     echo "Gravitino Server is not running"
   else
-    printArt
+    echo "$pid" > "$APP_PID"
     echo "Gravitino Server is running[PID:$pid]"
   fi
 }
 
 function found_gravitino_server_pid() {
+  if [[ -f "$APP_PID" && -s "$APP_PID" ]]; then
+    local PID=$(cat "$APP_PID")
+    if kill -0 "$PID" >/dev/null 2>&1; then
+      echo "$PID"
+      return 0
+    fi
+    rm -f "$APP_PID"
+  fi
+
   process_name='GravitinoServer';
   RUNNING_PIDS=$(ps x | grep ${process_name} | grep -v grep | awk '{print $1}');
 
@@ -75,6 +90,10 @@ function wait_for_gravitino_server_to_die() {
 
   if [[ $forceKill -ne 0 ]]; then
     kill -9 ${pid} > /dev/null 2> /dev/null
+  fi
+
+  if ! kill -0 "$pid" >/dev/null 2>&1; then
+    rm -f "$APP_PID" >/dev/null 2>&1 || { [[ -w "$APP_PID" ]] && cat /dev/null > "$APP_PID"; }
   fi
 }
 
@@ -120,6 +139,12 @@ function stop() {
     wait_for_gravitino_server_to_die
     echo "Gravitino Server stop"
   fi
+}
+
+function init_schema() {
+  nohup ${JAVA_RUNNER} \
+    -cp .:$APP_HOME/tools/sql-tools-1.0.jar com.huadis.SQLScriptExecutor \
+    $APP_HOME/tools/config.yaml $APP_HOME/scripts/mysql/schema-${GRAVITINO_VERSION}-mysql.sql metalake_meta >> $APP_SCHEMA_OUT 2>&1 &
 }
 
 HOSTNAME=$(hostname)
@@ -177,6 +202,9 @@ case "${1}" in
     ;;
   status)
     check_process_status
+    ;;
+  schema)
+    init_schema
     ;;
   *)
     echo ${USAGE}
