@@ -48,7 +48,7 @@
     </property>
     <property>
         <name>gravitino.entity.store.relational.jdbcUrl</name>
-        <value>jdbc:mysql://host:3306/gravitino?useUnicode=true&characterEncoding=UTF-8</value>
+        <value>jdbc:mysql://host:3306/gravitino</value>
         <display-name>Gravitino Database Url</display-name>
         <description>The database url that the JDBCBackend needs to connect to.</description>
         <on-ambari-upgrade add="false"/>

@@ -1,6 +1,126 @@
 {
   "BIGTOP": {
     "stack-select": {
+      "CELEBORN": {
+        "CELEBORN_MASTER": {
+          "STACK-SELECT-PACKAGE": "celeborn",
+          "INSTALL": [
+            "celeborn"
+          ],
+          "PATCH": [
+            "celeborn"
+          ],
+          "STANDARD": [
+            "celeborn"
+          ]
+        },
+        "CELEBORN_WORKER": {
+          "STACK-SELECT-PACKAGE": "celeborn",
+          "INSTALL": [
+            "celeborn"
+          ],
+          "PATCH": [
+            "celeborn"
+          ],
+          "STANDARD": [
+            "celeborn"
+          ]
+        },
+        "CELEBORN_CLIENT": {
+          "STACK-SELECT-PACKAGE": "celeborn",
+          "INSTALL": [
+            "celeborn"
+          ],
+          "PATCH": [
+            "celeborn"
+          ],
+          "STANDARD": [
+            "celeborn"
+          ]
+        }
+      },
+      "VICTORIAMETRICS": {
+        "VICTORIAMETRICS_SERVER": {
+          "STACK-SELECT-PACKAGE": "victoriametrics",
+          "INSTALL": [
+            "victoriametrics"
+          ],
+          "PATCH": [
+            "victoriametrics"
+          ],
+          "STANDARD": [
+            "victoriametrics"
+          ]
+        }
+      },
+      "NIGHTINGALE": {
+        "NIGHTINGALE_SERVER": {
+          "STACK-SELECT-PACKAGE": "nightingale",
+          "INSTALL": [
+            "nightingale"
+          ],
+          "PATCH": [
+            "nightingale"
+          ],
+          "STANDARD": [
+            "nightingale"
+          ]
+        },
+        "CATEGRAF": {
+          "STACK-SELECT-PACKAGE": "categraf",
+          "INSTALL": [
+            "categraf"
+          ],
+          "PATCH": [
+            "categraf"
+          ],
+          "STANDARD": [
+            "categraf"
+          ]
+        }
+      },
+      "SQOOP": {
+        "SQOOP": {
+          "STACK-SELECT-PACKAGE": "sqoop",
+          "INSTALL": [
+            "sqoop"
+          ],
+          "PATCH": [
+            "sqoop"
+          ],
+          "STANDARD": [
+            "sqoop"
+          ]
+        }
+      },
+      "SUPERSET": {
+        "SUPERSET": {
+          "STACK-SELECT-PACKAGE": "superset",
+          "INSTALL": [
+            "superset"
+          ],
+          "PATCH": [
+            "superset"
+          ],
+          "STANDARD": [
+            "superset"
+          ]
+        }
+      },
+      "GRAVITINO": {
+        "GRAVITINO-SERVER": {
+          "STACK-SELECT-PACKAGE": "gravitino-server",
+          "INSTALL": [
+            "gravitino-server"
+          ],
+          "PATCH": [
+            "gravitino-server"
+          ],
+          "STANDARD": [
+            "gravitino-server"
+          ]
+        }
+      },
       "KUDU": {
         "KUDU_MASTER": {
           "STACK-SELECT-PACKAGE": "kudu",
@@ -27,6 +147,68 @@
           ]
         }
       },
+      "IMPALA": {
+        "IMPALA": {
+          "STACK-SELECT-PACKAGE": "impala",
+          "INSTALL": [
+            "impala",
+            "impala-shell"
+          ],
+          "PATCH": [
+            "impala",
+            "impala-shell"
+          ],
+          "STANDARD": [
+            "impala",
+            "impala-shell"
+          ]
+        },
+        "IMPALA_CATALOG": {
+          "STACK-SELECT-PACKAGE": "impala",
+          "INSTALL": [
+            "impala",
+            "impala-shell"
+          ],
+          "PATCH": [
+            "impala",
+            "impala-shell"
+          ],
+          "STANDARD": [
+            "impala",
+            "impala-shell"
+          ]
+        },
+        "IMPALA_STATE_STORE": {
+          "STACK-SELECT-PACKAGE": "impala",
+          "INSTALL": [
+            "impala",
+            "impala-shell"
+          ],
+          "PATCH": [
+            "impala",
+            "impala-shell"
+          ],
+          "STANDARD": [
+            "impala",
+            "impala-shell"
+          ]
+        },
+        "IMPALA_DAEMON": {
+          "STACK-SELECT-PACKAGE": "impala",
+          "INSTALL": [
+            "impala",
+            "impala-shell"
+          ],
+          "PATCH": [
+            "impala",
+            "impala-shell"
+          ],
+          "STANDARD": [
+            "impala",
+            "impala-shell"
+          ]
+        }
+      },
       "SEATUNNEL": {
         "SEATUNNEL_SERVER": {
           "STACK-SELECT-PACKAGE": "seatunnel",
@@ -40,16 +222,28 @@
             "seatunnel"
           ]
         },
-        "SEATUNNEL-WEB": {
-          "STACK-SELECT-PACKAGE": "seatunnel-web",
+        "SEATUNNEL_MASTER": {
+          "STACK-SELECT-PACKAGE": "seatunnel",
           "INSTALL": [
-            "seatunnel-web"
+            "seatunnel"
           ],
           "PATCH": [
-            "seatunnel-web"
+            "seatunnel"
           ],
           "STANDARD": [
-            "seatunnel-web"
+            "seatunnel"
+          ]
+        },
+        "SEATUNNEL_WORKER": {
+          "STACK-SELECT-PACKAGE": "seatunnel",
+          "INSTALL": [
+            "seatunnel"
+          ],
+          "PATCH": [
+            "seatunnel"
+          ],
+          "STANDARD": [
+            "seatunnel"
           ]
         },
         "SEATUNNEL_CLIENT": {
@@ -63,9 +257,21 @@
           "STANDARD": [
             "seatunnel"
           ]
+        },
+        "SEATUNNEL_WEB": {
+          "STACK-SELECT-PACKAGE": "seatunnel-web",
+          "INSTALL": [
+            "seatunnel-web"
+          ],
+          "PATCH": [
+            "seatunnel-web"
+          ],
+          "STANDARD": [
+            "seatunnel-web"
+          ]
         }
       },
-      "DOLPHIN": {
+      "DOLPHINSCHEDULER": {
         "DOLPHIN_MASTER": {
           "STACK-SELECT-PACKAGE": "dolphinscheduler",
           "INSTALL": [
@@ -152,7 +358,7 @@
             "doris-be"
           ]
         },
-        "DORIS_HDDF_BROKER": {
+        "DORIS_HDFS_BROKER": {
           "STACK-SELECT-PACKAGE": "doris-hdfs_broker",
           "INSTALL": [
             "doris-hdfs_broker"
@@ -174,6 +380,56 @@
           ],
           "STANDARD": [
             "doris-client"
+          ]
+        }
+      },
+      "DOLPHIN": {
+        "DOLPHIN_MASTER": {
+          "STACK-SELECT-PACKAGE": "dolphinscheduler",
+          "INSTALL": [
+            "dolphinscheduler"
+          ],
+          "PATCH": [
+            "dolphinscheduler"
+          ],
+          "STANDARD": [
+            "dolphinscheduler"
+          ]
+        },
+        "DOLPHIN_WORKER": {
+          "STACK-SELECT-PACKAGE": "dolphinscheduler",
+          "INSTALL": [
+            "dolphinscheduler"
+          ],
+          "PATCH": [
+            "dolphinscheduler"
+          ],
+          "STANDARD": [
+            "dolphinscheduler"
+          ]
+        },
+        "DOLPHIN_ALERT": {
+          "STACK-SELECT-PACKAGE": "dolphinscheduler",
+          "INSTALL": [
+            "dolphinscheduler"
+          ],
+          "PATCH": [
+            "dolphinscheduler"
+          ],
+          "STANDARD": [
+            "dolphinscheduler"
+          ]
+        },
+        "DOLPHIN_API": {
+          "STACK-SELECT-PACKAGE": "dolphinscheduler",
+          "INSTALL": [
+            "dolphinscheduler"
+          ],
+          "PATCH": [
+            "dolphinscheduler"
+          ],
+          "STANDARD": [
+            "dolphinscheduler"
           ]
         }
       },
@@ -200,53 +456,6 @@
           ],
           "STANDARD": [
             "hue"
-          ]
-        }
-      },
-      "IMPALA": {
-        "IMPALA": {
-          "STACK-SELECT-PACKAGE": "impala",
-          "INSTALL": [
-            "impala",
-            "impala-shell"
-          ],
-          "PATCH": [
-            "impala",
-            "impala-shell"
-          ],
-          "STANDARD": [
-            "impala",
-            "impala-shell"
-          ]
-        },
-        "IMPALA_CATALOG": {
-          "STACK-SELECT-PACKAGE": "impala",
-          "INSTALL": [
-            "impala",
-            "impala-shell"
-          ],
-          "PATCH": [
-            "impala",
-            "impala-shell"
-          ],
-          "STANDARD": [
-            "impala",
-            "impala-shell"
-          ]
-        },
-        "IMPALA_STATE_STORE": {
-          "STACK-SELECT-PACKAGE": "impala",
-          "INSTALL": [
-            "impala",
-            "impala-shell"
-          ],
-          "PATCH": [
-            "impala",
-            "impala-shell"
-          ],
-          "STANDARD": [
-            "impala",
-            "impala-shell"
           ]
         }
       },
@@ -519,6 +728,20 @@
           ],
           "STANDARD": [
             "hadoop-hdfs-zkfc"
+          ]
+        }
+      },
+      "HADOOP_ROUTER": {
+        "ROUTER": {
+          "STACK-SELECT-PACKAGE": "hadoop-hdfs-router",
+          "INSTALL": [
+            "hadoop-hdfs-router"
+          ],
+          "PATCH": [
+            "hadoop-hdfs-router"
+          ],
+          "STANDARD": [
+            "hadoop-hdfs-router"
           ]
         }
       },
@@ -914,20 +1137,6 @@
           ]
         }
       },
-      "SUPERSET": {
-        "SUPERSET": {
-          "STACK-SELECT-PACKAGE": "superset",
-          "INSTALL": [
-            "superset"
-          ],
-          "PATCH": [
-            "superset"
-          ],
-          "STANDARD": [
-            "superset"
-          ]
-        }
-      },
       "TEZ": {
         "TEZ_CLIENT": {
           "STACK-SELECT-PACKAGE": "tez-client",
@@ -1020,6 +1229,44 @@
           ],
           "STANDARD": [
             "zookeeper-server"
+          ]
+        }
+      },
+      "TRINO": {
+        "TRINO_COORDINATOR": {
+          "STACK-SELECT-PACKAGE": "trino",
+          "INSTALL": [
+            "trino"
+          ],
+          "PATCH": [
+            "trino"
+          ],
+          "STANDARD": [
+            "trino"
+          ]
+        },
+        "TRINO_WORKER": {
+          "STACK-SELECT-PACKAGE": "trino",
+          "INSTALL": [
+            "trino"
+          ],
+          "PATCH": [
+            "trino"
+          ],
+          "STANDARD": [
+            "trino"
+          ]
+        },
+        "TRINO_CLI": {
+          "STACK-SELECT-PACKAGE": "trino-cli",
+          "INSTALL": [
+            "trino-cli"
+          ],
+          "PATCH": [
+            "trino-cli"
+          ],
+          "STANDARD": [
+            "trino-cli"
           ]
         }
       }
@@ -1255,7 +1502,7 @@
     },
     "conf-select-patching": {
       "DORIS": {
-        "packages": ["doris-be","doris-fe","doris-hdfs_broker","doris-client"]
+        "packages": ["doris-be", "doris-fe", "doris-hdfs_broker", "doris-client"]
       },
       "HUE": {
         "packages": ["hue"]
@@ -1271,6 +1518,9 @@
       },
       "ATLAS": {
         "packages": ["atlas"]
+      },
+      "GRAVITINO": {
+        "packages": ["gravitino"]
       },
       "HBASE": {
         "packages": [
