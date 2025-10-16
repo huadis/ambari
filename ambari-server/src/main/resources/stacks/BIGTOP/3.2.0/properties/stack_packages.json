@@ -108,7 +108,7 @@
         }
       },
       "GRAVITINO": {
-        "GRAVITINO-SERVER": {
+        "GRAVITINO_SERVER": {
           "STACK-SELECT-PACKAGE": "gravitino-server",
           "INSTALL": [
             "gravitino-server"
